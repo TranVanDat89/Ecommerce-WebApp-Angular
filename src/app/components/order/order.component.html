@@ -1,0 +1,100 @@
+<section id="order-page" style="padding: 90px 0 40px 0;">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-5">
+                <h2 class="product-header">Thông tin người nhận</h2>
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Họ và tên</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" id="phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Địa chỉ</label>
+                        <input type="text" class="form-control" placeholder="Địa chỉ" required id="address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="note" class="form-label">Ghi chú</label>
+                        <input type="text" class="form-control" placeholder="Ghi chú" required id="note">
+                    </div>
+                    <div class="mb-3">
+                        <label for="shippingMethod">Phương thức vận chuyển</label>
+                        <select class="form-control" id="shippingMethod">
+                            <option value="express">Nhanh (Express)</option>
+                            <option value="normal">Thường (Normal)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="paymentMethod">Phương thức thanh toán</label>
+                        <select class="form-control" id="paymentMethod">                     
+                            <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                            <option value="other">Thanh toán khác</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-7">
+                <h2 class="product-order">Sản phẩm đã đặt hàng</h2>
+                <table class="table text-center table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col" class="text-start">Sản phẩm</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Đơn giá</th>
+                            <th scope="col">Tổng giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <img src="../../../assets/intro-image.jpg"
+                                        alt="Product Image" class="img-fluid product-image">
+                                    <span class="fw-bold text-start">Optimum Nutrition Gold Standard 100% Whey Protein Powder</span>
+                                </div>
+                            </td>
+                            <td>2</td>
+                            <td>100,000 đ</td>
+                            <td>200,000 đ</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <img src="../../../assets/intro-image.jpg"
+                                        alt="Product Image" class="img-fluid product-image">
+                                    <span class="fw-bold text-start">Optimum Nutrition Gold Standard 100% Whey Protein Powder</span>
+                                </div>
+                            </td>
+                            <td>1</td>
+                            <td>150,000 đ</td>
+                            <td>150,000 đ</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-start mt-3">
+                    <h4 class="header-text text-end ">Tổng giá: 350,000 đ</h4>
+                </div>
+                <div class="mt-3">
+                    <h4 class="product-header">Nhập coupon</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Nhập coupon">
+                        <button class="btn btn-primary" type="button">Áp dụng</button>
+                    </div>
+                </div>
+                <div class="text-start mt-3">
+                    <!-- <button class="btn btn-primary" type="button">Đặt hàng</button> -->
+                    <!-- Button test -->
+                    <a href="/order-detail" class="btn btn-primary">Đặt hàng</a>
+                </div>
+            </div>
+        </div>    
+    </div>
+    
+</section>
