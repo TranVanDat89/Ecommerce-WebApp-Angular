@@ -1,52 +1,113 @@
 <section id="register-page" style="padding: 90px 0 40px 0;">
     <div class="container-lg">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="register-form mx-auto">
-                    <h2 class="text-center">Đăng ký</h2>
-                    <div class="form-group">
-                        <label for="email">Email/Phone</label>
-                        <input type="text" class="form-control" id="email">
-                    </div>
-                    <div class="mt-3"></div>
-                    <div class="form-group password-field">
-                        <label for="password">Mật khẩu</label>
-                        <input type="password" placeholder="Ít nhất 3 ký tự" 
-                            class="form-control" id="password">
-                    </div>
-                    <div class="mt-3"></div>
-                    <div class="form-group password-field">
-                        <label for="confirm-password">Gõ lại mật khẩu</label>
-                        <input type="password" placeholder="Ít nhất 3 ký tự" 
-                            class="form-control" id="confirm-password">
-                    </div>
-                    <div class="mt-3"></div>
-                    <div class="form-group">
-                        <label for="full-name">Họ và tên</label>
-                        <input type="text" class="form-control" id="full-name">
-                    </div>
-                    <div class="mt-3"></div>
-                    <div class="form-group">
-                        <label for="address">Địa chỉ</label>
-                        <input type="text" class="form-control" id="address">
-                    </div>
-                    <div class="form-group">
-                        <div class="form-check checkbox-text">
-                            <span style="display: flex;" class="mt-3">
-                                <input type="checkbox" class="form-check-input me-2" id="agree">
-                                <label class="form-check-label text-start" for="agree">
-                                    Tôi đồng ý với các điều khoản và điều kiện</label>
-                            </span>
+            <form [formGroup]="registerForm" method="post" name="register-form" (ngSubmit)="register()">
+                <div class="col-md-6 offset-md-3">
+                    <div class="register-form mx-auto">
+                        <h2 class="text-center">Đăng ký</h2>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="text" 
+                            name="phoneNumber" 
+                            class="form-control" 
+                            formControlName="phoneNumber"
+                            placeholder="Số điện thoại gồm 10 kí tự: 0867628xxx" >
+                            @if(registerForm.controls['phoneNumber'].invalid && (registerForm.controls['phoneNumber'].dirty || registerForm.controls['phoneNumber'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="registerForm.controls['phoneNumber'].errors?.['pattern'] || registerForm.controls['phoneNumber'].errors?.['minlength']">Số điện thoại không hợp lệ</p>
+                                <p class="text-danger mt-2" *ngIf="registerForm.controls['phoneNumber'].errors?.['required']">Bắt buộc phải nhập số điện thoại</p>
+                            }
+                        </div>
+                        <div class="mt-3"></div>
+                        <div class="form-group password-field">
+                            <label for="password">Mật khẩu</label>
+                            <input type="password"                          
+                            placeholder="Mật khẩu phải gồm chữ hoa, thường, kí tự đặc biệt: Abc@123" 
+                            class="form-control" 
+                            name="password"
+                            formControlName="password">
+                            @if(registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="registerForm.controls['password'].errors?.['pattern'] || registerForm.controls['password'].errors?.['minlength']">Mật khẩu không hợp lệ, gồm ít nhất 8 kí tự.</p>
+                                <p class="text-danger mt-2" *ngIf="registerForm.controls['password'].errors?.['required']">Bắt buộc phải nhập mật khẩu</p>
+                            }
+                        </div>
+                        <div class="mt-3"></div>
+                        <div class="form-group password-field">
+                            <label for="retypePassword">Gõ lại mật khẩu</label>
+                            <input type="password"
+                            placeholder="Mật khẩu phải trùng khớp" 
+                            class="form-control" 
+                            required
+                            formControlName="retypePassword"
+                            minlength="8"
+                            name="retypePassword">
+                            @if(registerForm.controls['retypePassword'].invalid && (registerForm.controls['retypePassword'].dirty || registerForm.controls['retypePassword'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="registerForm.controls['retypePassword'].errors?.['passwordMismatch']">Mật khẩu không khớp</p>
+                                <p class="text-danger mt-2" *ngIf="registerForm.controls['retypePassword'].errors?.['required']">Bắt buộc phải nhập lại mật khẩu</p>
+                            }
+                        </div>
+                        <div class="mt-3"></div>
+                        <div class="form-group">
+                            <label for="full-name">Họ và tên</label>
+                            <input type="text" 
+                            class="form-control" 
+                            name="fullName"
+                            formControlName="fullName"
+                            required
+                            placeholder="Họ và tên của bạn: Trần Văn A">
+                            @if(registerForm.controls['fullName'].invalid && (registerForm.controls['fullName'].dirty || registerForm.controls['fullName'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="registerForm.controls['fullName'].errors?.['pattern']">Họ và tên không hợp lệ</p>
+                                <p class="text-danger mt-2" *ngIf="registerForm.controls['fullName'].errors?.['required']">Bắt buộc phải nhập họ và tên</p>
+                            }
+                        </div>
+                        <div class="mt-3"></div>
+                        <div class="form-group">
+                            <label for="date-of-birth">Ngày tháng năm sinh</label>
+                            <input type="date" 
+                            class="form-control"  
+                            formControlName="dateOfBirth"
+                            required 
+                            name="dateOfBirth">  
+                            @if(registerForm.controls['dateOfBirth'].invalid && (registerForm.controls['dateOfBirth'].dirty || registerForm.controls['dateOfBirth'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="registerForm.controls['dateOfBirth'].errors?.['required']">Bắt buộc phải nhập ngày, tháng, năm sinh</p>
+                            }                 
+                        </div>
+                        <div class="mt-3"></div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" 
+                            class="form-control" 
+                            required
+                            formControlName="address"
+                            name="address"
+                            placeholder="Địa chỉ: Hưng Yên,...">
+                            @if(registerForm.controls['address'].invalid && (registerForm.controls['address'].dirty || registerForm.controls['address'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="registerForm.controls['address'].errors?.['required']">Bắt buộc phải nhập địa chỉ</p>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check checkbox-text">
+                                <span style="display: flex;" class="mt-3">
+                                    <input type="checkbox" 
+                                    formControlName="isAccepted"
+                                    name="isAccepted"
+                                    class="form-check-input">
+                                    <label class="form-check-label text-start" for="agree">
+                                        Tôi đồng ý với các điều khoản và điều kiện</label>
+                                    @if(registerForm.controls['isAccepted'].invalid && (registerForm.controls['isAccepted'].dirty || registerForm.controls['isAccepted'].touched)) {
+                                        <p class="text-danger mt-2" *ngIf="registerForm.controls['isAccepted'].errors?.['requiredTrue']">Bạn phải đồng ý với các điều khoản của chúng tôi</p>
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-center d-flex flex-column mt-4">
+                            <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary">Đăng ký</button>
+                            <p class="text-center">
+                                Bạn đã có tài khoản?<span><a href="/login" class="btn btn-link">Đăng nhập</a></span>
+                            </p>
                         </div>
                     </div>
-                    <div class="text-center d-flex flex-column mt-4">
-                        <button type="button" class="btn btn-primary">Đăng ký</button>
-                        <p class="text-center">
-                            Bạn đã có tài khoản?<span><a href="/login" class="btn btn-link">Đăng nhập</a></span>
-                        </p>
-                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>
