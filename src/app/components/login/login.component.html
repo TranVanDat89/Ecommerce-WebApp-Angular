@@ -2,32 +2,51 @@
     <div class="container-lg">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div class="login-form mx-auto">
-                    <h2 class="text-center">Đăng nhập</h2>
-                    <div class="form-group my-2">
-                        <label for="phoneNumber" class="mb-2">Số điện thoại</label>
-                        <input type="text" id="phoneNumber" class="form-control" placeholder="Nhập số điện thoại...">
-                    </div>
-                    <div class="form-group my-2">
-                        <label for="password" class="mb-2">Mật khẩu</label>
-                        <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu...">
-                    </div>
-                    <div class="form-group">
-                        <div class="d-flex justify-content-between">
-                          <span style="display: flex;">
-                            <input type="checkbox" class="form-check-input me-1" id="remember">
-                            <label class="form-check-label text-start" for="remember">Ghi nhớ đăng nhập</label>
-                          </span>
-                          <span><a href="#" class="">Quên mật khẩu</a></span>
+                <form action="" method="post" name="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div class="login-form mx-auto">
+                        <h2 class="text-center">Đăng nhập</h2>
+                        <div class="form-group my-2">
+                            <label for="phoneNumber" class="mb-2">Số điện thoại</label>
+                            <input type="text" 
+                            class="form-control" 
+                            formControlName="phoneNumber"
+                            placeholder="Nhập số điện thoại...">
+                            @if(loginForm.controls['phoneNumber'].invalid && (loginForm.controls['phoneNumber'].dirty || loginForm.controls['phoneNumber'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="loginForm.controls['phoneNumber'].errors?.['pattern'] || loginForm.controls['phoneNumber'].errors?.['minlength']">Số điện thoại không hợp lệ</p>
+                                <p class="text-danger mt-2" *ngIf="loginForm.controls['phoneNumber'].errors?.['required']">Bắt buộc phải nhập số điện thoại</p>
+                            }
+                        </div>
+                        <div class="form-group my-2">
+                            <label for="password" class="mb-2">Mật khẩu</label>
+                            <input type="password"
+                            formControlName="password"
+                            class="form-control" 
+                            placeholder="Nhập mật khẩu...">
+                            @if(loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="loginForm.controls['password'].errors?.['pattern'] || loginForm.controls['password'].errors?.['minlength']">Mật khẩu không hợp lệ, gồm ít nhất 8 kí tự.</p>
+                                <p class="text-danger mt-2" *ngIf="loginForm.controls['password'].errors?.['required']">Bắt buộc phải nhập mật khẩu</p>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <div class="d-flex justify-content-between">
+                              <span style="display: flex;">
+                                <input type="checkbox" 
+                                formControlName="rememberMe"
+                                class="form-check-input me-1" 
+                                id="remember">
+                                <label class="form-check-label text-start" for="remember">Ghi nhớ đăng nhập</label>
+                              </span>
+                              <span><a href="#" class="">Quên mật khẩu</a></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center my-3">
+                            <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Đăng nhập</button>
+                        </div>
+                        <div class="d-flex justify-content-center my-3">
+                            Bạn chưa đăng ký?<span><a href="" (click)="registerAccount()" class="ms-2">Tạo tài khoản</a></span>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center my-3">
-                        <button type="button" class="btn btn-primary">Đăng nhập</button>
-                    </div>
-                    <div class="d-flex justify-content-center my-3">
-                        Bạn chưa đăng ký?<span><a href="" class="ms-2">Tạo tài khoản</a></span>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

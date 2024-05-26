@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { RegisterDTO } from '../../dtos/user/register.dto';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from '../../responses/api.response';
+import { Observable, delay, of } from 'rxjs';
+import { UserResponse } from '../../responses/user.response';
 
 @Component({
   selector: 'app-register',
@@ -17,12 +19,12 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d+$/), Validators.minLength(10)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
-      retypePassword: ['', [Validators.required], Validators.minLength(8)],
-      fullName: ['', [Validators.required], Validators.pattern(/^[^\d]+$/), Validators.minLength(8)],
+      retypePassword: ['', [Validators.required, Validators.minLength(8)]],
+      fullName: ['', [Validators.required, Validators.pattern(/^[^\d]+$/), Validators.minLength(8)]],
       address: ['', [Validators.required]],
       dateOfBirth: [new Date(), [Validators.required]],
       isAccepted: [false, [Validators.requiredTrue]]
-    }, { validator: this.checkPasswordsMatch } as AbstractControlOptions)
+    }, { validators: this.checkPasswordsMatch } as AbstractControlOptions)
   }
   checkPasswordsMatch(form: FormGroup) {
     const password = form.get('password');
@@ -32,6 +34,9 @@ export class RegisterComponent {
     } else {
       retypePassword?.setErrors(null);
     }
+  }
+  loginAccount() {
+    this.router.navigate(['/login']);
   }
   register(): void {
     if (this.registerForm.valid) {
@@ -44,7 +49,7 @@ export class RegisterComponent {
       };
 
       this.userService.register(registerDTO).subscribe({
-        next: (apiResponse: any) => {
+        next: (apiResponse: ApiResponse<UserResponse>) => {
           const confirmation = window.confirm('Đăng ký thành công, mời bạn đăng nhập. Bấm "OK" để chuyển đến trang đăng nhập.');
           if (confirmation) {
             this.router.navigate(['/login']);

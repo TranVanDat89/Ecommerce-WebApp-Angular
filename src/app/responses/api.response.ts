@@ -1,5 +1,9 @@
-export interface ApiResponse {
+export interface ApiResponse<T> {
     message: string;
     status: string;
-    data: any;
+    requestMethod: string;
+    statusCode: string;
+    path: string;
+    timeStamp: string;
+    data: T;
 }

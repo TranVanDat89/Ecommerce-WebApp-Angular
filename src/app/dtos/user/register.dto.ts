@@ -1,8 +1,17 @@
+import { IsDate, IsNotEmpty, IsPhoneNumber, IsString } from "class-validator";
+
 export class RegisterDTO {
+    @IsString()
     fullName: string;
+    @IsPhoneNumber()
+    @IsNotEmpty()
     phoneNumber: string;
+    @IsString()
     address: string;
+    @IsString()
+    @IsNotEmpty()
     password: string;
+    @IsDate()
     dateOfBirth: Date;
     constructor(registerDTO: any) {
         this.fullName = registerDTO.fullname;

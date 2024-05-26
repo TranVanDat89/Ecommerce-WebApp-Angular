@@ -15,7 +15,17 @@ const routes: Routes = [
   },
   {
     path: "products",
-    component: ProductComponent
+    component: ProductComponent,
+    children: [
+      {
+        path: "product-detail",
+        component: ProductDetailComponent
+      }
+    ]
+  },
+  {
+    path: 'products/product-detail/:productId',
+    component: ProductDetailComponent
   },
   {
     path: "login",

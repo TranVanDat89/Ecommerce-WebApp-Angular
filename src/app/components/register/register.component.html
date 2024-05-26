@@ -2,7 +2,7 @@
     <div class="container-lg">
         <div class="row">
             <form [formGroup]="registerForm" method="post" name="register-form" (ngSubmit)="register()">
-                <div class="col-md-6 offset-md-3">
+                <div class="col-lg-6 mx-auto offset-md-3">
                     <div class="register-form mx-auto">
                         <h2 class="text-center">Đăng ký</h2>
                         <div class="form-group">
@@ -102,7 +102,7 @@
                         <div class="text-center d-flex flex-column mt-4">
                             <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary">Đăng ký</button>
                             <p class="text-center">
-                                Bạn đã có tài khoản?<span><a href="/login" class="btn btn-link">Đăng nhập</a></span>
+                                Bạn đã có tài khoản?<span><a href="" (click)="loginAccount()" class="btn btn-link">Đăng nhập</a></span>
                             </p>
                         </div>
                     </div>
