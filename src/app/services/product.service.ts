@@ -12,6 +12,7 @@ import { ProductResponse } from '../responses/product.response';
 })
 export class ProductService {
   private apiProduct = `${environment.apiBaseUrl}/products`;
+  private apiProductById = `${environment.apiBaseUrl}/products/product-detail`;
   private http = inject(HttpClient);
   private httpUtilService = inject(HttpUtilService);
   private apiConfig = {
@@ -25,5 +26,11 @@ export class ProductService {
       limit: limit.toString()
     }
     return this.http.get<ApiResponse<ProductResponse>>(this.apiProduct, { params });
+  }
+  getAllProductsWithoutPagination(): Observable<ApiResponse<ProductResponse>> {
+    return this.http.get<ApiResponse<ProductResponse>>(this.apiProduct);
+  }
+  getProductById(productId: string): Observable<ApiResponse<Product>> {
+    return this.http.get<ApiResponse<Product>>(this.apiProductById + `/${productId}`);
   }
 }

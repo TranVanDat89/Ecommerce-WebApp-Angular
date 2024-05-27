@@ -17,28 +17,30 @@ export class ProductComponent implements OnInit {
   categories: Category[];
   products: Product[];
   totalPages: number;
-  visiblePages: number[];
+  // visiblePages: number[];
   localStorage?: Storage;
   itemsPerPage: number;
   currentPage: number;
+  totalItems: number;
   constructor(private router: Router, private categoryService: CategoryService, private productService: ProductService) {
     this.categories = [];
     this.totalPages = 0;
-    this.visiblePages = [];
+    this.totalItems = 0;
+    // this.visiblePages = [];
     this.products = [];
-    this.currentPage = 0;
+    this.currentPage = 1;
     this.itemsPerPage = 9;
   }
   ngOnInit(): void {
     this.currentPage = Number(this.localStorage?.getItem('currentProductPage')) || 0;
     this.getCategories();
-    this.getAllProducts(1, 9);
+    this.getAllProducts();
   }
-  onPageChange(page: number) {
-    this.currentPage = page < 0 ? 0 : page;
-    this.localStorage?.setItem('currentProductPage', String(this.currentPage));
-    this.getAllProducts(this.currentPage, this.itemsPerPage);
-  }
+  // onPageChange(page: number) {
+  //   this.currentPage = page < 0 ? 0 : page;
+  //   this.localStorage?.setItem('currentProductPage', String(this.currentPage));
+  //   this.getAllProducts(this.currentPage, this.itemsPerPage);
+  // }
   getCategories() {
     this.categoryService.getAllCategories().subscribe({
       next: (apiResponse: ApiResponse<any>) => {
@@ -52,13 +54,15 @@ export class ProductComponent implements OnInit {
       }
     })
   }
-  getAllProducts(page: number, limit: number) {
-    this.productService.getAllProducts(page, limit).subscribe({
+
+  getAllProducts() {
+    this.productService.getAllProductsWithoutPagination().subscribe({
       next: (apiResponse: ApiResponse<ProductResponse>) => {
         const response = apiResponse.data;
         this.products = response.products;
         this.totalPages = response.totalPages;
-        this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
+        this.totalItems = this.products.length;
+        // this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
         console.log(apiResponse.data)
       }
       , error: (error: HttpErrorResponse) => {
@@ -66,20 +70,20 @@ export class ProductComponent implements OnInit {
       }
     })
   }
-  generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
-    const maxVisiblePages = 5;
-    const halfVisiblePages = Math.floor(maxVisiblePages / 2);
+  // generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
+  //   const maxVisiblePages = 5;
+  //   const halfVisiblePages = Math.floor(maxVisiblePages / 2);
 
-    let startPage = Math.max(currentPage - halfVisiblePages, 1);
-    let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+  //   let startPage = Math.max(currentPage - halfVisiblePages, 1);
+  //   let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
 
-    if (endPage - startPage + 1 < maxVisiblePages) {
-      startPage = Math.max(endPage - maxVisiblePages + 1, 1);
-    }
+  //   if (endPage - startPage + 1 < maxVisiblePages) {
+  //     startPage = Math.max(endPage - maxVisiblePages + 1, 1);
+  //   }
 
-    return new Array(endPage - startPage + 1).fill(0)
-      .map((_, index) => startPage + index);
-  }
+  //   return new Array(endPage - startPage + 1).fill(0)
+  //     .map((_, index) => startPage + index);
+  // }
   onProductClick(productId: string) {
     this.router.navigate(['/products/product-detail', productId]);
   }

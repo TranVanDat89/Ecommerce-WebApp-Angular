@@ -27,3 +27,23 @@
 .thumbnail-item.active {
     border: 2px solid rgb(21, 19, 19);
 }
+
+.product-title {
+    background-color: #e1f3ff;
+}
+
+.product-image {
+    height: 80%;
+    width: 80%;
+    object-fit: cover;
+}
+
+.carousel {
+    height: 500px;
+}
+
+.thumbnail-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
