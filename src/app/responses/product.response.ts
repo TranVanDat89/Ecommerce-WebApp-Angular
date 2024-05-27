@@ -1,6 +1,6 @@
 import { Product } from "../models/product";
 
 export interface ProductResponse {
-    totalPages: number,
+    totalPages?: number,
     products: Product[]
 }

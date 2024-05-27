@@ -1,8 +1,8 @@
 export interface UserResponse {
     fullName: string;
-    address: string;
+    address?: string;
     phoneNumber: string;
-    dateOfBirth: string;
+    dateOfBirth?: string;
     role: string;
     active: string;
 }

@@ -1,3 +1,4 @@
+<app-header></app-header>
 <section id="#product-page" style="padding: 100px 0 40px 0;">
     <div class="container-lg">
         <div class="row">
@@ -36,6 +37,7 @@
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text">{{product.productDetail.introduction}}</p>
                             <a href="" [routerLink]="['/products/product-detail', product.id]" class="btn btn-primary">Chi tiết sản phẩm</a>
+                            <a href="" class="btn btn-danger mt-2">Thêm vào giỏ hàng</a>
                           </div>
                       </div>
                     </div>
@@ -49,3 +51,4 @@
         </div>
     </div>
 </section>
+<app-footer></app-footer>

@@ -16,7 +16,7 @@ import { ProductResponse } from '../../responses/product.response';
 export class ProductComponent implements OnInit {
   categories: Category[];
   products: Product[];
-  totalPages: number;
+  totalPages?: number;
   // visiblePages: number[];
   localStorage?: Storage;
   itemsPerPage: number;

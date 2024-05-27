@@ -3,7 +3,7 @@ import { ProductDetail } from "./product.detail";
 import { ProductImage } from "./product.image";
 
 export interface Product {
-    id: number;
+    id: string;
     name: string;
     price: number;
     thumbnail: string;

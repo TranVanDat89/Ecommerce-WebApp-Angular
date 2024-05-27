@@ -1,3 +1,4 @@
+<app-header></app-header>
 <section id="intro">
     <div class="container-lg">
         <div class="row justify-content-center">
@@ -22,50 +23,22 @@
 <section id="most-popular-product" class="bg-light" style="padding: 0 0 60px 0;">
     <div class="container-lg py-4">
         <div class="text-center">
-            <h2 class="fw-bold">Sản phẩm bán chạy</h2>
-            <p class="lead text-muted">Top những sản phẩm được ưa chuộng nhất tại WheyStation.</p>
+            <h2 class="fw-bold">Sản phẩm mới nhất</h2>
+            <p class="lead text-muted">Top những sản phẩm mới nhất tại WheyStation.</p>
         </div>
         <div class="row justify-content-center">
+          @for (product of top4Product; track $index) {
             <div class="col-xl-3 col-md-6 col-8 mb-3">
-                <div class="card w-100">
-                    <img src="../../../assets/intro-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Mua ngay</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-8 mb-3">
-                <div class="card w-100">
-                    <img src="../../../assets/intro-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Mua ngay</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-8 mb-3">
-                <div class="card w-100">
-                    <img src="../../../assets/intro-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Mua ngay</a>
-                    </div>
-                </div>
-            </div> 
-            <div class="col-xl-3 col-md-6 col-8 mb-3">
-                <div class="card w-100">
-                    <img src="../../../assets/intro-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Mua ngay</a>
-                    </div>
-                </div>
-            </div>
+              <div class="card w-100">
+                  <img [src]="product.thumbnail" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <p class="card-text">{{product.productDetail.introduction}}</p>
+                    <a href="" [routerLink]="['products/product-detail', product.id]" class="btn btn-primary">Chi tiết sản phẩm</a>
+                  </div>
+              </div>
+            </div>    
+          }
         </div>
     </div>
 </section>
@@ -157,3 +130,4 @@
       </div>
     </div>
 </section>
+<app-footer></app-footer>

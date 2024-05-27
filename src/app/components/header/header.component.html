@@ -21,12 +21,38 @@
                     <li class="nav-item">
                         <a href="" class="nav-link text-white">Yêu thích</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="" routerLink="login" class="nav-link text-white">Đăng nhập</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" routerLink="register" class="btn btn-primary text-white">Đăng ký</a>
-                    </li>
+                    @if(userResponse) {
+                        <ng-container>
+                            <ng-container
+                              ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất"
+                              popoverTitle="User Actions"
+                              triggers="click"
+                              [placement]="'auto'"
+                              container="body"
+                            >
+                              <a class="nav-link text-white w-content"                              
+                                [ngbPopover]="popoverContent"
+                                (click)="togglePopover($event)">
+                                {{ userResponse.fullName }}
+                                <i class="fa-solid fa-caret-down"></i>
+                              </a>
+                              <ng-template #popoverContent>
+                                <div class="popover-list">
+                                  <a class="popover-item" href="">Tài khoản của tôi</a>
+                                  <a class="popover-item" href="">Đơn mua</a>
+                                  <a class="popover-item" (click)="handleItemClick(2)" href="">Đăng xuất</a>
+                                </div>
+                              </ng-template>
+                            </ng-container>
+                        </ng-container>
+                    } @else {
+                        <li class="nav-item">
+                            <a href="" routerLink="login" class="nav-link text-white">Đăng nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" routerLink="register" class="btn btn-primary text-white">Đăng ký</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

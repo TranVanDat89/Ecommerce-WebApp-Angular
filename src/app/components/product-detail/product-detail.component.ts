@@ -23,6 +23,7 @@ export class ProductDetailComponent implements OnInit {
     });
     this.getProductById(this.productId);
   }
+
   getProductById(productId: string) {
     this.productService.getProductById(productId).subscribe({
       next: (apiResponse: ApiResponse<any>) => {
