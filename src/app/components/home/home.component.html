@@ -8,7 +8,7 @@
                     <div class="display-6 text-muted">Dòng Whey tốt nhất trên thị trường hiện nay. 100% whey thủy phân hoàn toàn.</div>
                 </h2>
                 <p class="lead text-muted my-4">Còn chần chừ gì nữa, thêm ngay vào giỏ hàng của mình thôi nào.</p>
-                <a href="" class="btn btn-primary me-3 mt-2">Chi tiết sản phẩm</a>
+                <a class="btn btn-primary me-3 mt-2" [routerLink]="['/products/product-detail/147eb7bb-9f1e-472e-9467-11ad723fc316']">Chi tiết sản phẩm</a>
                 <!-- open sidebar / offcanvas -->
                 <a href="" routerLink="products" class="btn btn-dark mt-2">
                     Xem tất cả sản phẩm
@@ -29,13 +29,15 @@
         <div class="row justify-content-center">
           @for (product of top4Product; track $index) {
             <div class="col-xl-3 col-md-6 col-8 mb-3">
-              <div class="card w-100">
+              <div class="card w-100 h-100">
+                <div class="overflow-hidden" style="height: 226px;">
                   <img [src]="product.thumbnail" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">{{product.name}}</h5>
-                    <p class="card-text">{{product.productDetail.introduction}}</p>
-                    <a href="" [routerLink]="['products/product-detail', product.id]" class="btn btn-primary">Chi tiết sản phẩm</a>
-                  </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{product.name}}</h5>
+                  <p class="card-text text--shorten">{{product.productDetail.introduction}}</p>
+                  <a href="" [routerLink]="['products/product-detail', product.id]" class="btn btn-primary">Chi tiết sản phẩm</a>
+                </div>
               </div>
             </div>    
           }

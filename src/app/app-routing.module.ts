@@ -40,7 +40,7 @@ const routes: Routes = [
     component: ProductDetailComponent
   },
   {
-    path: "order",
+    path: "orders",
     component: OrderComponent
   },
   {

@@ -9,14 +9,15 @@
             </button>
             <div class="navbar-collapse justify-content-end align-center" id="main-nav">
                 <ul class="navbar-nav">
+                    <!-- chu xem chau cai trang toan san pham cho no deu ho chau voi, no cu tho thut y -->
                     <li class="nav-item">
-                        <a href="" routerLink="products" class="nav-link text-white">Sản phẩm</a>
+                        <a [routerLink]="['/products']" class="nav-link text-white">Sản phẩm</a>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link text-white">Thông báo</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" routerLink="order" class="nav-link text-white">Giỏ hàng</a>
+                        <a href="" [routerLink]="['/orders']" class="nav-link text-white">Giỏ hàng</a>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link text-white">Yêu thích</a>
@@ -47,10 +48,10 @@
                         </ng-container>
                     } @else {
                         <li class="nav-item">
-                            <a href="" routerLink="login" class="nav-link text-white">Đăng nhập</a>
+                            <a href="" [routerLink]="['/login']" class="nav-link text-white">Đăng nhập</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" routerLink="register" class="btn btn-primary text-white">Đăng ký</a>
+                            <a href="" [routerLink]="['/register']" class="btn btn-primary text-white">Đăng ký</a>
                         </li>
                     }
                 </ul>

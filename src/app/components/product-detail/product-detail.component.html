@@ -4,31 +4,33 @@
       <div class="row">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="" routerLink="">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="" routerLink="products">Sản phẩm</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['']">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/products']">Sản phẩm</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{product?.name}}</li>
           </ol>
         </nav>
       </div>
       <div class="row">
             <div class="col-lg-6 col-md-12">
-              <div id="carouselProductImage" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
+              <div id="carouselExampleIndicators" class="carousel slide">
+                <!-- mk ở trang product detail ý chú, bấm vào sản phẩm nó ko quay về chú ơi  -->
+                <div class="carousel-inner h-100">
                   @for (productImage of product?.productImages; track $index) {
-                    <div class="carousel-item active text-center">
-                      <img [src]="productImage.imageUrl" class="img-fluid product-image" alt="Product Image">
+                    <div class="carousel-item text-center h-100" [class.active]="$index == 0">
+                      <img [src]="productImage.imageUrl" class="img-fluid product-image h-100" alt="Product Image">
                     </div>
                   }
                 </div>
-                <button class="carousel-control-prev bg-dark rounded-circle" type="button" data-bs-target="#carouselProductImage" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
+                <button class="carousel-control-prev bg-dark rounded-circle" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next bg-dark rounded-circle" type="button" data-bs-target="#carouselProductImage" data-bs-slide="next">
+                <button class="carousel-control-next bg-dark rounded-circle" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
               </div>
+             
               <div class="row d-none d-lg-block">
                 <div class="d-flex justify-content-between my-4">
                   @for (productImage of product?.productImages; track $index) {
@@ -56,7 +58,7 @@
                     <p><span class="fw-bold">Số lượng:</span> {{product?.quantity}}</p>
                     <h3>
                       <span class="me-3 text-decoration-line-through">1.750.00đ</span>
-                      <span class="text-danger">{{product?.price}}đ</span>
+                      <span class="text-danger">{{ formatPrice(product?.price) }}</span>
                     </h3>
                     <div class="product-actions mt-3">
                       <button class="btn btn-danger me-3">Thêm vào giỏ hàng</button>

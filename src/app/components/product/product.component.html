@@ -4,8 +4,8 @@
         <div class="row">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="" routerLink="">Trang chủ</a></li>
-                <li class="breadcrumb-item"><a href="">Sản phẩm</a></li>
+                <li class="breadcrumb-item"><a href="" [routerLink]="['']">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="" [routerLink]="['/products']">Sản phẩm</a></li>
               </ol>
             </nav>
           </div>
@@ -26,17 +26,21 @@
                 <div class="row">
                   @for(product of products| paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; track product.id) {
                     <div class="col-lg-6 col-xxl-4 col-md-6 col-12 my-2">
-                      <div class="card w-100">
-                        @if (product.thumbnail === null) {
-                          <img src="../../../assets/intro-image.jpg" class="card-img-top" alt="...">
-                        }
-                        @if (product.thumbnail !== null) {
-                          <img [src]="product.thumbnail" class="card-img-top" alt="...">
-                        }
+                      <!-- mk dung text-truncate cho no bot chu duoc ko chu, chau dung anh no to dung luon  -->
+                      <!-- Tam thoi het roi chu oi, de chau lam them chuc nang roi chau hoi tiep. Chu ngu ngon! -->
+                      <div class="card w-100 h-100">
+                        <div style="height: 226px;" class="overflow-hidden">
+                          @if (product.thumbnail === null) {
+                            <img src="../../../assets/intro-image.jpg" class="card-img-top" alt="...">
+                          }
+                          @if (product.thumbnail !== null) {
+                            <img [src]="product.thumbnail" class="card-img-top" alt="...">
+                          }
+                        </div>
                           <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{product.productDetail.introduction}}</p>
-                            <a href="" [routerLink]="['/products/product-detail', product.id]" class="btn btn-primary">Chi tiết sản phẩm</a>
+                            <p class="card-text text--shorten">{{product.productDetail.introduction}}</p>
+                            <a href="" [routerLink]="['/products/product-detail', product.id]" class="btn btn-primary mt-2">Chi tiết sản phẩm</a>
                             <a href="" class="btn btn-danger mt-2">Thêm vào giỏ hàng</a>
                           </div>
                       </div>

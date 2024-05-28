@@ -23,7 +23,13 @@ export class ProductDetailComponent implements OnInit {
     });
     this.getProductById(this.productId);
   }
-
+  formatPrice(price: number | undefined): string {
+    if (price === undefined) return '';
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    }).format(price);
+  }
   getProductById(productId: string) {
     this.productService.getProductById(productId).subscribe({
       next: (apiResponse: ApiResponse<any>) => {
