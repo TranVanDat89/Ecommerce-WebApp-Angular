@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -41,11 +42,21 @@ const routes: Routes = [
   },
   {
     path: "orders",
-    component: OrderComponent
+    component: OrderComponent,
+    children: [
+      {
+        path: "order-detail",
+        component: OrderDetailComponent
+      }
+    ]
   },
   {
-    path: "order-detail",
-    component: OrderDetailComponent
+    path: 'orders/order-detail/:userId',
+    component: ProductDetailComponent
+  },
+  {
+    path: "user-profile",
+    component: UserProfileComponent
   }
 ];
 

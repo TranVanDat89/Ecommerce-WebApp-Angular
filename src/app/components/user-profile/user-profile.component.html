@@ -1,0 +1,83 @@
+<app-header></app-header>
+<section id="user-profile" style="padding: 90px 0 40px 0;">
+    <div class="container-lg">
+        <div class="row">
+            <form [formGroup]="profileForm" name="user-profile">
+                <div class="col-lg-6 mx-auto col-md-8 offset-md-3">
+                    <div class="mx-auto">
+                        <h2>Thông tin người dùng</h2>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="text" 
+                            name="phoneNumber" 
+                            class="form-control mt-2" 
+                            formControlName="phoneNumber"
+                            placeholder="Số điện thoại gồm 10 kí tự: 0867628xxx" >
+                            @if(profileForm.controls['phoneNumber'].invalid && (profileForm.controls['phoneNumber'].dirty || profileForm.controls['phoneNumber'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="profileForm.controls['phoneNumber'].errors?.['pattern'] || profileForm.controls['phoneNumber'].errors?.['minlength']">Số điện thoại không hợp lệ</p>
+                                <p class="text-danger mt-2" *ngIf="profileForm.controls['phoneNumber'].errors?.['required']">Bắt buộc phải nhập số điện thoại</p>
+                            }
+                        </div>
+                        <div class="mt-3"></div>
+                        <div class="form-group">
+                            <label for="phone">Họ và tên</label>
+                            <input type="text" 
+                            name="fullName" 
+                            class="form-control mt-2" 
+                            formControlName="fullName"
+                            placeholder="Số điện thoại gồm 10 kí tự: 0867628xxx" >
+                        </div>
+                        <div class="mt-3"></div>
+                        <div class="form-group">
+                            <label for="phone">Địa chỉ</label>
+                            <input type="text" 
+                            name="address" 
+                            class="form-control mt-2" 
+                            formControlName="address"
+                            placeholder="Ví dụ: Hưng Yên, Việt Nam" >
+                        </div>
+                        <div class="mt-3"></div>
+                        <div class="form-group">
+                            <label for="phone">Ngày sinh</label>
+                            <input type="date" 
+                            name="dateOfBirth" 
+                            class="form-control mt-2" 
+                            formControlName="dateOfBirth">
+                        </div>
+                        <div class="mt-3"></div>
+                        <div class="form-group">
+                            <label for="phone">Mật khẩu</label>
+                            <input type="password" 
+                            name="phoneNumber" 
+                            class="form-control mt-2" 
+                            formControlName="password"
+                            placeholder="Mật khẩu phải gồm chữ hoa, chữ thường, kí tự đặc biệt." >
+                            @if(profileForm.controls['password'].invalid && (profileForm.controls['password'].dirty || profileForm.controls['password'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="profileForm.controls['password'].errors?.['pattern'] || profileForm.controls['password'].errors?.['minlength']">Mật khẩu không hợp lệ, gồm ít nhất 8 kí tự.</p>
+                                <p class="text-danger mt-2" *ngIf="profileForm.controls['password'].errors?.['required']">Bắt buộc phải nhập mật khẩu</p>
+                            }
+                        </div>
+                        <div class="mt-3"></div>
+                        <div>
+                            <label for="phone">Nhập lại mật khẩu</label>
+                            <input type="password" 
+                            name="phoneNumber" 
+                            class="form-control mt-2" 
+                            formControlName="retypePassword"
+                            placeholder="Nhập lại đúng mật khẩu" >
+                            @if(profileForm.controls['retypePassword'].invalid && (profileForm.controls['retypePassword'].dirty || profileForm.controls['retypePassword'].touched)) {
+                                <p class="text-danger mt-2" *ngIf="profileForm.controls['retypePassword'].errors?.['passwordMismatch']">Mật khẩu không khớp</p>
+                                <p class="text-danger mt-2" *ngIf="profileForm.controls['retypePassword'].errors?.['required']">Bắt buộc phải nhập lại mật khẩu</p>
+                            }
+                        </div>
+                        <div class="mt-3"></div>
+                        <div>
+                            <button type="button" [disabled]="profileForm.invalid" class="btn btn-primary">Lưu thay đổi</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

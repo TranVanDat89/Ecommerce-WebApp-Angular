@@ -39,8 +39,8 @@
                               </a>
                               <ng-template #popoverContent>
                                 <div class="popover-list">
-                                  <a class="popover-item" href="">Tài khoản của tôi</a>
-                                  <a class="popover-item" href="">Đơn mua</a>
+                                  <a class="popover-item" [routerLink]="['/user-profile']" href="">Tài khoản của tôi</a>
+                                  <a class="popover-item" [routerLink]="['/order-detail/', userResponse.id]" href="">Đơn mua</a>
                                   <a class="popover-item" (click)="handleItemClick(2)" href="">Đăng xuất</a>
                                 </div>
                               </ng-template>
