@@ -1,3 +1,4 @@
 export interface StorageResponse<T> {
-    userResponse: T
+    userResponse?: T
+    orderDetails?: T
 }

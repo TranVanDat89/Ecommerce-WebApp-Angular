@@ -32,12 +32,6 @@ export class UserService {
     return this.http.post<ApiResponse<any>>(this.apiLogin, loginDTO, this.apiConfig);
   }
   getUserDetail(): Observable<ApiResponse<UserResponse>> {
-    // return this.http.post<ApiResponse<UserResponse>>(this.apiUserDetail, {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Bearer ${token}`
-    //   })
-    // })
     return this.http.post<ApiResponse<UserResponse>>(this.apiUserDetail, this.apiConfig);
   }
   saveUserResponseToLocalStorage(userResponse?: UserResponse) {

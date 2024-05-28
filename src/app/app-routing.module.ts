@@ -52,7 +52,7 @@ const routes: Routes = [
   },
   {
     path: 'orders/order-detail/:userId',
-    component: ProductDetailComponent
+    component: OrderDetailComponent
   },
   {
     path: "user-profile",

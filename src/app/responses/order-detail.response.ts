@@ -1,7 +1,7 @@
 import { Order } from "../models/order";
-import { DetailReponse } from "./detail.response";
+import { DetailResponse } from "./detail.response";
 
-export interface OrderDetailReponse {
+export interface OrderDetailResponse {
     order: Order;
-    detailReponses: DetailReponse[]
+    detailResponses: DetailResponse[]
 }
