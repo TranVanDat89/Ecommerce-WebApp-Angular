@@ -54,66 +54,21 @@
       <div class="row justify-content-center my-5">
         <div class="col-lg-8">
           <div class="list-group">
-            <div class="list-group-item py-3">
-              <div class="pb-2">
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
+            @for (comment of comments; track $index) {
+              <div class="list-group-item py-3">
+                <div class="pb-2">
+                  @for (start of getStarsArray(comment.star); track $index) {
+                    <i class="fa-solid fa-star text-warning"></i>
+                  }
+                  @for (start of getStarsArray(5 - comment.star); track $index) {
+                    <i class="fa-solid fa-star"></i>
+                  }
+                </div>
+                <h5 class="mb-1">{{comment.content}}</h5>
+                <p class="mb-1">{{comment.createdAt}}</p>
+                <small>Nhận xét bởi <strong>{{comment.fullName}}</strong></small>
               </div>
-              <h5 class="mb-1">A must-buy for every aspiring web dev</h5>
-              <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur error veniam sit expedita est illo maiores neque quos nesciunt, reprehenderit autem odio commodi labore praesentium voluptate repellat in id quisquam.</p>
-              <small>Review by Mario</small>
-            </div>
-            <div class="list-group-item py-3">
-              <div class="pb-2">
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-              </div>
-              <h5 class="mb-1">A must-buy for every aspiring web dev</h5>
-              <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur error veniam sit expedita est illo maiores neque quos nesciunt, reprehenderit autem odio commodi labore praesentium voluptate repellat in id quisquam.</p>
-              <small>Review by Mario</small>
-            </div>
-            <div class="list-group-item py-3">
-              <div class="pb-2">
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-              </div>
-              <h5 class="mb-1">A must-buy for every aspiring web dev</h5>
-              <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur error veniam sit expedita est illo maiores neque quos nesciunt, reprehenderit autem odio commodi labore praesentium voluptate repellat in id quisquam.</p>
-              <small>Review by Mario</small>
-            </div>
-            <div class="list-group-item py-3">
-              <div class="pb-2">
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-              </div>
-              <h5 class="mb-1">A must-buy for every aspiring web dev</h5>
-              <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur error veniam sit expedita est illo maiores neque quos nesciunt, reprehenderit autem odio commodi labore praesentium voluptate repellat in id quisquam.</p>
-              <small>Review by Mario</small>
-            </div>
-            <div class="list-group-item py-3">
-              <div class="pb-2">
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-                <i class="fa-solid fa-star text-warning"></i>
-              </div>
-              <h5 class="mb-1">A must-buy for every aspiring web dev</h5>
-              <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur error veniam sit expedita est illo maiores neque quos nesciunt, reprehenderit autem odio commodi labore praesentium voluptate repellat in id quisquam.</p>
-              <small>Review by Mario</small>
-            </div>
+            }
           </div>
         </div>
       </div>
@@ -123,11 +78,50 @@
     <div class="container">
       <div class="text-center">
         <h2>WheyStation là gì?</h2>
-        <p class="lead">Get the latest updates as they happen...</p>
+        <p class="lead">Tại sao nên lựa chọn WheyStation...</p>
       </div>
       <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-          <p class="text-muted my-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero exercitationem voluptatibus porro, hic asperiores fuga illo voluptates obcaecati deleniti veritatis sunt saepe quasi deserunt ex ipsum. Est possimus, aspernatur, vitae eligendi rem odit quaerat, ipsum pariatur ratione maxime delectus fuga minus accusamus dolores iusto maiores accusantium cumque magnam placeat quia!</p>
+        <div class="col-lg-8 mt-4">
+          <div class="row">
+            <div class="col-6 col-md-6">
+              <div class="feature">
+                <div class="icon">
+                  <img src="../../../assets/truck.svg" alt="Image" class="imf-fluid">
+                </div>
+                <h3>Nhanh &amp; Miễn phí giao hàng</h3>
+                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-6">
+              <div class="feature">
+                <div class="icon">
+                  <img src="../../../assets/bag.svg" alt="Image" class="imf-fluid">
+                </div>
+                <h3>Dễ dàng mua hàng</h3>
+                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-md-6">
+              <div class="feature">
+                <div class="icon">
+                  <img src="../../../assets/support.svg" alt="Image" class="imf-fluid">
+                </div>
+                <h3>Hỗ trợ 24/7</h3>
+                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-6">
+              <div class="feature">
+                <div class="icon">
+                  <img src="../../../assets/return.svg" alt="Image" class="imf-fluid">
+                </div>
+                <h3>30 ngày đổi trả</h3>
+                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

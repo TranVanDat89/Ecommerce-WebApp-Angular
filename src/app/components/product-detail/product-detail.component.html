@@ -57,12 +57,18 @@
                     </div>
                     <p><span class="fw-bold">Số lượng:</span> {{product?.quantity}}</p>
                     <h3>
-                      <span class="me-3 text-decoration-line-through">1.750.00đ</span>
+                      <span class="me-3 text-decoration-line-through">2.000.000</span>
                       <span class="text-danger">{{ formatPrice(product?.price) }}</span>
                     </h3>
                     <div class="product-actions mt-3">
-                      <button class="btn btn-danger me-3">Thêm vào giỏ hàng</button>
-                      <button class="btn btn-primary">Mua ngay</button>
+                      @if(userResponse || userResponse === undefined) {
+                        <span class="bg-warning p-3 rounded text-white">
+                          <i class="fa fa-triangle-exclamation"></i>
+                          Vui lòng đăng nhập để mua hàng.</span>
+                      } @else {
+                        <button class="btn btn-danger me-3">Thêm vào giỏ hàng</button>
+                        <button class="btn btn-primary">Mua ngay</button>
+                      }
                     </div>
                 </div>
             </div>

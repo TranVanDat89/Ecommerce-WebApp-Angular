@@ -7,6 +7,8 @@ import { Category } from '../../models/category';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { ProductResponse } from '../../responses/product.response';
+import { UserResponse } from '../../responses/user.response';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-product',
@@ -14,6 +16,7 @@ import { ProductResponse } from '../../responses/product.response';
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnInit {
+  userResponse?: UserResponse | null;
   categories: Category[];
   products: Product[];
   totalPages?: number;
@@ -22,7 +25,7 @@ export class ProductComponent implements OnInit {
   itemsPerPage: number;
   currentPage: number;
   totalItems: number;
-  constructor(private router: Router, private categoryService: CategoryService, private productService: ProductService) {
+  constructor(private router: Router, private categoryService: CategoryService, private userService: UserService, private productService: ProductService) {
     this.categories = [];
     this.totalPages = 0;
     this.totalItems = 0;
@@ -32,6 +35,7 @@ export class ProductComponent implements OnInit {
     this.itemsPerPage = 9;
   }
   ngOnInit(): void {
+    this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
     this.currentPage = Number(this.localStorage?.getItem('currentProductPage')) || 0;
     this.getCategories();
     this.getAllProducts();

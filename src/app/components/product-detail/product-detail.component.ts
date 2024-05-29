@@ -5,6 +5,8 @@ import { ProductService } from '../../services/product.service';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../responses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserResponse } from '../../responses/user.response';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,16 +14,19 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './product-detail.component.css'
 })
 export class ProductDetailComponent implements OnInit {
+  userResponse?: UserResponse | null;
   productId: string;
   product?: Product;
-  constructor(private router: ActivatedRoute, private productService: ProductService) {
+  constructor(private router: ActivatedRoute, private userService: UserService, private productService: ProductService) {
     this.productId = '';
   }
   ngOnInit(): void {
+    this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
     this.router.paramMap.subscribe(params => {
       this.productId = params.get('productId') ?? '';
     });
     this.getProductById(this.productId);
+    console.log(this.userResponse);
   }
   formatPrice(price: number | undefined): string {
     if (price === undefined) return '';

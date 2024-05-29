@@ -8,6 +8,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { OrderComponent } from './components/order/order.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { WishListComponent } from './components/wish-list/wish-list.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
   {
     path: "user-profile",
     component: UserProfileComponent
+  },
+  {
+    path: "favorites",
+    component: WishListComponent
   }
 ];
 

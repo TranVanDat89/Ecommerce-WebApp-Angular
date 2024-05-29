@@ -18,6 +18,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { WishListComponent } from './components/wish-list/wish-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     RegisterComponent,
     OrderComponent,
     OrderDetailComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    WishListComponent
   ],
   imports: [
     BrowserModule,

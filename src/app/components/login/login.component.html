@@ -1,10 +1,13 @@
 <app-header></app-header>
 <section id="login" style="padding: 120px 0 40px 0;">
     <div class="container-lg">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-xxl-6 w-50 mx-auto">
+                <img src="../../../assets/undraw_secure_login_pdn4.svg" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-6 col-xxl-6">
                 <form action="" method="post" name="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
-                    <div class="login-form mx-auto">
+                    <div class="login-form">
                         <h2 class="text-center">Đăng nhập</h2>
                         <div class="form-group my-2">
                             <label for="phoneNumber" class="mb-2">Số điện thoại</label>
