@@ -16,6 +16,7 @@ export class UserService {
   private apiRegister = `${environment.apiBaseUrl}/users/auth/register`;
   private apiLogin = `${environment.apiBaseUrl}/users/auth/login`;
   private apiUserDetail = `${environment.apiBaseUrl}/users/auth/details`;
+  private apiUserAll = `${environment.apiBaseUrl}/users/auth/all`;
   private http = inject(HttpClient);
   private httpUtilService = inject(HttpUtilService);
 
@@ -23,7 +24,9 @@ export class UserService {
     headers: this.httpUtilService.createHeaders()
   }
   constructor() { }
-
+  getAllUsers(): Observable<ApiResponse<StorageResponse<UserResponse[]>>> {
+    return this.http.get<ApiResponse<StorageResponse<UserResponse[]>>>(this.apiUserAll);
+  }
   register(registerDTO: RegisterDTO): Observable<ApiResponse<UserResponse>> {
     return this.http.post<ApiResponse<UserResponse>>(this.apiRegister, registerDTO, this.apiConfig);
   }

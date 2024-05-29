@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 .text--shorten {
     overflow: hidden;
     display: -webkit-box;

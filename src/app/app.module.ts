@@ -19,6 +19,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { UserComponent } from './components/admin/user/user.component';
+import { HeaderAdminComponent } from './components/admin/header-admin/header-admin.component';
+import { OrderAdminComponent } from './components/admin/order-admin/order-admin.component';
+import { ProductAdminComponent } from './components/admin/product-admin/product-admin.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,13 @@ import { WishListComponent } from './components/wish-list/wish-list.component';
     OrderComponent,
     OrderDetailComponent,
     UserProfileComponent,
-    WishListComponent
+    WishListComponent,
+    AdminComponent,
+    UserComponent,
+    HeaderAdminComponent,
+    OrderAdminComponent,
+    ProductAdminComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

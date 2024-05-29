@@ -4,7 +4,8 @@
             <a href="" class="navbar-brand">
                 <span class="fw-bold text-white">WheyStation</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
+                aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon btn-white"></span>
             </button>
             <div class="navbar-collapse justify-content-end align-center" id="main-nav">
@@ -17,40 +18,36 @@
                         <a href="" class="nav-link text-white">Thông báo</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" [routerLink]="['/orders']" class="nav-link text-white">Giỏ hàng</a>
+                        <a href="" [routerLink]="['/carts']" class="nav-link text-white">Giỏ hàng</a>
                     </li>
                     @if(userResponse) {
-                        <ng-container>
-                            <ng-container
-                              ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất"
-                              popoverTitle="User Actions"
-                              triggers="click"
-                              [placement]="'auto'"
-                              container="body"
-                            >
-                              <a href="" [routerLink]="['/favorites']" class="nav-link text-white">Yêu thích</a>
-                              <a class="nav-link text-white w-content"                              
-                                [ngbPopover]="popoverContent"
+                    <ng-container>
+                        <ng-container ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất" popoverTitle="User Actions"
+                            triggers="click" [placement]="'auto'" container="body">
+                            <a href="" [routerLink]="['/favorites']" class="nav-link text-white">Yêu thích</a>
+                            <a class="nav-link text-white w-content" [ngbPopover]="popoverContent"
                                 (click)="togglePopover($event)">
                                 {{ userResponse.fullName }}
                                 <i class="fa-solid fa-caret-down"></i>
-                              </a>
-                              <ng-template #popoverContent>
+                            </a>
+                            <ng-template #popoverContent>
                                 <div class="popover-list">
-                                  <a class="popover-item" [routerLink]="['/user-profile']" href="">Tài khoản của tôi</a>
-                                  <a class="popover-item" [routerLink]="['/orders/order-detail/', userResponse.id]" href="">Đơn mua</a>
-                                  <a class="popover-item" (click)="handleItemClick(2)" href="">Đăng xuất</a>
+                                    <a class="popover-item" [routerLink]="['/user-profile']" href="">Tài khoản của
+                                        tôi</a>
+                                    <a class="popover-item" [routerLink]="['/orders/order-detail/', userResponse.id]"
+                                        href="">Đơn mua</a>
+                                    <a class="popover-item" (click)="handleItemClick(2)" href="">Đăng xuất</a>
                                 </div>
-                              </ng-template>
-                            </ng-container>
+                            </ng-template>
                         </ng-container>
+                    </ng-container>
                     } @else {
-                        <li class="nav-item">
-                            <a href="" [routerLink]="['/login']" class="nav-link text-white">Đăng nhập</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" [routerLink]="['/register']" class="btn btn-primary text-white">Đăng ký</a>
-                        </li>
+                    <li class="nav-item">
+                        <a href="" [routerLink]="['/login']" class="nav-link text-white">Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" [routerLink]="['/register']" class="btn btn-primary text-white">Đăng ký</a>
+                    </li>
                     }
                 </ul>
             </div>

@@ -1,0 +1,38 @@
+<section id="user-management" style="padding: 90px 0 40px 0;">
+    <div class="row m-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>State</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(user of users; track user.id) {
+                <tr>
+                    <td>{{ user.fullName }}</td>
+                    <td>{{ user.phoneNumber }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.active ? 'Active' : 'Inactive' }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                        <button class="btn" [ngClass]="{
+                                        'btn-danger': user.active,
+                                        'btn-success': !user.active
+                                      }">
+                            {{ user.active? 'Block User' : 'Unblock User' }}
+                        </button>
+                        <button class="btn btn-primary ms-2">
+                            Reset Password
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

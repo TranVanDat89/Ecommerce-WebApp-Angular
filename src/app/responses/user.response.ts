@@ -5,5 +5,5 @@ export interface UserResponse {
     phoneNumber: string;
     dateOfBirth?: string;
     role: string;
-    active: string;
+    active: boolean;
 }

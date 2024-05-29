@@ -1,129 +1,181 @@
 <app-header></app-header>
 <section id="intro">
-    <div class="container-lg">
-        <div class="row justify-content-center">
-            <div class="col-lg-5 text-center text-start">
-                <h2>
-                    <div class="display-5 fw-bold mb-3">Optimum Nutrition Gold Standard 100% Whey Protein Powder</div>
-                    <div class="display-6 text-muted">Dòng Whey tốt nhất trên thị trường hiện nay. 100% whey thủy phân hoàn toàn.</div>
-                </h2>
-                <p class="lead text-muted my-4">Còn chần chừ gì nữa, thêm ngay vào giỏ hàng của mình thôi nào.</p>
-                <a class="btn btn-primary me-3 mt-2" [routerLink]="['/products/product-detail/147eb7bb-9f1e-472e-9467-11ad723fc316']">Chi tiết sản phẩm</a>
-                <!-- open sidebar / offcanvas -->
-                <a href="" routerLink="products" class="btn btn-dark mt-2">
-                    Xem tất cả sản phẩm
-                </a>
-            </div>
-            <div class="col-lg-5 mt-3 text-center d-none d-lg-block">
-                <img src="../../../assets/intro-image.jpg" class="img-fluid" alt="ebook">
-            </div>
-        </div>
+  <div class="container-lg">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 text-center text-start">
+        <h2>
+          <div class="display-5 fw-bold mb-3">Optimum Nutrition Gold Standard 100% Whey Protein Powder</div>
+          <div class="display-6 text-muted">Dòng Whey tốt nhất trên thị trường hiện nay. 100% whey thủy phân hoàn toàn.
+          </div>
+        </h2>
+        <p class="lead text-muted my-4">Còn chần chừ gì nữa, thêm ngay vào giỏ hàng của mình thôi nào.</p>
+        <a class="btn btn-primary me-3 mt-2"
+          [routerLink]="['/products/product-detail/147eb7bb-9f1e-472e-9467-11ad723fc316']">Chi tiết sản phẩm</a>
+        <!-- open sidebar / offcanvas -->
+        <a href="" routerLink="products" class="btn btn-dark mt-2">
+          Xem tất cả sản phẩm
+        </a>
+      </div>
+      <div class="col-lg-5 mt-3 text-center d-none d-lg-block">
+        <img src="../../../assets/intro-image.jpg" class="img-fluid" alt="ebook">
+      </div>
     </div>
+  </div>
 </section>
 <section id="most-popular-product" class="bg-light" style="padding: 0 0 60px 0;">
-    <div class="container-lg py-4">
-        <div class="text-center">
-            <h2 class="fw-bold">Sản phẩm mới nhất</h2>
-            <p class="lead text-muted">Top những sản phẩm mới nhất tại WheyStation.</p>
-        </div>
-        <div class="row justify-content-center">
-          @for (product of top4Product; track $index) {
-            <div class="col-xl-3 col-md-6 col-8 mb-3">
-              <div class="card w-100 h-100">
-                <div class="overflow-hidden" style="height: 226px;">
-                  <img [src]="product.thumbnail" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">{{product.name}}</h5>
-                  <p class="card-text text--shorten">{{product.productDetail.introduction}}</p>
-                  <a href="" [routerLink]="['products/product-detail', product.id]" class="btn btn-primary">Chi tiết sản phẩm</a>
-                </div>
-              </div>
-            </div>    
-          }
-        </div>
+  <div class="container-lg py-4">
+    <div class="text-center">
+      <h2 class="fw-bold">Sản phẩm mới nhất</h2>
+      <p class="lead text-muted">Top những sản phẩm mới nhất tại WheyStation.</p>
     </div>
+    <div class="row justify-content-center">
+      @for (product of top4Product; track $index) {
+      <div class="col-xl-3 col-md-6 col-8 mb-3">
+        <div class="card w-100 h-100">
+          <div class="overflow-hidden" style="height: 226px;">
+            <img [src]="product.thumbnail" class="card-img-top" alt="...">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text text--shorten">{{product.productDetail.introduction}}</p>
+            <a href="" [routerLink]="['products/product-detail', product.id]" class="btn btn-primary">Chi tiết sản
+              phẩm</a>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
 </section>
 <section id="reviews">
-    <div class="container-lg mt-4">
-      <div class="text-center">
-        <h2><i class="bi bi-stars"></i>Đánh giá của khách hàng</h2>
-        <p class="lead">Khánh hàng đánh giá gì về dịch vụ của chúng tôi...</p>
-      </div>
+  <div class="container-lg mt-4">
+    <div class="text-center">
+      <h2><i class="bi bi-stars"></i>Đánh giá của khách hàng</h2>
+      <p class="lead">Khánh hàng đánh giá gì về dịch vụ của chúng tôi...</p>
+    </div>
 
-      <div class="row justify-content-center my-5">
-        <div class="col-lg-8">
-          <div class="list-group">
-            @for (comment of comments; track $index) {
-              <div class="list-group-item py-3">
-                <div class="pb-2">
-                  @for (start of getStarsArray(comment.star); track $index) {
-                    <i class="fa-solid fa-star text-warning"></i>
-                  }
-                  @for (start of getStarsArray(5 - comment.star); track $index) {
-                    <i class="fa-solid fa-star"></i>
-                  }
-                </div>
-                <h5 class="mb-1">{{comment.content}}</h5>
-                <p class="mb-1">{{comment.createdAt}}</p>
-                <small>Nhận xét bởi <strong>{{comment.fullName}}</strong></small>
-              </div>
-            }
+    <div class="row justify-content-center my-5">
+      <div class="col-lg-8">
+        <div class="list-group">
+          @for (comment of comments; track $index) {
+          <div class="list-group-item py-3">
+            <div class="pb-2">
+              @for (start of getStarsArray(comment.star); track $index) {
+              <i class="fa-solid fa-star text-warning"></i>
+              }
+              @for (start of getStarsArray(5 - comment.star); track $index) {
+              <i class="fa-solid fa-star"></i>
+              }
+            </div>
+            <h5 class="mb-1">{{comment.content}}</h5>
+            <p class="mb-1">{{comment.createdAt}}</p>
+            <small>Nhận xét bởi <strong>{{comment.fullName}}</strong></small>
           </div>
+          }
         </div>
       </div>
     </div>
+  </div>
 </section>
 <section class="bg-light" id="about-us" style="padding: 30px 0 50px 0;">
-    <div class="container">
-      <div class="text-center">
-        <h2>WheyStation là gì?</h2>
-        <p class="lead">Tại sao nên lựa chọn WheyStation...</p>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-lg-8 mt-4">
-          <div class="row">
-            <div class="col-6 col-md-6">
-              <div class="feature">
-                <div class="icon">
-                  <img src="../../../assets/truck.svg" alt="Image" class="imf-fluid">
-                </div>
-                <h3>Nhanh &amp; Miễn phí giao hàng</h3>
-                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-              </div>
-            </div>
-            <div class="col-6 col-md-6">
-              <div class="feature">
-                <div class="icon">
-                  <img src="../../../assets/bag.svg" alt="Image" class="imf-fluid">
-                </div>
-                <h3>Dễ dàng mua hàng</h3>
-                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+  <div class="container">
+    <div class="text-center">
+      <h2>WheyStation là gì?</h2>
+      <p class="lead">Tại sao nên lựa chọn WheyStation...</p>
+    </div>
+    <div class="row mt-5">
+      <div class="col-lg-6 col-md-12 mx-auto">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                <span class="fw-bold">WHEYSTATION - UY TÍN MỘT THẬP KỶ</span>
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p>
+                  Với 10 năm kinh nghiệm, WheyStore tự hào là một trong những đơn vị hàng đầu trong lĩnh vực phân phối
+                  thực phẩm thể hình và thực phẩm bổ sung tăng cường sức khỏe.
+                </p>
+                <p>
+                  WheyStore từng bước ghi dấu ấn và nhận được sự quan tâm của đông đảo những người yêu thích thể hình
+                  trên khắp cả nước. Sau 10 năm kể từ khi khai trương cửa hàng đầu tiên tại Hà Nội, WheyStore đã phát
+                  triển 7 chi nhánh đặt tại 3 thành phố lớn (Hà Nội, Đà Nẵng và TP.HCM), sở hữu lượng khách hàng đông
+                  đảo.
+                </p>
+                <p>
+                  Mỗi năm trung bình WheyStore tiếp đón hơn 300.000 lượt khách, tốc độ tăng trưởng khoảng 18% / năm.
+                  Không chỉ có những vị khách là gymer, WheyStore còn là thương hiệu đồng hành cùng rất nhiều vận động
+                  viên khi tham dự các giải đấu thể hình ở đấu trường trong nước và quốc tế như Tuấn Anh IFBB, Hoàng Hải
+                  Đăng,...
+                </p>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-6 col-md-6">
-              <div class="feature">
-                <div class="icon">
-                  <img src="../../../assets/support.svg" alt="Image" class="imf-fluid">
-                </div>
-                <h3>Hỗ trợ 24/7</h3>
-                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <span class="fw-bold">1000+ SẢN PHẨM DINH DƯỠNG THỂ HÌNH CHÍNH HÃNG</span>
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p>
+                  Tại WheyStore chúng tôi cung cấp cho bạn các loại <strong>whey protein, protein bar,mass gainer,
+                    pre-workout, creatine, fat burner,...</strong> với mục đích hỗ trợ quá trình tập luyện cải thiện thể
+                  hình, thể trạng và sức khỏe của bạn. 100% sản phẩm được nhập khẩu chính hãng từ Mỹ, Anh, Ba Lan, Úc,
+                  Châu Âu,...
+                </p>
+                <p>
+                  Quý khách hàng sẽ được lựa chọn hơn 1000 mã sản phẩm đang được kinh doanh tại WheyStore. Từ các sản
+                  phẩm hỗ trợ tăng cơ, tăng sức mạnh, tăng cân, giảm mỡ cho đến các loại vitamin khoáng chất và dưỡng
+                  chất hỗ trợ tập luyện và tăng cường thể lực. Bạn có thể dễ dàng bắt gặp các sản phẩm nổi tiếng của các
+                  “ông lớn” rất nổi tiếng trong ngành sản xuất dinh dưỡng thể thao trên thế giới như
+                  <strong>Nutrabolics, Dymatize, Optimum Nutrition, Amix Nutrition, Applied Nutrition,...</strong>
+                </p>
+                <p>
+                  Chúng tôi đảm bảo sản phẩm có xuất xứ rõ ràng, tem mác đầy đủ và đã được cấp phép kinh doanh của các
+                  đơn vị kiểm định chất lượng có thẩm quyền. Bạn hoàn toàn có thể kiểm tra nguồn gốc sản phẩm theo hướng
+                  dẫn in trên tem.
+                </p>
               </div>
             </div>
-            <div class="col-6 col-md-6">
-              <div class="feature">
-                <div class="icon">
-                  <img src="../../../assets/return.svg" alt="Image" class="imf-fluid">
-                </div>
-                <h3>30 ngày đổi trả</h3>
-                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <span class="fw-bold">CHẾ ĐỘ BẢO HÀNH ĐẢM BẢO LỢI ÍCH TỐI ĐA CHO KHÁCH HÀNG</span>
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p>
+                  Wheystore luôn tạo điều kiện để hỗ trợ khách hàng tốt nhất có thể. Thời gian đổi trả hàng được hỗ trợ
+                  lên tới 30 ngày, với điều kiện hàng chưa bóc tem, còn nguyên vẹn. Khi đổi hoặc trả hàng, bạn nhớ lưu ý
+                  cung cấp hóa đơn bán hàng đi kèm. Ngoài ra chúng tôi còn hỗ trợ thanh lý sản phẩm với tùy từng trường
+                  hợp.
+                </p>
+                <p>
+                  Lựa chọn mua sắm với WheyStore, bạn sẽ không bao giờ phải lo lắng về vấn đề hàng giả hàng nhái, hàng
+                  kém chất lượng. Chúng tôi luôn đặt uy tín và sức khỏe của quý khách hàng lên hàng đầu. WheyStore sẵn
+                  sàng đồng hành cùng bạn lâu dài trong quá trình cải thiện vóc dáng và duy trì một cơ thể khỏe mạnh.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="col-lg-6 col-md-12 mx-auto">
+        <img src="../../../assets/khach-hang_1708422822.jpg.webp" class="img-fluid rounded" alt="">
+      </div>
     </div>
+  </div>
 </section>
 <app-footer></app-footer>

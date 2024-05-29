@@ -3,4 +3,5 @@ export interface StorageResponse<T> {
     orderDetails?: T;
     favorites?: T;
     comments?: T;
+    userResponses?: T;
 }

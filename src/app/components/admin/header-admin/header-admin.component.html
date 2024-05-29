@@ -1,0 +1,33 @@
+<header>
+    <nav class="navbar fixed-top bg-dark navbar-expand-lg navbar-dark">
+        <div class="container-lg p-2">
+            <a href="" class="navbar-brand">
+                <span class="fw-bold text-white">AdminPanel</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
+                aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon btn-white"></span>
+            </button>
+            <div class="navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav">
+                    <!-- chu xem chau cai trang toan san pham cho no deu ho chau voi, no cu tho thut y -->
+                    <li class="nav-item">
+                        <a [routerLink]="" href="" class="nav-link text-white">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['/admin/users']" href="" class="nav-link text-white">Người dùng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="" href="" class="nav-link text-white">Đơn hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="" href="" class="nav-link text-white">Danh mục sản phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="" href="" class="nav-link text-white">Sản phẩm</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

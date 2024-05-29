@@ -9,6 +9,9 @@ import { OrderComponent } from './components/order/order.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { UserComponent } from './components/admin/user/user.component';
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -18,14 +21,7 @@ const routes: Routes = [
   {
     path: "products",
     component: ProductComponent,
-    children: [
-      {
-        path: "product-detail",
-        component: ProductDetailComponent
-      }
-    ]
-  },
-  {
+  }, {
     path: 'products/product-detail/:productId',
     component: ProductDetailComponent
   },
@@ -42,14 +38,12 @@ const routes: Routes = [
     component: ProductDetailComponent
   },
   {
+    path: "carts",
+    component: CartComponent
+  },
+  {
     path: "orders",
-    component: OrderComponent,
-    children: [
-      {
-        path: "order-detail",
-        component: OrderDetailComponent
-      }
-    ]
+    component: OrderComponent
   },
   {
     path: 'orders/order-detail/:userId',
@@ -62,6 +56,15 @@ const routes: Routes = [
   {
     path: "favorites",
     component: WishListComponent
+  }, {
+    path: "admin",
+    component: AdminComponent,
+    children: [
+      {
+        path: "users",
+        component: UserComponent
+      }
+    ]
   }
 ];
 
