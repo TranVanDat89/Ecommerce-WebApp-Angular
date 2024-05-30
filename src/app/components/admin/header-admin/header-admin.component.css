@@ -1,0 +1,66 @@
+#sidebar {
+    width: 240px;
+    margin-top: 62px;
+    background-color: #24272a;
+    transition: width 1s ease-in-out;
+    height: 100vh;
+    padding-top: 70px;
+}
+
+.popover-list {
+    padding: 10px;
+}
+
+::ng-deep .popover-body {
+    padding: 0px;
+}
+
+.popover-item {
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+}
+
+.popover-item:hover {
+    background-color: #f0f0f0;
+    color: black;
+}
+
+.w-content {
+    width: max-content;
+}
+
+.popover-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.popover-item {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    /* Adjust padding as needed */
+    color: #333;
+    /* Default text color */
+    text-decoration: none;
+    /* Remove underline */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.popover-item:hover {
+    background-color: var(--bs-primary);
+    /* Use Bootstrap's primary color */
+    color: #fff;
+    /* Text color on hover */
+}
+
+.routing {
+    width: calc(100% - 240px);
+}

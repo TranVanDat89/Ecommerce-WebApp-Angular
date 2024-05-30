@@ -1,3 +1,4 @@
+import { CartService } from '../../services/cart.service';
 import { TokenService } from '../../services/token.service';
 import { UserResponse } from './../../responses/user.response';
 import { UserService } from './../../services/user.service';
@@ -11,12 +12,15 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   userResponse?: UserResponse | null;
+  cart: Map<string, { quantity: number, flavorName: string }> = new Map();
   isPopoverOpen = false;
-  constructor(private router: Router, private userService: UserService, private tokenService: TokenService) {
+  constructor(private router: Router, private cartService: CartService, private userService: UserService, private tokenService: TokenService) {
   }
   ngOnInit(): void {
     this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
     // console.log(this.userResponse);
+    this.cart = this.cartService.getCart();
+
   }
 
   togglePopover(event: Event): void {

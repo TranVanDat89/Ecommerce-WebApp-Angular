@@ -10,6 +10,7 @@
                         <div class="d-flex">
                             <div class="d-flex">
                                 <a href="" style="width: 24px;height: 24px;"
+                                    (click)="removeProductFromCart(cart.product.id)"
                                     class="nav-link text-center d-inline-block rounded-circle bg-light btn-remove"><i
                                         class="fa-solid fa-xmark"></i></a>
                                 <a href="" class="img-fluid" style="width: 80px; height: 80px;"><img
@@ -54,12 +55,7 @@
                             </div>
                             <div class="d-flex justify-content-between mt-3">
                                 <span class="fw-bold">Tổng tiền</span>
-                                @if(cartItems.length > 0) {
-                                const total = cartItems.reduce((a, b) => a + b.product.price * b.quantity, 0);
-                                <span>total</span>
-                                } @else {
-                                <span class="fw-bold">0</span>
-                                }
+                                <span class="fw-bold">{{formatPrice(totalMoneys)}}</span>
                             </div>
                         </div>
                     </div>

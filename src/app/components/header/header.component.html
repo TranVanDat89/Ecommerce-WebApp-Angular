@@ -14,17 +14,20 @@
                     <li class="nav-item me-2">
                         <a [routerLink]="['/products']" class="nav-link text-white">Sản phẩm</a>
                     </li>
-                    <li class="nav-item position-relative me-2  w-content">
-                        <a href="" [routerLink]="['/orders']" class="nav-link text-white">Giỏ hàng <i
-                                class="fa-solid fa-cart-shopping "></i></a>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            9
-                        </span>
-                    </li>
                     @if(userResponse) {
                     <ng-container>
                         <ng-container ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất" popoverTitle="User Actions"
                             triggers="click" [placement]="'auto'" container="body">
+                            <li class="nav-item position-relative me-2  w-content">
+                                <a href="" [routerLink]="['/orders']" class="nav-link text-white">Giỏ hàng <i
+                                        class="fa-solid fa-cart-shopping "></i></a>
+                                @if(cart.size > 0) {
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {{cart.size}}
+                                </span>
+                                }
+                            </li>
                             <li class="nav-item me-2">
                                 <a href="" class="nav-link text-white">Thông báo</a>
                             </li>

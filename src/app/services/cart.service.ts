@@ -35,6 +35,10 @@ export class CartService {
     // Sau khi thay đổi giỏ hàng, lưu trữ nó vào localStorage
     this.saveCartToLocalStorage();
   }
+  removeFromCart(productId: string) {
+    this.cart.delete(productId);
+    this.saveCartToLocalStorage();
+  }
   setCart(cart: Map<string, { quantity: number, flavorName: string }>) {
     this.cart = cart ?? new Map<string, { quantity: number, flavorName: string }>();
     this.saveCartToLocalStorage();

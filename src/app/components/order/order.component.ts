@@ -14,6 +14,7 @@ import { ApiResponse } from '../../responses/api.response';
 export class OrderComponent implements OnInit {
   cart: Map<string, { quantity: number, flavorName: string }> = new Map();
   cartItems: { product: Product, quantity: number, flavorName: string }[] = [];
+  totalMoneys: number = 0;
   constructor(private cartService: CartService, private productService: ProductService) { }
   ngOnInit(): void {
     this.cart = this.cartService.getCart();
@@ -24,7 +25,7 @@ export class OrderComponent implements OnInit {
       });
       this.getProductsFromCart(productInfors);
     }
-    console.log(this.cartItems)
+    console.log(this.cartItems);
   }
   getProductsFromCart(productInfors: Map<string, { quantity: number, flavorName: string }>) {
     productInfors.forEach((value, key) => {
@@ -32,12 +33,16 @@ export class OrderComponent implements OnInit {
         next: (apiResponse: ApiResponse<any>) => {
           const { product } = apiResponse.data;
           this.cartItems.push({ product, quantity: value.quantity, flavorName: value.flavorName });
+          this.totalMoneys += product.price * value.quantity;
         },
         error: (error: HttpErrorResponse) => {
           console.error(error?.error?.message ?? '');
         }
       })
     })
+  }
+  removeProductFromCart(productId: string) {
+    this.cartService.removeFromCart(productId);
   }
   formatPrice(price: number | undefined): string {
     if (price === undefined) return '';

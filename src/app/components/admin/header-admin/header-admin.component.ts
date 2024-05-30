@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './header-admin.component.css'
 })
 export class HeaderAdminComponent {
+  isCollapsed: boolean = false;
 
+  toggleCollapse(): void {
+    this.isCollapsed = !this.isCollapsed;
+  }
 }
