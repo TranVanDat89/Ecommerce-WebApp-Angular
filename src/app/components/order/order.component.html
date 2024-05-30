@@ -1,100 +1,105 @@
 <app-header></app-header>
-<section id="order-page" style="padding: 90px 0 40px 0;">
+<section id="order-page" style="padding: 90px 0 40px 0;" class="bg-light">
     <div class="container-lg">
         <div class="row">
-            <div class="col-lg-5">
-                <h2 class="product-header">Giỏ hàng</h2>
-                <form>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Họ và tên</label>
-                        <input type="text" class="form-control" id="name" placeholder="Trần Văn A">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Số điện thoại</label>
-                        <input type="text" class="form-control" id="phone" placeholder="0268452xxx">
-                    </div>
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Địa chỉ</label>
-                        <input type="text" class="form-control" placeholder="Địa chỉ" required id="address">
-                    </div>
-                    <div class="mb-3">
-                        <label for="note" class="form-label">Ghi chú</label>
-                        <input type="text" class="form-control" placeholder="Ghi chú" required id="note">
-                    </div>
-                    <div class="mb-3">
-                        <label for="shippingMethod">Phương thức vận chuyển</label>
-                        <select class="form-control" id="shippingMethod">
-                            <option value="express">Nhanh (Express)</option>
-                            <option value="normal">Thường (Normal)</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="paymentMethod">Phương thức thanh toán</label>
-                        <select class="form-control" id="paymentMethod">
-                            <option value="cod">Thanh toán khi nhận hàng (COD)</option>
-                            <option value="other">Thanh toán khác</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-7">
-                <h2 class="product-order">Sản phẩm đã đặt hàng</h2>
-                <table class="table text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="text-start">Sản phẩm</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Đơn giá</th>
-                            <th scope="col">Tổng giá</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="d-flex flex-column">
-                                    <img src="../../../assets/intro-image.jpg" alt="Product Image"
-                                        class="img-fluid product-image">
-                                    <span class="fw-bold text-start">Optimum Nutrition Gold Standard 100% Whey Protein
-                                        Powder</span>
+            <div class="col-lg-8 mx-auto">
+                <h3 class="product-header">Giỏ hàng</h3>
+                <div class="mb-3">
+                    <div class="p-3 rounded" style="background-color: #fff;">
+                        <div class="d-flex">
+                            <div class="d-flex">
+                                <a href="" style="width: 24px;height: 24px;"
+                                    class="nav-link text-center d-inline-block rounded-circle bg-light btn-remove"><i
+                                        class="fa-solid fa-xmark"></i></a>
+                                <a href="" class="img-fluid" style="width: 80px; height: 80px;"><img
+                                        src="../../../assets/intro-image.jpg" class="img-fluid" alt=""></a>
+                            </div>
+                            <div class="infor-name-number flex-grow-1 d-flex flex-column">
+                                <div class="content-col d-flex justify-content-between">
+                                    <div class="col-name px-3">
+                                        <a href="" class="nav-link fw-bold">ON Gold Standard 100% Whey 5lbs</a>
+                                        <p>Vanilla Ice Cream</p>
+                                    </div>
+                                    <div class="col-price">
+                                        <p class="fw-bold">1.590.000đ</p>
+                                    </div>
                                 </div>
-                            </td>
-                            <td>2</td>
-                            <td>100,000 đ</td>
-                            <td>200,000 đ</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex flex-column">
-                                    <img src="../../../assets/intro-image.jpg" alt="Product Image"
-                                        class="img-fluid product-image">
-                                    <span class="fw-bold text-start">Optimum Nutrition Gold Standard 100% Whey Protein
-                                        Powder</span>
+                                <div class="quantity-check-number d-flex flex-wrap">
+                                    <div class="px-3 mt-3 w-auto flex-grow-1">
+                                        <select class="form-select bg-light" aria-label="Select Type">
+                                            <option>Vanila Ice Cream</option>
+                                            <option value="">Chocolate</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group mt-3 px-3 w-auto">
+                                        <span class="input-group-text fw-bold btn btn-light"><i class="fa-solid fa-plus"
+                                                style="font-size: 12px;"></i></span>
+                                        <input type="text" style="width: 30px;" value="1"
+                                            class="form-control text-center bg-light border-0">
+                                        <span class="input-group-text btn btn-light"><i class="fa-solid fa-minus"
+                                                style="font-size: 12px;"></i></span>
+                                    </div>
                                 </div>
-                            </td>
-                            <td>1</td>
-                            <td>150,000 đ</td>
-                            <td>150,000 đ</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="text-start mt-3">
-                    <h4 class="header-text text-end ">Tổng giá: 350,000 đ</h4>
-                </div>
-                <div class="mt-3">
-                    <h4 class="product-header">Nhập coupon</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Nhập coupon">
-                        <button class="btn btn-primary" type="button">Áp dụng</button>
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <span>Mã giảm giá</span>
+                                <input type="text" placeholder="Nhập mã giảm giá"
+                                    class="form-control text-center bg-light border-0" style="width: 60%;">
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span class="fw-bold">Tổng tiền</span>
+                                <span>1.590.000đ</span>
+                            </div>
+                        </div>
                     </div>
+                    <form action="" method="post"></form>
                 </div>
-                <div class="text-start mt-3">
-                    <!-- <button class="btn btn-primary" type="button">Đặt hàng</button> -->
-                    <!-- Button test -->
-                    <a href="/order-detail" class="btn btn-primary">Đặt hàng</a>
+                <h3>Thông tin khách hàng</h3>
+                <div class="mb-3">
+                    <div class="rounded p-3" style="background-color: #fff">
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Họ và tên</label>
+                                <input type="text" class="form-control" id="name" placeholder="Trần Văn A">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input type="text" class="form-control" id="phone" placeholder="0268452xxx">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-control" placeholder="Địa chỉ" required id="address">
+                            </div>
+                            <div class="mb-3">
+                                <label for="note" class="form-label">Ghi chú</label>
+                                <input type="text" class="form-control" placeholder="Ghi chú" required id="note">
+                            </div>
+                            <div class="mb-3">
+                                <label for="shippingMethod">Phương thức vận chuyển</label>
+                                <select class="form-control" id="shippingMethod">
+                                    <option value="express">Nhanh (Express)</option>
+                                    <option value="normal">Thường (Normal)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="paymentMethod">Phương thức thanh toán</label>
+                                <select class="form-control" id="paymentMethod">
+                                    <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                                    <option value="other">Thanh toán khác</option>
+                                </select>
+                            </div>
+                            <div class="d-flex justify-content-center mb-3">
+                                <button type="submit" class="btn btn-primary">Hoàn tất đơn hàng</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
