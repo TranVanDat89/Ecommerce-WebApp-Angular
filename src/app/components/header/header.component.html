@@ -15,15 +15,13 @@
                         <a [routerLink]="['/products']" class="nav-link text-white">Sản phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link text-white">Thông báo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" [routerLink]="['/carts']" class="nav-link text-white">Giỏ hàng</a>
+                        <a href="" [routerLink]="['/orders']" class="nav-link text-white">Giỏ hàng</a>
                     </li>
                     @if(userResponse) {
                     <ng-container>
                         <ng-container ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất" popoverTitle="User Actions"
                             triggers="click" [placement]="'auto'" container="body">
+                            <a href="" class="nav-link text-white">Thông báo</a>
                             <a href="" [routerLink]="['/favorites']" class="nav-link text-white">Yêu thích</a>
                             <a class="nav-link text-white w-content" [ngbPopover]="popoverContent"
                                 (click)="togglePopover($event)">
@@ -36,6 +34,8 @@
                                         tôi</a>
                                     <a class="popover-item" [routerLink]="['/orders/order-detail/', userResponse.id]"
                                         href="">Đơn mua</a>
+                                    <a class="popover-item" [routerLink]="['/orders/history']" href="">Lịch sử mua
+                                        hàng</a>
                                     <a class="popover-item" (click)="handleItemClick(2)" href="">Đăng xuất</a>
                                 </div>
                             </ng-template>

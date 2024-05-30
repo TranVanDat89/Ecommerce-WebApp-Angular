@@ -24,7 +24,6 @@ import { UserComponent } from './components/admin/user/user.component';
 import { HeaderAdminComponent } from './components/admin/header-admin/header-admin.component';
 import { OrderAdminComponent } from './components/admin/order-admin/order-admin.component';
 import { ProductAdminComponent } from './components/admin/product-admin/product-admin.component';
-import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +43,7 @@ import { CartComponent } from './components/cart/cart.component';
     UserComponent,
     HeaderAdminComponent,
     OrderAdminComponent,
-    ProductAdminComponent,
-    CartComponent
+    ProductAdminComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,6 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/admin/user/user.component';
-import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -36,10 +35,6 @@ const routes: Routes = [
   {
     path: "product-detail",
     component: ProductDetailComponent
-  },
-  {
-    path: "carts",
-    component: CartComponent
   },
   {
     path: "orders",
