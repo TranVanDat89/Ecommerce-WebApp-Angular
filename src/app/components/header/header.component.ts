@@ -16,8 +16,7 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit(): void {
     this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
-    console.log(this.userResponse);
-
+    // console.log(this.userResponse);
   }
 
   togglePopover(event: Event): void {

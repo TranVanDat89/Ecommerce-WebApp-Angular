@@ -1,201 +1,219 @@
 <app-header></app-header>
 <section id="product-detail-page" style="padding: 95px 0 40px 0;">
-    <div class="container-lg">
-      <div class="row">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a [routerLink]="['']">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="['/products']">Sản phẩm</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{product?.name}}</li>
-          </ol>
-        </nav>
+  <div class="container-lg">
+    <div class="row">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['']">Trang chủ</a></li>
+          <li class="breadcrumb-item"><a [routerLink]="['/products']">Sản phẩm</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{product?.name}}</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <div id="carouselExampleIndicators" class="carousel slide">
+          <!-- mk ở trang product detail ý chú, bấm vào sản phẩm nó ko quay về chú ơi  -->
+          <div class="carousel-inner h-100">
+            @for (productImage of product?.productImages; track $index) {
+            <div class="carousel-item text-center h-100" [class.active]="$index == 0">
+              <img [src]="productImage.imageUrl" class="img-fluid product-image h-100" alt="Product Image">
+            </div>
+            }
+          </div>
+          <button class="carousel-control-prev bg-dark rounded-circle" type="button"
+            data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next bg-dark rounded-circle" type="button"
+            data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+        <div class="row d-none d-lg-block">
+          <div class="d-flex justify-content-between my-4">
+            @for (productImage of product?.productImages; track $index) {
+            <div class="thumbnail-item active">
+              <img [src]="productImage.imageUrl" class="thumbnail-image" alt="Thumbnail Image">
+            </div>
+            }
+          </div>
+        </div>
       </div>
-      <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <div id="carouselExampleIndicators" class="carousel slide">
-                <!-- mk ở trang product detail ý chú, bấm vào sản phẩm nó ko quay về chú ơi  -->
-                <div class="carousel-inner h-100">
-                  @for (productImage of product?.productImages; track $index) {
-                    <div class="carousel-item text-center h-100" [class.active]="$index == 0">
-                      <img [src]="productImage.imageUrl" class="img-fluid product-image h-100" alt="Product Image">
-                    </div>
-                  }
-                </div>
-                <button class="carousel-control-prev bg-dark rounded-circle" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next bg-dark rounded-circle" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-             
-              <div class="row d-none d-lg-block">
-                <div class="d-flex justify-content-between my-4">
-                  @for (productImage of product?.productImages; track $index) {
-                    <div class="thumbnail-item active">
-                      <img [src]="productImage.imageUrl" class="thumbnail-image" alt="Thumbnail Image">
-                  </div>
-                  }
-               </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-                <div class="product-details ms-3">
-                    <h2>{{product?.name}}</h2>
-                    <p class="product-title p-3 rounded"><i class="fa-solid fa-shield pe-2"></i>Sản phẩm được nhập khẩu chính ngạch bởi công ty WheyStation, INC Việt Nam</p>
-                    <p>{{product?.productDetail?.introduction}}</p>
-                    <div class="my-3">
-                      <label for="" class="fw-bold">Hương vị</label>
-                      <select class="form-select w-50" aria-label="Select Type">
-                        <option selected disabled>Lựa chọn hương vị</option>
-                        @for (flavor of product?.ingredient?.flavors; track $index) {
-                          <option [value]="flavor.id">{{flavor.name}}</option>
-                        }
-                      </select>
-                    </div>
-                    <p><span class="fw-bold">Số lượng:</span> {{product?.quantity}}</p>
-                    <h3>
-                      <span class="me-3 text-decoration-line-through">2.000.000</span>
-                      <span class="text-danger">{{ formatPrice(product?.price) }}</span>
-                    </h3>
-                    <div class="product-actions mt-3">
-                      @if(userResponse || userResponse === undefined) {
-                        <span class="bg-warning p-3 rounded text-white">
-                          <i class="fa fa-triangle-exclamation"></i>
-                          Vui lòng đăng nhập để mua hàng.</span>
-                      } @else {
-                        <button class="btn btn-danger me-3">Thêm vào giỏ hàng</button>
-                        <button class="btn btn-primary">Mua ngay</button>
-                      }
-                    </div>
-                </div>
-            </div>
-      </div>
-      <div class="row mt-3">
-            <div class="col-md-6">
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Ưu điểm nổi bật & công dụng
-                    </button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <!-- @for (adv of productAdvantage; track $index) {
-                        <p>{{adv}}</p>
-                      } -->
-                      @for (item of product?.productDetail?.advantage?.split("/"); track $index) {
-                        <p>{{item}}</p>
-                      }
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      Hướng dẫn sử dụng
-                    </button>
-                  </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      @for (item of product?.productDetail?.instruction?.split("/"); track $index) {
-                        <p>{{item}}</p>
-                      }
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Lưu ý
-                    </button>
-                  </h2>
-                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <ul>
-                        @for (item of product?.productDetail?.warning?.split("/"); track $index) {
-                          <li>{{item}}</li>
-                        }
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-                <h4>Thông tin sản phẩm</h4>
-                <table class="table">
-                    <tbody>
-                      @if(product?.ingredient?.brand !== null) {
-                        <tr>
-                          <td class="fw-bold">Thương hiệu</td>
-                          <td class="fw-bold text-success">{{product?.ingredient?.brand}}</td>
-                        </tr>
-                      }
-                      @if(product?.ingredient?.weight !== null) {
-                        <tr>
-                          <td class="fw-bold">Trọng lượng</td>
-                          <td>{{product?.ingredient?.weight}}</td>
-                        </tr>
-                      }
-                      @if(product?.ingredient?.servingSize !== null) {
-                        <tr>
-                          <td class="fw-bold">Serving Size</td>
-                          <td>{{product?.ingredient?.servingSize}}</td>
-                        </tr>
-                      }
-                      @if(product?.ingredient?.serving !== null) {
-                        <tr>
-                          <td class="fw-bold">Số lần dùng</td>
-                          <td>{{product?.ingredient?.serving}}</td>
-                        </tr>
-                      }
-                      @if(product?.ingredient?.ingredientList !== null) {
-                        <tr>
-                          <td class="fw-bold">Thành phần</td>
-                          <td>{{product?.ingredient?.ingredientList}}</td>
-                        </tr>
-                      }
-                      @if(product?.ingredient?.flavors !== null) {
-                        <tr>
-                          <td class="fw-bold">Hương vị</td>
-                          <td>
-                            @for (flavor of product?.ingredient?.flavors; track $index) {
-                              @if($last) {
-                                <span>{{flavor.name}}</span>
-                              } @else {
-                                <span>{{flavor.name+", "}}</span>
-                              }
-                            }
-                          </td>
-                        </tr>
-                      }
-                      @if(product?.ingredient?.proteinPerServing !== null) {
-                        <tr>
-                          <td class="fw-bold">Hàm lượng protein</td>
-                          <td>{{product?.ingredient?.proteinPerServing}}</td>
-                        </tr>
-                      }
-                      @if(product?.ingredient?.calories !== null) {
-                        <tr>
-                          <td class="fw-bold">Calories</td>
-                          <td>{{product?.ingredient?.calories}}</td>
-                        </tr>
-                      }
-                      <tr>
-                        <td class="fw-bold">Xuất xứ</td>
-                        <td>{{product?.ingredient?.origin}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="text-center mt-5">
-                    <img src="../../../assets/certificate.webp" class="img-fluid" alt="">
-                  </div>
-            </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="product-details ms-3">
+          <h2>{{product?.name}}</h2>
+          <p class="product-title p-3 rounded"><i class="fa-solid fa-shield pe-2"></i>Sản phẩm được nhập khẩu chính
+            ngạch bởi công ty WheyStation, INC Việt Nam</p>
+          <p>{{product?.productDetail?.introduction}}</p>
+          <p><span class="fw-bold">Hiện có:</span> {{product?.quantity}}</p>
+          <div class="my-3">
+            <label for="" class="fw-bold">Hương vị</label>
+            <select [(ngModel)]="flavorName" class="form-select w-50" aria-label="Select Type">
+              <option value="" disabled>Chọn hương vị</option>
+              @for (flavor of product?.ingredient?.flavors; track $index) {
+              <option [value]="flavor.name">{{flavor.name}}</option>
+              }
+            </select>
+          </div>
+          <div class="fw-bold">Số lượng</div>
+          <div class="input-group w-25 mb-3">
+            <span (click)="increaseQuantity()" class="input-group-text fw-bold btn btn-light"><i
+                class="fa-solid fa-plus" style="font-size: 12px;"></i></span>
+            <input type="text" style="width: 30px;" [value]="quantity"
+              class="form-control text-center bg-light border-0">
+            <span (click)="decreaseQuantity()" class="input-group-text btn btn-light"><i class="fa-solid fa-minus"
+                style="font-size: 12px;"></i></span>
+          </div>
+          <h3>
+            <span class="me-3 text-decoration-line-through">2.000.000</span>
+            <span class="text-danger">{{ formatPrice(product?.price) }}</span>
+          </h3>
+          <div class="product-actions mt-3">
+            @if(!userResponse || userResponse === undefined) {
+            <span class="bg-warning p-3 rounded text-white">
+              <i class="fa fa-triangle-exclamation"></i>
+              Vui lòng đăng nhập để mua hàng.</span>
+            } @else {
+            <button class="btn btn-danger me-3" (click)="addToCart()">Thêm vào giỏ hàng</button>
+            <button class="btn btn-primary">Mua ngay</button>
+            }
+          </div>
+        </div>
       </div>
     </div>
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                Ưu điểm nổi bật & công dụng
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <!-- @for (adv of productAdvantage; track $index) {
+                        <p>{{adv}}</p>
+                      } -->
+                @for (item of product?.productDetail?.advantage?.split("/"); track $index) {
+                <p>{{item}}</p>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Hướng dẫn sử dụng
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                @for (item of product?.productDetail?.instruction?.split("/"); track $index) {
+                <p>{{item}}</p>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Lưu ý
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <ul>
+                  @for (item of product?.productDetail?.warning?.split("/"); track $index) {
+                  <li>{{item}}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h4>Thông tin sản phẩm</h4>
+        <table class="table">
+          <tbody>
+            @if(product?.ingredient?.brand !== null) {
+            <tr>
+              <td class="fw-bold">Thương hiệu</td>
+              <td class="fw-bold text-success">{{product?.ingredient?.brand}}</td>
+            </tr>
+            }
+            @if(product?.ingredient?.weight !== null) {
+            <tr>
+              <td class="fw-bold">Trọng lượng</td>
+              <td>{{product?.ingredient?.weight}}</td>
+            </tr>
+            }
+            @if(product?.ingredient?.servingSize !== null) {
+            <tr>
+              <td class="fw-bold">Serving Size</td>
+              <td>{{product?.ingredient?.servingSize}}</td>
+            </tr>
+            }
+            @if(product?.ingredient?.serving !== null) {
+            <tr>
+              <td class="fw-bold">Số lần dùng</td>
+              <td>{{product?.ingredient?.serving}}</td>
+            </tr>
+            }
+            @if(product?.ingredient?.ingredientList !== null) {
+            <tr>
+              <td class="fw-bold">Thành phần</td>
+              <td>{{product?.ingredient?.ingredientList}}</td>
+            </tr>
+            }
+            @if(product?.ingredient?.flavors !== null) {
+            <tr>
+              <td class="fw-bold">Hương vị</td>
+              <td>
+                @for (flavor of product?.ingredient?.flavors; track $index) {
+                @if($last) {
+                <span>{{flavor.name}}</span>
+                } @else {
+                <span>{{flavor.name+", "}}</span>
+                }
+                }
+              </td>
+            </tr>
+            }
+            @if(product?.ingredient?.proteinPerServing !== null) {
+            <tr>
+              <td class="fw-bold">Hàm lượng protein</td>
+              <td>{{product?.ingredient?.proteinPerServing}}</td>
+            </tr>
+            }
+            @if(product?.ingredient?.calories !== null) {
+            <tr>
+              <td class="fw-bold">Calories</td>
+              <td>{{product?.ingredient?.calories}}</td>
+            </tr>
+            }
+            <tr>
+              <td class="fw-bold">Xuất xứ</td>
+              <td>{{product?.ingredient?.origin}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center mt-5">
+          <img src="../../../assets/certificate.webp" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <app-footer></app-footer>

@@ -51,7 +51,7 @@ export class ProductComponent implements OnInit {
         console.log(apiResponse.data)
         const { categories } = apiResponse.data;
         this.categories = categories;
-        console.log(this.categories);
+        // console.log(this.categories);
       },
       error: (error: HttpErrorResponse) => {
         console.error(error?.error?.message ?? '');
@@ -66,28 +66,13 @@ export class ProductComponent implements OnInit {
         this.products = response.products;
         this.totalPages = response.totalPages;
         this.totalItems = this.products.length;
-        // this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
-        console.log(apiResponse.data)
+        // console.log(apiResponse.data)
       }
       , error: (error: HttpErrorResponse) => {
         console.error(error?.error?.message ?? '');
       }
     })
   }
-  // generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
-  //   const maxVisiblePages = 5;
-  //   const halfVisiblePages = Math.floor(maxVisiblePages / 2);
-
-  //   let startPage = Math.max(currentPage - halfVisiblePages, 1);
-  //   let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
-
-  //   if (endPage - startPage + 1 < maxVisiblePages) {
-  //     startPage = Math.max(endPage - maxVisiblePages + 1, 1);
-  //   }
-
-  //   return new Array(endPage - startPage + 1).fill(0)
-  //     .map((_, index) => startPage + index);
-  // }
   onProductClick(productId: string) {
     this.router.navigate(['/products/product-detail', productId]);
   }

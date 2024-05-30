@@ -11,23 +11,33 @@
             <div class="navbar-collapse justify-content-end align-center" id="main-nav">
                 <ul class="navbar-nav">
                     <!-- chu xem chau cai trang toan san pham cho no deu ho chau voi, no cu tho thut y -->
-                    <li class="nav-item">
+                    <li class="nav-item me-2">
                         <a [routerLink]="['/products']" class="nav-link text-white">Sản phẩm</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="" [routerLink]="['/orders']" class="nav-link text-white">Giỏ hàng</a>
+                    <li class="nav-item position-relative me-2  w-content">
+                        <a href="" [routerLink]="['/orders']" class="nav-link text-white">Giỏ hàng <i
+                                class="fa-solid fa-cart-shopping "></i></a>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            9
+                        </span>
                     </li>
                     @if(userResponse) {
                     <ng-container>
                         <ng-container ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất" popoverTitle="User Actions"
                             triggers="click" [placement]="'auto'" container="body">
-                            <a href="" class="nav-link text-white">Thông báo</a>
-                            <a href="" [routerLink]="['/favorites']" class="nav-link text-white">Yêu thích</a>
-                            <a class="nav-link text-white w-content" [ngbPopover]="popoverContent"
-                                (click)="togglePopover($event)">
-                                {{ userResponse.fullName }}
-                                <i class="fa-solid fa-caret-down"></i>
-                            </a>
+                            <li class="nav-item me-2">
+                                <a href="" class="nav-link text-white">Thông báo</a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <a href="" [routerLink]="['/favorites']" class="nav-link text-white">Yêu thích</a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <a class="nav-link text-white w-content" [ngbPopover]="popoverContent"
+                                    (click)="togglePopover($event)">
+                                    {{ userResponse.fullName }}
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </a>
+                            </li>
                             <ng-template #popoverContent>
                                 <div class="popover-list">
                                     <a class="popover-item" [routerLink]="['/user-profile']" href="">Tài khoản của

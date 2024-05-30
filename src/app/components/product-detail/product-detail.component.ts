@@ -1,3 +1,4 @@
+import { Flavor } from './../../models/flavor';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product';
@@ -7,6 +8,7 @@ import { ApiResponse } from '../../responses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserResponse } from '../../responses/user.response';
 import { UserService } from '../../services/user.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,9 +18,13 @@ import { UserService } from '../../services/user.service';
 export class ProductDetailComponent implements OnInit {
   userResponse?: UserResponse | null;
   productId: string;
+  quantity: number;
   product?: Product;
-  constructor(private router: ActivatedRoute, private userService: UserService, private productService: ProductService) {
+  flavorName: string;
+  constructor(private router: ActivatedRoute, private cartService: CartService, private userService: UserService, private productService: ProductService) {
     this.productId = '';
+    this.quantity = 1;
+    this.flavorName = '';
   }
   ngOnInit(): void {
     this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
@@ -26,7 +32,9 @@ export class ProductDetailComponent implements OnInit {
       this.productId = params.get('productId') ?? '';
     });
     this.getProductById(this.productId);
-    console.log(this.userResponse);
+  }
+  addToCart(): void {
+    this.cartService.addToCart(this.productId, this.quantity, this.flavorName);
   }
   formatPrice(price: number | undefined): string {
     if (price === undefined) return '';
@@ -46,5 +54,14 @@ export class ProductDetailComponent implements OnInit {
         console.error(error?.error?.message ?? '');
       }
     })
+  }
+  increaseQuantity(): void {
+    this.quantity++;
+  }
+
+  decreaseQuantity(): void {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
   }
 }
