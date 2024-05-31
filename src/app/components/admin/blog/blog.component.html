@@ -1,24 +1,55 @@
 <section id="user-management" style="margin-top: 70px; height: 100vh;">
     <div class="row m-3">
         <h2>Tạo blog</h2>
-        <div class="h-100" style="height: 100vh;">
-            <editor [init]="{
-                branding: false,
-                base_url: '/tinymce', 
-                suffix: '.min', 
-                plugins: [
-                    'advlist autolink link lists charmap print preview anchor textcolor',
-                    'searchreplace wordcount visualblocks visualchars code fullscreen fullpage insertdatetime nonbreaking',
-                    'table template paste help',
-                ],
-                toolbar1: 'undo redo | formatselect fontselect fontsizeselect | forecolor backcolor | link | print',
-                toolbar2: 'cut copy paste pastetext | bold italic underline strikethrough superscript subscript | bullist numlist outdent indent | alignleft aligncenter alignright alignjustify | blockquote | removeformat',
-                menubar: 'edit view insert format tools table',
-                deprecation_warnings: false
-              }" [(ngModel)]="blogPostText">
-            </editor>
-            <button type="button" (click)="getEditorContent()" class="btn btn-primary mt-3">Tạo
-                Blog</button>
-        </div>
+        <form action="" [formGroup]="blogForm" enctype="multipart/form-data">
+            <div class="form-group my-2">
+                <label for="title" class="mb-2">Tiêu đề</label>
+                <input type="text" class="form-control" formControlName="title" placeholder="Nhập tiêu đề...">
+                @if(blogForm.controls['title'].invalid && (blogForm.controls['title'].dirty ||
+                blogForm.controls['title'].touched)) {
+                <p class="text-danger mt-2" *ngIf="blogForm.controls['title'].errors?.['required']">
+                    Bắt buộc phải tiêu đề</p>
+                }
+            </div>
+            <div class="form-group my-2">
+                <label for="imageFile" class="mb-2">Ảnh</label>
+                <input type="file" class="form-control" formControlName="imageFile" placeholder="Nhập tiêu đề...">
+            </div>
+            <div class="form-group my-2">
+                <label for="category" class="mb-2">Danh mục</label>
+                <select formControlName="category" class="form-select w-50" aria-label="Select Type">
+                    <option disabled selected>Chọn danh mục</option>
+                    <option value="Dinh dưỡng thể hình">Dinh dưỡng thể hình</option>
+                    <option value="Giới thiệu sản phẩm">Giới thiệu sản phẩm</option>
+                    <option value="Sức khỏe và đời sống">Sức khỏe và đời sống</option>
+                </select>
+            </div>
+            <div>
+                <editor [init]="{
+                    branding: false,
+                    base_url: '/tinymce', 
+                    suffix: '.min', 
+                    plugins: [
+                        'advlist autolink link lists charmap print preview anchor textcolor',
+                        'searchreplace wordcount visualblocks visualchars code fullscreen fullpage insertdatetime nonbreaking',
+                        'table template paste help',
+                    ],
+                    toolbar1: 'undo redo | formatselect fontselect fontsizeselect | forecolor backcolor | link | print',
+                    toolbar2: 'cut copy paste pastetext | bold italic underline strikethrough superscript subscript | bullist numlist outdent indent | alignleft aligncenter alignright alignjustify | blockquote | removeformat',
+                    menubar: 'edit view insert format tools table',
+                    deprecation_warnings: false
+                  }" formControlName="content">
+                </editor>
+                @if(blogForm.controls['content'].invalid && (blogForm.controls['content'].dirty ||
+                blogForm.controls['content'].touched)) {
+                <p class="text-danger mt-2" *ngIf="blogForm.controls['content'].errors?.['required']">
+                    Bắt buộc phải nhập nội dung</p>
+                }
+            </div>
+            <div class="form-group my-2">
+                <button type="submit" (click)="createAtricle()" class="btn btn-primary">Tạo
+                    bài viết</button>
+            </div>
+        </form>
     </div>
 </section>

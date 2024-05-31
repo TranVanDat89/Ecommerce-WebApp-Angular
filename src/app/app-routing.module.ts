@@ -60,7 +60,7 @@ const routes: Routes = [
         path: "users",
         component: UserComponent
       }, {
-        path: "blogs",
+        path: "blogs/create-blog",
         component: BlogComponent
       }
     ]

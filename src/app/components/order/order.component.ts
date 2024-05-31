@@ -5,6 +5,8 @@ import { ProductService } from '../../services/product.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProductResponse } from '../../responses/product.response';
 import { ApiResponse } from '../../responses/api.response';
+import { UserResponse } from '../../responses/user.response';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-order',
@@ -15,9 +17,11 @@ export class OrderComponent implements OnInit {
   cart: Map<string, { quantity: number, flavorName: string }> = new Map();
   cartItems: { product: Product, quantity: number, flavorName: string }[] = [];
   totalMoneys: number = 0;
-  constructor(private cartService: CartService, private productService: ProductService) { }
+  constructor(private cartService: CartService, private productService: ProductService, private userService: UserService) { }
   ngOnInit(): void {
-    this.cart = this.cartService.getCart();
+    if (this.userService.getUserResponseFromLocalStorage()) {
+      this.cart = this.cartService.getCart();
+    }
     if (this.cart.size !== 0) {
       const productInfors: Map<string, { quantity: number, flavorName: string }> = new Map();
       this.cart.forEach((value, key) => {

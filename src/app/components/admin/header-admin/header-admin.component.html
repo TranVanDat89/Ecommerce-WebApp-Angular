@@ -100,14 +100,16 @@
                     <a href="#collapseBlog" (click)="enableActived(5)" [ngClass]="{ 'active': isActived === 5 }"
                         class="nav-link text-white" data-bs-toggle="collapse" role="button" aria-expanded="false"
                         aria-controls="collapseBlog">
-                        <i class="fa-solid fa-blog me-2"></i>Blog
+                        <i class="fa-solid fa-blog me-2"></i>Bài viết
                     </a>
                     <div class="collapse" id="collapseBlog">
                         <ul class="list-unstyled ms-3">
-                            <li><a class="nav-link text-white"><i class="fa-solid fa-square-plus me-2"></i>Create
-                                    Blog</a>
+                            <li><a [routerLink]="['/admin/blogs/create-blog']" class="nav-link text-white"><i
+                                        class="fa-solid fa-square-plus me-2"></i>Tạo bào
+                                    viết</a>
                             </li>
-                            <li><a class="nav-link text-white"><i class="fa-solid fa-file-pen me-2"></i>Update Blog</a>
+                            <li><a class="nav-link text-white"><i class="fa-solid fa-file-pen me-2"></i>Cập nhật bài
+                                    viết</a>
                             </li>
                         </ul>
                     </div>

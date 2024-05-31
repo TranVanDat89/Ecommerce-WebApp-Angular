@@ -19,6 +19,8 @@ export class CartService {
     return this.cart;
   }
   private getCartKey(): string {
+    debugger
+    if (!localStorage?.getItem('user')) return 'cart:';
     const userResponseJSON = localStorage?.getItem('user');
     const storageResponse: StorageResponse<UserResponse> = JSON.parse(userResponseJSON!);
     return `cart:${storageResponse.userResponse?.id ?? ''}`;
