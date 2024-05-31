@@ -1,0 +1,24 @@
+<section id="user-management" style="margin-top: 70px; height: 100vh;">
+    <div class="row m-3">
+        <h2>Tạo blog</h2>
+        <div class="h-100" style="height: 100vh;">
+            <editor [init]="{
+                branding: false,
+                base_url: '/tinymce', 
+                suffix: '.min', 
+                plugins: [
+                    'advlist autolink link lists charmap print preview anchor textcolor',
+                    'searchreplace wordcount visualblocks visualchars code fullscreen fullpage insertdatetime nonbreaking',
+                    'table template paste help',
+                ],
+                toolbar1: 'undo redo | formatselect fontselect fontsizeselect | forecolor backcolor | link | print',
+                toolbar2: 'cut copy paste pastetext | bold italic underline strikethrough superscript subscript | bullist numlist outdent indent | alignleft aligncenter alignright alignjustify | blockquote | removeformat',
+                menubar: 'edit view insert format tools table',
+                deprecation_warnings: false
+              }" [(ngModel)]="blogPostText">
+            </editor>
+            <button type="button" (click)="getEditorContent()" class="btn btn-primary mt-3">Tạo
+                Blog</button>
+        </div>
+    </div>
+</section>

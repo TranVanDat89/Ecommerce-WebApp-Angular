@@ -21,11 +21,13 @@
     "@fortawesome/fontawesome-free": "^6.5.2",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
+    "@tinymce/tinymce-angular": "^8.0.0",
     "bootstrap": "^5.3.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "ngx-pagination": "^6.0.3",
     "rxjs": "~7.8.0",
+    "tinymce": "^7.1.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },

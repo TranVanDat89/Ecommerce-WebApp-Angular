@@ -72,22 +72,45 @@
         <div class="">
             <ul class="nav navbar navbar-collapse nav-pills flex-column">
                 <li class="nav-item w-75 my-2">
-                    <a class="nav-link active" routerLink="/admin/dashboard">Trang chủ</a>
+                    <a class="nav-link text-white" (click)=" enableActived(0)" [ngClass]="{ 'active': isActived === 0 }"
+                        [routerLink]="['/admin/dashboard']">
+                        <i class="fa-solid fa-house me-2"></i>Trang chủ</a>
                 </li>
                 <li class="nav-item w-75 my-2">
-                    <a href="" [routerLink]="['/admin/users']" class="nav-link text-white">Người dùng</a>
+                    <a href="" [routerLink]="['/admin/users']" (click)="enableActived(1)"
+                        [ngClass]="{ 'active': isActived === 1 }" class="nav-link text-white">
+                        <i class="fa-solid fa-user me-2"></i>Người dùng</a>
                 </li>
                 <li class="nav-item w-75 my-2">
-                    <a href="" class="nav-link text-white">Đơn hàng</a>
+                    <a href="" (click)="enableActived(2)" [ngClass]="{ 'active': isActived === 2 }"
+                        class="nav-link text-white">
+                        <i class="fa-solid fa-cart-shopping me-2"></i>Đơn hàng</a>
                 </li>
                 <li class="nav-item w-75 my-2">
-                    <a href="" class="nav-link text-white">Danh mục sản phẩm</a>
+                    <a href="" (click)="enableActived(3)" [ngClass]="{ 'active': isActived === 3 }"
+                        class="nav-link text-white">
+                        <i class="fa-solid fa-list me-2"></i>Danh mục sản phẩm</a>
                 </li>
                 <li class="nav-item w-75 my-2">
-                    <a href="" class="nav-link text-white">Sản phẩm</a>
+                    <a href="" (click)="enableActived(4)" [ngClass]="{ 'active': isActived === 4 }"
+                        class="nav-link text-white">
+                        <i class="fa-solid fa-box me-2"></i>Sản phẩm</a>
                 </li>
                 <li class="nav-item w-75 my-2">
-                    <a href="" class="nav-link text-white">Blog</a>
+                    <a href="#collapseBlog" (click)="enableActived(5)" [ngClass]="{ 'active': isActived === 5 }"
+                        class="nav-link text-white" data-bs-toggle="collapse" role="button" aria-expanded="false"
+                        aria-controls="collapseBlog">
+                        <i class="fa-solid fa-blog me-2"></i>Blog
+                    </a>
+                    <div class="collapse" id="collapseBlog">
+                        <ul class="list-unstyled ms-3">
+                            <li><a class="nav-link text-white"><i class="fa-solid fa-square-plus me-2"></i>Create
+                                    Blog</a>
+                            </li>
+                            <li><a class="nav-link text-white"><i class="fa-solid fa-file-pen me-2"></i>Update Blog</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>

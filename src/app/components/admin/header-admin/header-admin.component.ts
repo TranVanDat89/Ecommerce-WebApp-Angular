@@ -7,8 +7,13 @@ import { Component } from '@angular/core';
 })
 export class HeaderAdminComponent {
   isCollapsed: boolean = false;
+  isActived: number = 0;
 
   toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  enableActived(index: number): void {
+    this.isActived = index;
   }
 }

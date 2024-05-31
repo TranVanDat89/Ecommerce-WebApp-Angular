@@ -24,6 +24,9 @@ import { UserComponent } from './components/admin/user/user.component';
 import { HeaderAdminComponent } from './components/admin/header-admin/header-admin.component';
 import { OrderAdminComponent } from './components/admin/order-admin/order-admin.component';
 import { ProductAdminComponent } from './components/admin/product-admin/product-admin.component';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { BlockParameter } from '@angular/compiler';
+import { BlogComponent } from './components/admin/blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { ProductAdminComponent } from './components/admin/product-admin/product-
     UserComponent,
     HeaderAdminComponent,
     OrderAdminComponent,
-    ProductAdminComponent
+    ProductAdminComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,14 +56,16 @@ import { ProductAdminComponent } from './components/admin/product-admin/product-
     HttpClientModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    NgbModule
+    NgbModule,
+    EditorModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
   ],
   bootstrap: [AppComponent]
 })

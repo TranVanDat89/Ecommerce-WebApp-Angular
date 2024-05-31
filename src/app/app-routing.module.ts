@@ -11,6 +11,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/admin/user/user.component';
+import { BlogComponent } from './components/admin/blog/blog.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,9 @@ const routes: Routes = [
       {
         path: "users",
         component: UserComponent
+      }, {
+        path: "blogs",
+        component: BlogComponent
       }
     ]
   }
