@@ -35,8 +35,8 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "./node_modules/tinymce",
-                "output": "/tinymce/"
+                "input": "./node_modules/@kolkov/angular-editor/assets/",
+                "output": "./assets/fonts/"
               }
             ],
             "styles": [
@@ -45,8 +45,7 @@
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "./node_modules/tinymce/tinymce.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {

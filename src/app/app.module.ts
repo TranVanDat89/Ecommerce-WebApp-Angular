@@ -24,10 +24,11 @@ import { UserComponent } from './components/admin/user/user.component';
 import { HeaderAdminComponent } from './components/admin/header-admin/header-admin.component';
 import { OrderAdminComponent } from './components/admin/order-admin/order-admin.component';
 import { ProductAdminComponent } from './components/admin/product-admin/product-admin.component';
-import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { BlockParameter } from '@angular/compiler';
 import { BlogComponent } from './components/admin/blog/blog.component';
 import { ArticleComponent } from './components/article/article.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HtmlEditorService, ImageService, LinkService, QuickToolbarService, RichTextEditorModule, TableService, ToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 
 @NgModule({
   declarations: [
@@ -59,15 +60,15 @@ import { ArticleComponent } from './components/article/article.component';
     ReactiveFormsModule,
     NgxPaginationModule,
     NgbModule,
-    EditorModule
+    AngularEditorModule,
+    RichTextEditorModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    },
-    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
+    }, LinkService, ImageService, HtmlEditorService, ToolbarService, TableService, QuickToolbarService
   ],
   bootstrap: [AppComponent]
 })

@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Article } from '../../../models/article';
 import { ApiResponse } from '../../../responses/api.response';
 import { ArticleDTO } from '../../../dtos/article/article.dto';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-blog',
@@ -14,6 +15,7 @@ import { ArticleDTO } from '../../../dtos/article/article.dto';
 export class BlogComponent implements OnInit {
   blogForm: FormGroup;
   imageFile?: File;
+  height: string = '270px';
   constructor(private fb: FormBuilder, private articleService: ArticleService) {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
@@ -59,4 +61,42 @@ export class BlogComponent implements OnInit {
       this.imageFile = file;
     }
   }
+  // editorConfig: AngularEditorConfig = {
+  //   editable: true,
+  //   spellcheck: true,
+  //   height: '270px',
+  //   minHeight: '0',
+  //   maxHeight: 'auto',
+  //   width: 'auto',
+  //   minWidth: '0',
+  //   translate: 'yes',
+  //   enableToolbar: true,
+  //   showToolbar: true,
+  //   placeholder: 'Enter text here...',
+  //   defaultParagraphSeparator: '',
+  //   defaultFontName: '',
+  //   defaultFontSize: '',
+  //   fonts: [
+  //     { class: 'arial', name: 'Arial' },
+  //     { class: 'times-new-roman', name: 'Times New Roman' },
+  //     { class: 'calibri', name: 'Calibri' },
+  //     { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+  //   ],
+  //   customClasses: [
+  //     {
+  //       name: 'quote',
+  //       class: 'quote',
+  //     },
+  //     {
+  //       name: 'redText',
+  //       class: 'redText'
+  //     },
+  //     {
+  //       name: 'titleText',
+  //       class: 'titleText',
+  //       tag: 'h1',
+  //     },
+  //   ],
+  //   uploadUrl: 'v1/image'
+  // };
 }

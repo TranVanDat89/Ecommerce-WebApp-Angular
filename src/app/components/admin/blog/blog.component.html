@@ -26,21 +26,13 @@
             </div>
             <div>
                 <label for="centent" class="mb-2">Nội dung</label>
-                <editor [init]="{
-                    branding: false,
-                    base_url: '/tinymce', 
-                    suffix: '.min', 
-                    plugins: [
-                        'advlist autolink link lists charmap print preview anchor textcolor',
-                        'searchreplace wordcount visualblocks visualchars code fullscreen fullpage insertdatetime nonbreaking',
-                        'table template paste help',
-                    ],
-                    toolbar1: 'undo redo | formatselect fontselect fontsizeselect | forecolor backcolor | link | print',
-                    toolbar2: 'cut copy paste pastetext | bold italic underline strikethrough superscript subscript | bullist numlist outdent indent | alignleft aligncenter alignright alignjustify | blockquote | removeformat',
-                    menubar: 'edit view insert format tools table',
-                    deprecation_warnings: false
-                  }" formControlName="content">
-                </editor>
+                <ejs-richtexteditor formControlName="content" id='defaultRTE' [height]="height">
+                    <ng-template #valueTemplate>
+                        <p>The Rich Text Editor component is WYSIWYG ("what you see is what you get") editor that
+                            provides the best user experience to create and update the content. Users can format their
+                            content using standard toolbar commands.</p>
+                    </ng-template>
+                </ejs-richtexteditor>
                 @if(blogForm.controls['content'].invalid && (blogForm.controls['content'].dirty ||
                 blogForm.controls['content'].touched)) {
                 <p class="text-danger mt-2" *ngIf="blogForm.controls['content'].errors?.['required']">
