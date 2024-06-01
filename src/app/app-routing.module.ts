@@ -12,11 +12,22 @@ import { WishListComponent } from './components/wish-list/wish-list.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/admin/user/user.component';
 import { BlogComponent } from './components/admin/blog/blog.component';
+import { ArticleComponent } from './components/article/article.component';
 
 const routes: Routes = [
   {
     path: "",
-    component: HomeComponent
+    component: HomeComponent,
+    // children: [
+    //   {
+    //     path: "articles",
+    //     component: ArticleComponent
+    //   }
+    // ]
+  },
+  {
+    path: "articles",
+    component: ArticleComponent
   },
   {
     path: "products",

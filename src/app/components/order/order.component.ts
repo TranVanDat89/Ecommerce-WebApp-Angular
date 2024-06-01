@@ -45,8 +45,13 @@ export class OrderComponent implements OnInit {
       })
     })
   }
-  removeProductFromCart(productId: string) {
-    this.cartService.removeFromCart(productId);
+  removeProductFromCart(index: number) {
+    // this.cartService.removeFromCart(productId);
+    this.cartItems.splice(index, 1);
+    // Cập nhật lại this.cart từ this.cartItems
+    this.updateCartFromCartItems();
+    // Tính toán lại tổng tiền
+    this.calculateTotal();
   }
   formatPrice(price: number | undefined): string {
     if (price === undefined) return '';
@@ -54,5 +59,35 @@ export class OrderComponent implements OnInit {
       style: 'currency',
       currency: 'VND'
     }).format(price);
+  }
+  decreaseQuantity(index: number): void {
+    if (this.cartItems[index].quantity > 1) {
+      this.cartItems[index].quantity--;
+      // Cập nhật lại this.cart từ this.cartItems
+      this.updateCartFromCartItems();
+      this.calculateTotal();
+    }
+  }
+
+  increaseQuantity(index: number): void {
+    this.cartItems[index].quantity++;
+    // Cập nhật lại this.cart từ this.cartItems
+    this.updateCartFromCartItems();
+    this.calculateTotal();
+  }
+
+  // Hàm tính tổng tiền
+  calculateTotal(): void {
+    this.totalMoneys = this.cartItems.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0
+    );
+  }
+  private updateCartFromCartItems(): void {
+    this.cart.clear();
+    this.cartItems.forEach((item) => {
+      this.cart.set(item.product.id, { quantity: item.quantity, flavorName: item.flavorName });
+    });
+    this.cartService.setCart(this.cart);
   }
 }

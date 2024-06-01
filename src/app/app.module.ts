@@ -27,6 +27,7 @@ import { ProductAdminComponent } from './components/admin/product-admin/product-
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { BlockParameter } from '@angular/compiler';
 import { BlogComponent } from './components/admin/blog/blog.component';
+import { ArticleComponent } from './components/article/article.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { BlogComponent } from './components/admin/blog/blog.component';
     HeaderAdminComponent,
     OrderAdminComponent,
     ProductAdminComponent,
-    BlogComponent
+    BlogComponent,
+    ArticleComponent
   ],
   imports: [
     BrowserModule,

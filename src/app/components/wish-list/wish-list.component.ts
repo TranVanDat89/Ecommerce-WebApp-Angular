@@ -17,6 +17,8 @@ export class WishListComponent implements OnInit {
   constructor(private productService: ProductService) { }
   ngOnInit(): void {
     this.getAllFavs();
+    console.log(this.favorites);
+
   }
   getAllFavs() {
     this.productService.getAllFavorites().subscribe({

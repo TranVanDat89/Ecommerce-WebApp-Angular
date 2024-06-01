@@ -3,7 +3,7 @@
     margin-top: 62px;
     background-color: #24272a;
     transition: width 1s ease-in-out;
-    height: 100vh;
+    min-height: 100vh;
     padding-top: 70px;
 }
 

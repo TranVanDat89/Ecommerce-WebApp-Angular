@@ -21,7 +21,18 @@ export class ArticleService {
     constructor() {
     }
 
-    createArticle(formData: FormData): Observable<ApiResponse<Article>> {
+    // createArticle(formData: FormData): Observable<ApiResponse<Article>> {
+    //     return this.http.post<ApiResponse<Article>>(this.apiArticleCreate, formData, this.apiConfig);
+    // }
+    createArticle(articleDTO: ArticleDTO): Observable<ApiResponse<Article>> {
+        console.log(articleDTO, "services");
+        const formData = new FormData();
+        formData.append('title', articleDTO.title.trim());
+        formData.append('category', articleDTO.category.trim());
+        if (articleDTO.imageFile) {
+            formData.append('imageFile', articleDTO.imageFile);
+        }
+        formData.append('content', articleDTO.content.trim());
         return this.http.post<ApiResponse<Article>>(this.apiArticleCreate, formData, this.apiConfig);
     }
 }

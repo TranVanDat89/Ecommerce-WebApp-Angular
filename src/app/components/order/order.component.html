@@ -6,11 +6,10 @@
                 <h3 class="product-header">Giỏ hàng</h3>
                 <div class="mb-3">
                     <div class="p-3 rounded" style="background-color: #fff;">
-                        @for (cart of cartItems; track $index) {
+                        @for (cart of cartItems; track $index;) {
                         <div class="d-flex">
                             <div class="d-flex">
-                                <a href="" style="width: 24px;height: 24px;"
-                                    (click)="removeProductFromCart(cart.product.id)"
+                                <a href="" style="width: 24px;height: 24px;" (click)="removeProductFromCart($index)"
                                     class="nav-link text-center d-inline-block rounded-circle bg-light btn-remove"><i
                                         class="fa-solid fa-xmark"></i></a>
                                 <a href="" class="img-fluid" style="width: 80px; height: 80px;"><img
@@ -35,11 +34,13 @@
                                         </select>
                                     </div>
                                     <div class="input-group mt-3 px-3 flex-grow-1 w-auto">
-                                        <span class="input-group-text fw-bold btn btn-light"><i class="fa-solid fa-plus"
+                                        <span (click)="increaseQuantity($index)"
+                                            class="input-group-text fw-bold btn btn-light"><i class="fa-solid fa-plus"
                                                 style="font-size: 12px;"></i></span>
                                         <input type="text" [value]="cart.quantity" style="width: 30px;" value="1"
                                             class="form-control text-center bg-light border-0">
-                                        <span class="input-group-text btn btn-light"><i class="fa-solid fa-minus"
+                                        <span (click)="decreaseQuantity($index)"
+                                            class="input-group-text btn btn-light"><i class="fa-solid fa-minus"
                                                 style="font-size: 12px;"></i></span>
                                     </div>
                                 </div>

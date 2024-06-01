@@ -1,8 +1,8 @@
 <section id="user-management" style="margin-top: 70px; height: 100vh;">
     <div class="row m-3">
         <h2>Tạo blog</h2>
-        <form action="" [formGroup]="blogForm" enctype="multipart/form-data">
-            <div class="form-group my-2">
+        <form action="" [formGroup]="blogForm" enctype="multipart/form-data" (ngSubmit)="createAtricle()">
+            <div class="form-group">
                 <label for="title" class="mb-2">Tiêu đề</label>
                 <input type="text" class="form-control" formControlName="title" placeholder="Nhập tiêu đề...">
                 @if(blogForm.controls['title'].invalid && (blogForm.controls['title'].dirty ||
@@ -13,7 +13,7 @@
             </div>
             <div class="form-group my-2">
                 <label for="imageFile" class="mb-2">Ảnh</label>
-                <input type="file" class="form-control" formControlName="imageFile" placeholder="Nhập tiêu đề...">
+                <input type="file" class="form-control" (change)="onFileChange($event)" placeholder="Nhập tiêu đề...">
             </div>
             <div class="form-group my-2">
                 <label for="category" class="mb-2">Danh mục</label>
@@ -25,6 +25,7 @@
                 </select>
             </div>
             <div>
+                <label for="centent" class="mb-2">Nội dung</label>
                 <editor [init]="{
                     branding: false,
                     base_url: '/tinymce', 
@@ -46,8 +47,8 @@
                     Bắt buộc phải nhập nội dung</p>
                 }
             </div>
-            <div class="form-group my-2">
-                <button type="submit" (click)="createAtricle()" class="btn btn-primary">Tạo
+            <div class="form-group py-2">
+                <button type="submit" class="btn btn-primary">Tạo
                     bài viết</button>
             </div>
         </form>
