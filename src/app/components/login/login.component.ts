@@ -35,12 +35,10 @@ export class LoginComponent {
       this.userService.login(loginDTO).subscribe({
         // Field data of ApiResponse have object {token: "....."} => any for short
         next: (apiResponse: ApiResponse<any>) => {
-          // console.log(apiResponse);
-          // console.log(apiResponse.data.token, apiResponse.statusCode, apiResponse.timeStamp)
           const { token } = apiResponse.data;
           if (this.loginForm.get('rememberMe')?.value) {
-            this.tokenService.removeToken();
-            this.tokenService.setTokenToLocalStorage(token);
+            this.tokenService.deleteCookie();
+            this.tokenService.setCookie(token, 7);
             this.userService.getUserDetail().subscribe({
               next: (apiResponse2: ApiResponse<UserResponse>) => {
                 this.userResponse = apiResponse2.data;
@@ -71,8 +69,6 @@ export class LoginComponent {
               }
             })
           }
-          console.log(this.loginForm.get('rememberMe')?.value)
-          // this.router.navigate(['/']);
         },
         error: (error: HttpErrorResponse) => {
           console.error(error?.error?.message ?? 'An error occurred during registration');

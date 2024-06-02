@@ -39,8 +39,7 @@ export class HeaderComponent implements OnInit {
       //   this.userService.removeUserFromSessionStorage();
       // }
       this.userService.removeUserFromLocalStorage();
-      this.userService.removeUserFromSessionStorage();
-      this.tokenService.removeToken();
+      this.tokenService.deleteCookie();
       this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse;
     }
     this.isPopoverOpen = false; // Close the popover after clicking an item    

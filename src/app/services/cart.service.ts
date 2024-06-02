@@ -1,13 +1,21 @@
+import { HttpClient } from '@angular/common/http';
 import { UserResponse } from '../responses/user.response';
 import { StorageResponse } from './../responses/storage.response';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpUtilService } from './http-util.service';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private cart: Map<string, { quantity: number, flavorName: string }>;// Dùng Map để lưu trữ giỏ hàng, key là id sản phẩm, value là số lượng
-
+  private apiAddToCart = `${environment.apiBaseUrl}/carts/add-to-cart`;
+  private http = inject(HttpClient);
+  private httpUtilService = inject(HttpUtilService);
+  private apiConfig = {
+    headers: this.httpUtilService.createHeaders()
+  }
   constructor() {
     this.cart = new Map<string, { quantity: number, flavorName: string }>();
     this, this.refreshCart();
@@ -26,16 +34,17 @@ export class CartService {
     return `cart:${storageResponse.userResponse?.id ?? ''}`;
   }
   addToCart(productId: string, quantity: number = 1, flavorName?: string): void {
-    if (this.cart.has(productId)) {
-      // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng lên `quantity`
-      const quant = this.cart.get(productId)!.quantity + quantity;
-      this.cart.set(productId, { quantity: quant, flavorName: flavorName || '' });
-    } else {
-      // Nếu sản phẩm chưa có trong giỏ hàng, thêm sản phẩm vào với số lượng là `quantity`
-      this.cart.set(productId, { quantity, flavorName: flavorName || '' });
-    }
-    // Sau khi thay đổi giỏ hàng, lưu trữ nó vào localStorage
-    this.saveCartToLocalStorage();
+
+    // if (this.cart.has(productId)) {
+    //   // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng lên `quantity`
+    //   const quant = this.cart.get(productId)!.quantity + quantity;
+    //   this.cart.set(productId, { quantity: quant, flavorName: flavorName || '' });
+    // } else {
+    //   // Nếu sản phẩm chưa có trong giỏ hàng, thêm sản phẩm vào với số lượng là `quantity`
+    //   this.cart.set(productId, { quantity, flavorName: flavorName || '' });
+    // }
+    // // Sau khi thay đổi giỏ hàng, lưu trữ nó vào localStorage
+    // this.saveCartToLocalStorage();
   }
   removeFromCart(productId: string) {
     this.cart.delete(productId);
