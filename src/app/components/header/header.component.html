@@ -24,10 +24,10 @@
                             <li class="nav-item position-relative me-2  w-content">
                                 <a href="" [routerLink]="['/orders']" class="nav-link text-white">Giỏ hàng <i
                                         class="fa-solid fa-cart-shopping "></i></a>
-                                @if(cart.size > 0) {
+                                @if(cart?.cartItems?.length) {
                                 <span
                                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{cart.size}}
+                                    {{ cart?.cartItems?.length }}
                                 </span>
                                 }
                             </li>

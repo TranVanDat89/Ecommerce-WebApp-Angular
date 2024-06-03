@@ -1,3 +1,4 @@
+import { CartItem } from './../../responses/cart.item.response';
 import { Flavor } from './../../models/flavor';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +10,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { UserResponse } from '../../responses/user.response';
 import { UserService } from '../../services/user.service';
 import { CartService } from '../../services/cart.service';
+import { StorageResponse } from '../../responses/storage.response';
+import { Cart } from '../../responses/cart.response';
 
 @Component({
   selector: 'app-product-detail',
@@ -34,7 +37,14 @@ export class ProductDetailComponent implements OnInit {
     this.getProductById(this.productId);
   }
   addToCart(): void {
-    this.cartService.addToCart(this.productId, this.quantity, this.flavorName);
+    this.cartService.addToCart(this.productId, this.quantity, this.flavorName).subscribe({
+      next: (apiResponse: ApiResponse<StorageResponse<Cart>>) => {
+        console.log(apiResponse.data.cart);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? '');
+      }
+    });
   }
   formatPrice(price: number | undefined): string {
     if (price === undefined) return '';

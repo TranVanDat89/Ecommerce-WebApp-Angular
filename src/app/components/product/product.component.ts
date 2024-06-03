@@ -9,6 +9,9 @@ import { Product } from '../../models/product';
 import { ProductResponse } from '../../responses/product.response';
 import { UserResponse } from '../../responses/user.response';
 import { UserService } from '../../services/user.service';
+import { StorageResponse } from '../../responses/storage.response';
+import { Cart } from '../../responses/cart.response';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -20,16 +23,14 @@ export class ProductComponent implements OnInit {
   categories: Category[];
   products: Product[];
   totalPages?: number;
-  // visiblePages: number[];
   localStorage?: Storage;
   itemsPerPage: number;
   currentPage: number;
   totalItems: number;
-  constructor(private router: Router, private categoryService: CategoryService, private userService: UserService, private productService: ProductService) {
+  constructor(private router: Router, private cartService: CartService, private categoryService: CategoryService, private userService: UserService, private productService: ProductService) {
     this.categories = [];
     this.totalPages = 0;
     this.totalItems = 0;
-    // this.visiblePages = [];
     this.products = [];
     this.currentPage = 1;
     this.itemsPerPage = 9;
@@ -40,11 +41,16 @@ export class ProductComponent implements OnInit {
     this.getCategories();
     this.getAllProducts();
   }
-  // onPageChange(page: number) {
-  //   this.currentPage = page < 0 ? 0 : page;
-  //   this.localStorage?.setItem('currentProductPage', String(this.currentPage));
-  //   this.getAllProducts(this.currentPage, this.itemsPerPage);
-  // }
+  addToCart(productId: string, quantity: number, flavorName: string): void {
+    this.cartService.addToCart(productId, quantity, flavorName).subscribe({
+      next: (apiResponse: ApiResponse<StorageResponse<Cart>>) => {
+        console.log(apiResponse.data.cart);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? '');
+      }
+    });
+  }
   getCategories() {
     this.categoryService.getAllCategories().subscribe({
       next: (apiResponse: ApiResponse<any>) => {

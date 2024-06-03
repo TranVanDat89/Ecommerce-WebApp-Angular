@@ -1,3 +1,4 @@
+import { TokenInterceptor } from './../../interceptors/token.interceptor';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { Product } from '../../models/product';
@@ -7,6 +8,9 @@ import { ProductResponse } from '../../responses/product.response';
 import { ApiResponse } from '../../responses/api.response';
 import { UserResponse } from '../../responses/user.response';
 import { UserService } from '../../services/user.service';
+import { Cart } from '../../responses/cart.response';
+import { StorageResponse } from '../../responses/storage.response';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -14,44 +18,38 @@ import { UserService } from '../../services/user.service';
   styleUrl: './order.component.css'
 })
 export class OrderComponent implements OnInit {
-  cart: Map<string, { quantity: number, flavorName: string }> = new Map();
-  cartItems: { product: Product, quantity: number, flavorName: string }[] = [];
-  totalMoneys: number = 0;
-  constructor(private cartService: CartService, private productService: ProductService, private userService: UserService) { }
-  ngOnInit(): void {
-    if (this.userService.getUserResponseFromLocalStorage()) {
-      this.cart = this.cartService.getCart();
-    }
-    if (this.cart.size !== 0) {
-      const productInfors: Map<string, { quantity: number, flavorName: string }> = new Map();
-      this.cart.forEach((value, key) => {
-        productInfors.set(key, value);
-      });
-      this.getProductsFromCart(productInfors);
-    }
-    console.log(this.cartItems);
+  cart?: Cart;
+  selectedFlavor?: string;
+  constructor(private cartService: CartService, private router: Router) {
   }
-  getProductsFromCart(productInfors: Map<string, { quantity: number, flavorName: string }>) {
-    productInfors.forEach((value, key) => {
-      this.productService.getProductById(key).subscribe({
-        next: (apiResponse: ApiResponse<any>) => {
-          const { product } = apiResponse.data;
-          this.cartItems.push({ product, quantity: value.quantity, flavorName: value.flavorName });
-          this.totalMoneys += product.price * value.quantity;
-        },
-        error: (error: HttpErrorResponse) => {
-          console.error(error?.error?.message ?? '');
-        }
-      })
+  ngOnInit(): void {
+    this.getCart();
+  }
+  getCart() {
+    this.cartService.getCart().subscribe({
+      next: (apiResponse: ApiResponse<StorageResponse<Cart>>) => {
+        console.log(apiResponse.data);
+        this.cart = apiResponse.data.cart
+        console.log(this.cart);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? '');
+      }
     })
   }
-  removeProductFromCart(index: number) {
-    // this.cartService.removeFromCart(productId);
-    this.cartItems.splice(index, 1);
-    // Cập nhật lại this.cart từ this.cartItems
-    this.updateCartFromCartItems();
-    // Tính toán lại tổng tiền
-    this.calculateTotal();
+  removeItemFromCart(productId: string) {
+    console.log(productId);
+    this.cartService.removeFromCart(productId).subscribe({
+      next: (apiResponse: ApiResponse<StorageResponse<Cart>>) => {
+        console.log(apiResponse.data);
+        this.cart = apiResponse.data.cart
+        console.log(this.cart);
+        this.router.navigate(['/order']);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? '');
+      }
+    })
   }
   formatPrice(price: number | undefined): string {
     if (price === undefined) return '';
@@ -61,33 +59,33 @@ export class OrderComponent implements OnInit {
     }).format(price);
   }
   decreaseQuantity(index: number): void {
-    if (this.cartItems[index].quantity > 1) {
-      this.cartItems[index].quantity--;
-      // Cập nhật lại this.cart từ this.cartItems
-      this.updateCartFromCartItems();
-      this.calculateTotal();
-    }
+    if (this.cart === undefined) return;
+    if (this.cart.cartItems[index].quantity <= 1) return;
+    this.cart.cartItems[index].quantity -= 1;
   }
 
   increaseQuantity(index: number): void {
-    this.cartItems[index].quantity++;
-    // Cập nhật lại this.cart từ this.cartItems
-    this.updateCartFromCartItems();
-    this.calculateTotal();
+    if (this.cart === undefined) return;
+    this.cart.cartItems[index].quantity += 1;
   }
-
-  // Hàm tính tổng tiền
-  calculateTotal(): void {
-    this.totalMoneys = this.cartItems.reduce(
-      (total, item) => total + item.product.price * item.quantity,
-      0
-    );
+  onFlavorSelect(event: Event, index: number) {
+    if (this.cart === undefined) return;
+    this.cart.cartItems[index].flavorName = (event.target as HTMLSelectElement).value;
+  }
+  updateCart() {
+    debugger
+    this.cartService.updateCart(this?.cart!).subscribe({
+      next: (apiResponse: ApiResponse<StorageResponse<Cart>>) => {
+        console.log(apiResponse.data);
+        this.cart = apiResponse.data.cart
+        console.log(this.cart);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? '');
+      }
+    })
   }
   private updateCartFromCartItems(): void {
-    this.cart.clear();
-    this.cartItems.forEach((item) => {
-      this.cart.set(item.product.id, { quantity: item.quantity, flavorName: item.flavorName });
-    });
-    this.cartService.setCart(this.cart);
+
   }
 }

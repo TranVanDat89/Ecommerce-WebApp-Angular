@@ -6,12 +6,15 @@ import { Article } from "../models/article";
 import { Observable } from "rxjs";
 import { ApiResponse } from "../responses/api.response";
 import { ArticleDTO } from "../dtos/article/article.dto";
+import { StorageResponse } from "../responses/storage.response";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ArticleService {
     private apiArticleCreate = `${environment.apiBaseUrl}/articles/create-article`;
+    private apiGetAllArticles = `${environment.apiBaseUrl}/articles/all`;
+    private apiGetAllArticleCategories = `${environment.apiBaseUrl}/articles/all-article-category`;
     private http = inject(HttpClient);
     private httpUtilService = inject(HttpUtilService);
 
@@ -24,15 +27,21 @@ export class ArticleService {
     // createArticle(formData: FormData): Observable<ApiResponse<Article>> {
     //     return this.http.post<ApiResponse<Article>>(this.apiArticleCreate, formData, this.apiConfig);
     // }
-    createArticle(articleDTO: ArticleDTO): Observable<ApiResponse<Article>> {
+    createArticle(articleDTO: ArticleDTO): Observable<ApiResponse<StorageResponse<Article>>> {
         console.log(articleDTO, "services");
         const formData = new FormData();
         formData.append('title', articleDTO.title.trim());
-        formData.append('category', articleDTO.category.trim());
+        formData.append('articleCategoryId', articleDTO.articleCategoryId.trim());
         if (articleDTO.imageFile) {
             formData.append('imageFile', articleDTO.imageFile);
         }
         formData.append('content', articleDTO.content.trim());
-        return this.http.post<ApiResponse<Article>>(this.apiArticleCreate, formData, this.apiConfig);
+        return this.http.post<ApiResponse<StorageResponse<Article>>>(this.apiArticleCreate, formData, this.apiConfig);
+    }
+    getAllArticles(): Observable<ApiResponse<StorageResponse<Article[]>>> {
+        return this.http.get<ApiResponse<StorageResponse<Article[]>>>(this.apiGetAllArticles);
+    }
+    getAllArticleCategories(): Observable<ApiResponse<StorageResponse<{ id: string, name: string }[]>>> {
+        return this.http.get<ApiResponse<StorageResponse<{ id: string, name: string }[]>>>(this.apiGetAllArticleCategories);
     }
 }

@@ -6,10 +6,11 @@
                 <h3 class="product-header">Giỏ hàng</h3>
                 <div class="mb-3">
                     <div class="p-3 rounded" style="background-color: #fff;">
-                        @for (cart of cartItems; track $index;) {
+                        @for (cart of cart?.cartItems; track $index;) {
                         <div class="d-flex">
                             <div class="d-flex">
-                                <a href="" style="width: 24px;height: 24px;" (click)="removeProductFromCart($index)"
+                                <a href="" style="width: 24px;height: 24px;"
+                                    (click)="removeItemFromCart(cart.product.id)"
                                     class="nav-link text-center d-inline-block rounded-circle bg-light btn-remove"><i
                                         class="fa-solid fa-xmark"></i></a>
                                 <a href="" class="img-fluid" style="width: 80px; height: 80px;"><img
@@ -27,7 +28,8 @@
                                 </div>
                                 <div class="quantity-check-number d-flex flex-wrap">
                                     <div class="px-3 mt-3 w-auto flex-grow-1">
-                                        <select class="form-select bg-light" aria-label="Select Type">
+                                        <select class="form-select bg-light" (change)="onFlavorSelect($event, $index)"
+                                            aria-label="Select Type">
                                             @for (flavor of cart.product.ingredient.flavors; track $index) {
                                             <option [value]="flavor.name">{{flavor.name}}</option>
                                             }
@@ -56,7 +58,10 @@
                             </div>
                             <div class="d-flex justify-content-between mt-3">
                                 <span class="fw-bold">Tổng tiền</span>
-                                <span class="fw-bold">{{formatPrice(totalMoneys)}}</span>
+                                <div>
+                                    <span class="btn btn-primary me-2" (click)="updateCart()">Cập nhật giỏ hàng</span>
+                                    <span class="fw-bold">{{formatPrice(cart?.totalPrice)}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>

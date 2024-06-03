@@ -3,7 +3,10 @@ export interface Article {
     title: string;
     content: string;
     imageUrl: string;
-    category: string;
+    category: {
+        id: string;
+        name: string;
+    };
     createdAt: Date;
     updatedAt: Date;
 }

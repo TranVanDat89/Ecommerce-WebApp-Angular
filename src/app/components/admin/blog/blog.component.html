@@ -18,21 +18,16 @@
             <div class="form-group my-2">
                 <label for="category" class="mb-2">Danh mục</label>
                 <select formControlName="category" class="form-select w-50" aria-label="Select Type">
-                    <option disabled selected>Chọn danh mục</option>
-                    <option value="Dinh dưỡng thể hình">Dinh dưỡng thể hình</option>
-                    <option value="Giới thiệu sản phẩm">Giới thiệu sản phẩm</option>
-                    <option value="Sức khỏe và đời sống">Sức khỏe và đời sống</option>
+                    <option disabled>Chọn danh mục</option>
+                    @for (category of articleCategories; track $index) {
+                    <option [value]="category.id">{{category.name}}</option>
+                    }
                 </select>
             </div>
             <div>
                 <label for="centent" class="mb-2">Nội dung</label>
-                <ejs-richtexteditor formControlName="content" id='defaultRTE' [height]="height">
-                    <ng-template #valueTemplate>
-                        <p>The Rich Text Editor component is WYSIWYG ("what you see is what you get") editor that
-                            provides the best user experience to create and update the content. Users can format their
-                            content using standard toolbar commands.</p>
-                    </ng-template>
-                </ejs-richtexteditor>
+                <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig"
+                    formControlName="content"></angular-editor>
                 @if(blogForm.controls['content'].invalid && (blogForm.controls['content'].dirty ||
                 blogForm.controls['content'].touched)) {
                 <p class="text-danger mt-2" *ngIf="blogForm.controls['content'].errors?.['required']">

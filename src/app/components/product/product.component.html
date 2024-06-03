@@ -42,7 +42,8 @@
                 <a href="" [routerLink]="['/products/product-detail', product.id]" class="btn btn-primary mt-2">Chi tiết
                   sản phẩm</a>
                 @if(userResponse) {
-                <a href="" class="btn btn-danger mt-2">Thêm vào giỏ hàng</a>
+                <a href="" class="btn btn-danger mt-2"
+                  (click)="addToCart(product.id, 1, product.ingredient.flavors[0].name)">Thêm vào giỏ hàng</a>
                 }
               </div>
             </div>
