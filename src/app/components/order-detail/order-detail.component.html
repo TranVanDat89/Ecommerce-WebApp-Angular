@@ -2,6 +2,8 @@
 <section id="order-detail" style="padding: 90px 0 40px 0;">
     <div class="container-lg">
         <div class="row">
+            @for (orderDetailResponse of orderDetailResponses! | paginate: { itemsPerPage: itemsPerPage, currentPage:
+            currentPage }; track $index) {
             <div class="col-lg-6">
                 <h2>Thông tin người nhận</h2>
                 <div class="mb-3">
@@ -9,15 +11,16 @@
                         {{orderDetailResponse?.order?.fullName}}</p>
                 </div>
                 <!-- Các trường thông tin khác -->
-                <div class="mb-3">
-                    <p class="form-label"><span class="fw-bold">Email:</span> {{orderDetailResponse?.order?.email}}</p>
-                </div>
+                <!-- <div class="mb-3">
+                        <p class="form-label"><span class="fw-bold">Email:</span> {{orderDetailResponse?.order?.email}}</p>
+                    </div> -->
                 <div class="mb-3">
                     <p class="form-label"><span class="fw-bold">Số điện thoại:</span>
                         {{orderDetailResponse?.order?.phoneNumber}}</p>
                 </div>
                 <div class="mb-3">
-                    <p class="form-label"><span class="fw-bold">Địa chỉ:</span> {{orderDetailResponse?.order?.address}}
+                    <p class="form-label"><span class="fw-bold">Địa chỉ:</span>
+                        {{orderDetailResponse?.order?.shippingAddress}}
                     </p>
                 </div>
                 <div class="mb-3">
@@ -88,10 +91,15 @@
                         }
                     </tbody>
                 </table>
+                <h4 class="text-end">Tổng tiền: {{formatPrice(orderDetailResponse?.order?.totalMoney)}}</h4>
                 <!-- <div class="text-center mt-3">
-                    <button class="btn btn-primary" [routerLink]="['/products']" type="button">Tiếp tục mua sắm</button>
-                </div> -->
+                        <button class="btn btn-primary" [routerLink]="['/products']" type="button">Tiếp tục mua sắm</button>
+                    </div> -->
             </div>
+            }
+        </div>
+        <div class="row mt-3 mx-auto text-center">
+            <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
         </div>
     </div>
 </section>

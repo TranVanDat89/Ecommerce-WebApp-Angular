@@ -72,43 +72,83 @@
                 <h3>Thông tin khách hàng</h3>
                 <div class="mb-3">
                     <div class="rounded p-3" style="background-color: #fff">
-                        <form>
+                        <form [formGroup]="orderForm" (ngSubmit)="createOrder()">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Họ và tên</label>
-                                <input type="text" class="form-control" id="name" placeholder="Trần Văn A">
+                                <label for="fullName" class="form-label">Họ và tên</label>
+                                <input type="text" class="form-control" formControlName="fullName"
+                                    placeholder="Trần Văn A">
+                                @if(orderForm.controls['fullName'].invalid &&
+                                (orderForm.controls['fullName'].dirty || orderForm.controls['fullName'].touched))
+                                {
+                                <p class="text-danger mt-2" *ngIf="orderForm.controls['fullName'].errors?.['required']">
+                                    Bắt buộc phải nhập số
+                                    tên người nhận</p>
+                                }
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Số điện thoại</label>
-                                <input type="text" class="form-control" id="phone" placeholder="0268452xxx">
+                                <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                                <input type="text" class="form-control" formControlName="phoneNumber"
+                                    placeholder="0268452xxx">
+                                @if(orderForm.controls['phoneNumber'].invalid &&
+                                (orderForm.controls['phoneNumber'].dirty || orderForm.controls['phoneNumber'].touched))
+                                {
+                                <p class="text-danger mt-2"
+                                    *ngIf="orderForm.controls['phoneNumber'].errors?.['pattern']">
+                                    Số điện thoại không hợp lệ</p>
+                                <p class="text-danger mt-2"
+                                    *ngIf="orderForm.controls['phoneNumber'].errors?.['required']">Bắt buộc phải nhập số
+                                    điện thoại</p>
+                                }
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control" placeholder="Địa chỉ" required id="address">
+                                <input type="text" class="form-control" formControlName="address" placeholder="Địa chỉ"
+                                    required id="address">
+                                @if(orderForm.controls['address'].invalid &&
+                                (orderForm.controls['address'].dirty || orderForm.controls['address'].touched))
+                                {
+                                <p class="text-danger mt-2" *ngIf="orderForm.controls['address'].errors?.['required']">
+                                    Bắt buộc phải nhập địa chỉ người nhận</p>
+                                }
                             </div>
                             <div class="mb-3">
                                 <label for="note" class="form-label">Ghi chú</label>
-                                <input type="text" class="form-control" placeholder="Ghi chú" required id="note">
+                                <input type="text" class="form-control" placeholder="Ghi chú" required
+                                    formControlName="note">
                             </div>
                             <div class="mb-3">
                                 <label for="shippingMethod">Phương thức vận chuyển</label>
-                                <select class="form-control" id="shippingMethod">
-                                    <option value="express">Nhanh (Express)</option>
-                                    <option value="normal">Thường (Normal)</option>
+                                <select class="form-control" formControlName="shippingMethod">
+                                    <option value="Express">Nhanh (Express)</option>
+                                    <option value="Normal">Thường (Normal)</option>
                                 </select>
+                                @if(orderForm.controls['shippingMethod'].invalid &&
+                                (orderForm.controls['shippingMethod'].dirty ||
+                                orderForm.controls['shippingMethod'].touched))
+                                {
+                                <p class="text-danger mt-2"
+                                    *ngIf="orderForm.controls['shippingMethod'].errors?.['required']">
+                                    Bắt buộc phải chọn phương thức vận chuyển</p>
+                                }
                             </div>
                             <div class="mb-3">
                                 <label for="paymentMethod">Phương thức thanh toán</label>
-                                <select class="form-control" id="paymentMethod">
-                                    <option value="cod">Thanh toán khi nhận hàng (COD)</option>
-                                    <option value="other">Thanh toán khác</option>
+                                <select class="form-control" formControlName="paymentMethod">
+                                    <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+                                    <option value="other" disabled>Thanh toán qua ngân hàng</option>
                                 </select>
+                                @if(orderForm.controls['paymentMethod'].invalid &&
+                                (orderForm.controls['paymentMethod'].dirty ||
+                                orderForm.controls['paymentMethod'].touched))
+                                {
+                                <p class="text-danger mt-2"
+                                    *ngIf="orderForm.controls['paymentMethod'].errors?.['required']">
+                                    Bắt buộc phải chọn phương thức thanh toán</p>
+                                }
                             </div>
                             <div class="d-flex justify-content-center mb-3">
-                                <button type="submit" class="btn btn-primary">Hoàn tất đơn hàng</button>
+                                <button type="submit" class="btn btn-primary" [disabled]="orderForm.invalid">Hoàn tất
+                                    đơn hàng</button>
                             </div>
                         </form>
                     </div>

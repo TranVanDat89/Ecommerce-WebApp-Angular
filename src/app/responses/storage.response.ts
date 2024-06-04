@@ -8,4 +8,5 @@ export interface StorageResponse<T> {
     articles?: T;
     articleCategories?: T;
     article?: T;
+    order?: T;
 }

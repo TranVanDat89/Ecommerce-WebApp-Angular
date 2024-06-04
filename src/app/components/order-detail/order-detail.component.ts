@@ -15,7 +15,9 @@ import { CommentDTO } from '../../dtos/comment.dto';
 })
 export class OrderDetailComponent implements OnInit {
   userId: string = '';
-  orderDetailResponse?: OrderDetailResponse;
+  orderDetailResponses?: OrderDetailResponse[];
+  currentPage: number = 1;
+  itemsPerPage: number = 1;
   // isComment: boolean = false;
   constructor(private router: ActivatedRoute, private orderService: OrderService, private productService: ProductService) {
   }
@@ -34,8 +36,8 @@ export class OrderDetailComponent implements OnInit {
   }
   getOrderDetail(userId: string) {
     this.orderService.getOrderDetail(userId).subscribe({
-      next: (apiResponse: ApiResponse<StorageResponse<OrderDetailResponse>>) => {
-        this.orderDetailResponse = apiResponse.data.orderDetails;
+      next: (apiResponse: ApiResponse<StorageResponse<OrderDetailResponse[]>>) => {
+        this.orderDetailResponses = apiResponse.data.orderDetails;
       },
       error: (error: HttpErrorResponse) => {
         console.error(error?.error?.message ?? '');

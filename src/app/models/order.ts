@@ -1,13 +1,11 @@
 export interface Order {
     id: string;
     fullName: string;
-    email: string;
     phoneNumber: string;
-    address: string;
     note: string;
     isCommented: boolean;
     status: string;
-    totalMoney: string;
+    totalMoney: number;
     shippingMethod: string;
     shippingAddress: string;
     shippingDate: string;
