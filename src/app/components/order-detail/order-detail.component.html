@@ -20,6 +20,25 @@
                     <p class="form-label"><span class="fw-bold">Địa chỉ:</span> {{orderDetailResponse?.order?.address}}
                     </p>
                 </div>
+                <div class="mb-3">
+                    @switch (orderDetailResponse?.order?.status) {
+                    @case ('Success') {
+                    <p class="form-label"><span class="fw-bold me-2">Trạng thái:</span>
+                        <span class="text-success fw-bold">Thành công</span>
+                    </p>
+                    }
+                    @case ('Cancelled') {
+                    <p class="form-label"><span class="fw-bold me-2">Trạng thái:</span>
+                        <span class="text-danger fw-bold">Đã hủy</span>
+                    </p>
+                    }
+                    @default {
+                    <p class="form-label"><span class="fw-bold me-2">Trạng thái:</span>
+                        <span class="text-primary fw-bold">Chờ vận chuyển</span>
+                    </p>
+                    }
+                    }
+                </div>
                 @if (orderDetailResponse?.order?.note !== null) {
                 <div class="mb-3">
                     <p class="form-label"><span class="fw-bold">Ghi chú:</span> {{orderDetailResponse?.order?.note}}</p>
@@ -33,6 +52,13 @@
                     <p class="form-label"><span class="fw-bold">Phương thức thanh toán:</span>
                         {{orderDetailResponse?.order?.paymentMethod}}</p>
                 </div>
+                @if(orderDetailResponse?.order?.status === 'Success') {
+                <div class="mb-3">
+                    <button type="button" class="btn btn-warning text-white"
+                        [disabled]="(orderDetailResponse?.order?.isCommented && orderDetailResponse?.order?.status === 'Success')||orderDetailResponse?.order?.status!=='Success'">Thêm
+                        nhận xét</button>
+                </div>
+                }
             </div>
             <div class="col-lg-6">
                 <h2>Sản phẩm đã đặt hàng</h2>
@@ -62,9 +88,9 @@
                         }
                     </tbody>
                 </table>
-                <div class="text-center mt-3">
+                <!-- <div class="text-center mt-3">
                     <button class="btn btn-primary" [routerLink]="['/products']" type="button">Tiếp tục mua sắm</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

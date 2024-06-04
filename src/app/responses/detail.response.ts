@@ -1,4 +1,5 @@
 export interface DetailResponse {
+    productId: string;
     productThumbnail: string;
     productName: string;
     price: number;

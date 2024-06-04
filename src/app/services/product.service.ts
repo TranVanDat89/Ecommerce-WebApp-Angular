@@ -9,6 +9,7 @@ import { ProductResponse } from '../responses/product.response';
 import { StorageResponse } from '../responses/storage.response';
 import { FavoriteResponse } from '../responses/favorite.response';
 import { Comment } from '../models/comment';
+import { CommentDTO } from '../dtos/comment.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,8 @@ export class ProductService {
   }
   getAllProductsByCategoryId(categoryId: string): Observable<ApiResponse<ProductResponse>> {
     return this.http.get<ApiResponse<ProductResponse>>(this.apiProduct + `/category/${categoryId}`);
+  }
+  getCommentsByUserId(userId: string): Observable<ApiResponse<StorageResponse<CommentDTO[]>>> {
+    return this.http.get<ApiResponse<StorageResponse<CommentDTO[]>>>(this.apiComments + `/user/${userId}`);
   }
 }

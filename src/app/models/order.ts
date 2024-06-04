@@ -5,6 +5,7 @@ export interface Order {
     phoneNumber: string;
     address: string;
     note: string;
+    isCommented: boolean;
     status: string;
     totalMoney: string;
     shippingMethod: string;

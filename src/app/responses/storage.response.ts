@@ -7,5 +7,5 @@ export interface StorageResponse<T> {
     cart?: T;
     articles?: T;
     articleCategories?: T;
-    article?: T
+    article?: T;
 }

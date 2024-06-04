@@ -47,6 +47,14 @@ export class ArticleComponent implements OnInit {
     this.activedRoute.paramMap.subscribe(params => {
       this.categoryId = params.get('categoryId') ?? '';
     });
+    this.articleService.getAllArticlesByCategory(this.categoryId!).subscribe({
+      next: (apiResponse: ApiResponse<StorageResponse<Article[]>>) => {
+        this.articles = apiResponse.data.articles;
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? '');
+      }
+    })
   }
   getArticleDetail(articleId: string) {
     this.router.navigate(['/articles/article-detail', articleId]);

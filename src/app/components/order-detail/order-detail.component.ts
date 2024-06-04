@@ -5,6 +5,8 @@ import { ApiResponse } from '../../responses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
 import { StorageResponse } from '../../responses/storage.response';
 import { OrderDetailResponse } from '../../responses/order-detail.response';
+import { ProductService } from '../../services/product.service';
+import { CommentDTO } from '../../dtos/comment.dto';
 
 @Component({
   selector: 'app-order-detail',
@@ -14,7 +16,8 @@ import { OrderDetailResponse } from '../../responses/order-detail.response';
 export class OrderDetailComponent implements OnInit {
   userId: string = '';
   orderDetailResponse?: OrderDetailResponse;
-  constructor(private router: ActivatedRoute, private orderService: OrderService) {
+  // isComment: boolean = false;
+  constructor(private router: ActivatedRoute, private orderService: OrderService, private productService: ProductService) {
   }
   ngOnInit(): void {
     this.router.paramMap.subscribe(params => {
