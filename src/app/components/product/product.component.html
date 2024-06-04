@@ -14,9 +14,15 @@
         <div class="row text-start">
           <h3>Danh mục sản phẩm</h3>
           <ul class="nav flex-column">
+            <li class="nav-item">
+              <a href="#" [routerLink]="['/products']" class="nav-link text-muted">Tất cả sản phẩm</a>
+            </li>
             @for(category of categories; track category.name) {
             <li class="nav-item">
-              <a href="#" class="nav-link text-muted">{{ category.name }}</a>
+              <a href="#" (click)="getAllProductsByCategoryId()" [routerLink]="['/products/category', category.id]"
+                class="nav-link text-muted">{{
+                category.name
+                }}</a>
             </li>
             }
           </ul>

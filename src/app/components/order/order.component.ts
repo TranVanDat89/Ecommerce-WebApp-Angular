@@ -21,7 +21,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class OrderComponent implements OnInit {
   cart?: Cart;
-  selectedFlavor?: string;
+  // selectedFlavor?: string;
+  isCartChanged: boolean = false;
   constructor(private cartService: CartService, private router: Router, private toastr: ToastrService) {
   }
   ngOnInit(): void {
@@ -64,15 +65,18 @@ export class OrderComponent implements OnInit {
     if (this.cart === undefined) return;
     if (this.cart.cartItems[index].quantity <= 1) return;
     this.cart.cartItems[index].quantity -= 1;
+    this.isCartChanged = true;
   }
 
   increaseQuantity(index: number): void {
     if (this.cart === undefined) return;
     this.cart.cartItems[index].quantity += 1;
+    this.isCartChanged = true;
   }
   onFlavorSelect(event: Event, index: number) {
     if (this.cart === undefined) return;
     this.cart.cartItems[index].flavorName = (event.target as HTMLSelectElement).value;
+    this.isCartChanged = true;
   }
   updateCart() {
     let cartRequest: CartRequest[] = [];
@@ -85,6 +89,7 @@ export class OrderComponent implements OnInit {
         this.cart = apiResponse.data.cart
         console.log(this.cart);
         this.toastr.success('Cập nhật giỏ hàng thành công!', 'Thành công');
+        this.isCartChanged = false;
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error('Cập nhật giỏ hàng thất bại!', 'Thất bại');

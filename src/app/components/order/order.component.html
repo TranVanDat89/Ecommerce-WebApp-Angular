@@ -59,7 +59,9 @@
                             <div class="d-flex justify-content-between mt-3">
                                 <span class="fw-bold">Tổng tiền</span>
                                 <div>
-                                    <span class="btn btn-primary me-2" (click)="updateCart()">Cập nhật giỏ hàng</span>
+                                    <button class="btn btn-primary me-2" type="button" [disabled]="!isCartChanged"
+                                        (click)="updateCart()">Cập nhật
+                                        giỏ hàng</button>
                                     <span class="fw-bold">{{formatPrice(cart?.totalPrice)}}</span>
                                 </div>
                             </div>

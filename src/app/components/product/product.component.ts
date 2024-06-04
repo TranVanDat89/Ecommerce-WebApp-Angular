@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { ApiResponse } from '../../responses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -22,22 +22,23 @@ export class ProductComponent implements OnInit {
   userResponse?: UserResponse | null;
   categories: Category[];
   products: Product[];
-  totalPages?: number;
+  // totalPages?: number;
   localStorage?: Storage;
   itemsPerPage: number;
   currentPage: number;
-  totalItems: number;
-  constructor(private router: Router, private cartService: CartService, private categoryService: CategoryService, private userService: UserService, private productService: ProductService) {
+  categoryId?: string;
+  // totalItems: number;
+  constructor(private router: Router, private activedRouter: ActivatedRoute, private cartService: CartService, private categoryService: CategoryService, private userService: UserService, private productService: ProductService) {
     this.categories = [];
-    this.totalPages = 0;
-    this.totalItems = 0;
+    // this.totalPages = 0;
+    // this.totalItems = 0;
     this.products = [];
     this.currentPage = 1;
     this.itemsPerPage = 9;
   }
   ngOnInit(): void {
     this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
-    this.currentPage = Number(this.localStorage?.getItem('currentProductPage')) || 0;
+    // this.currentPage = Number(this.localStorage?.getItem('currentProductPage')) || 0;
     this.getCategories();
     this.getAllProducts();
   }
@@ -70,9 +71,23 @@ export class ProductComponent implements OnInit {
       next: (apiResponse: ApiResponse<ProductResponse>) => {
         const response = apiResponse.data;
         this.products = response.products;
-        this.totalPages = response.totalPages;
-        this.totalItems = this.products.length;
+        // this.totalPages = response.totalPages;
+        // this.totalItems = this.products.length;
         // console.log(apiResponse.data)
+      }
+      , error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? '');
+      }
+    })
+  }
+  getAllProductsByCategoryId() {
+    this.activedRouter.paramMap.subscribe(params => {
+      this.categoryId = params.get('categoryId') ?? '';
+    });
+    this.productService.getAllProductsByCategoryId(this.categoryId!).subscribe({
+      next: (apiResponse: ApiResponse<ProductResponse>) => {
+        const response = apiResponse.data;
+        this.products = response.products;
       }
       , error: (error: HttpErrorResponse) => {
         console.error(error?.error?.message ?? '');

@@ -25,11 +25,19 @@ const routes: Routes = [
     component: ArticleComponent
   },
   {
+    path: "articles/category/:categoryId",
+    component: ArticleComponent
+  },
+  {
     path: 'articles/article-detail/:articleId',
     component: ArticleDetailComponent
   },
   {
     path: "products",
+    component: ProductComponent,
+  },
+  {
+    path: "products/category/:categoryId",
     component: ProductComponent,
   }, {
     path: 'products/product-detail/:productId',

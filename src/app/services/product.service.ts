@@ -52,4 +52,7 @@ export class ProductService {
   getCommentsByProductId(productId: string): Observable<ApiResponse<StorageResponse<Comment[]>>> {
     return this.http.get<ApiResponse<StorageResponse<Comment[]>>>(this.apiComments + `?productId=${productId}`);
   }
+  getAllProductsByCategoryId(categoryId: string): Observable<ApiResponse<ProductResponse>> {
+    return this.http.get<ApiResponse<ProductResponse>>(this.apiProduct + `/category/${categoryId}`);
+  }
 }

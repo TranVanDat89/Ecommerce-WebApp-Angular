@@ -4,7 +4,7 @@ import { ArticleService } from '../../services/article.service';
 import { ApiResponse } from '../../responses/api.response';
 import { StorageResponse } from '../../responses/storage.response';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-article',
@@ -16,7 +16,8 @@ export class ArticleComponent implements OnInit {
   articleCategories?: { id: string, name: string }[];
   itemsPerPage: number = 9;
   currentPage: number = 1;
-  constructor(private articleService: ArticleService, private router: Router) { }
+  categoryId?: string;
+  constructor(private articleService: ArticleService, private router: Router, private activedRoute: ActivatedRoute) { }
   ngOnInit(): void {
     this.getAllArticles();
     this.getAllArticleCategories();
@@ -41,6 +42,11 @@ export class ArticleComponent implements OnInit {
         console.error(error?.error?.message ?? '');
       }
     })
+  }
+  getAllArticleByCategoryId() {
+    this.activedRoute.paramMap.subscribe(params => {
+      this.categoryId = params.get('categoryId') ?? '';
+    });
   }
   getArticleDetail(articleId: string) {
     this.router.navigate(['/articles/article-detail', articleId]);

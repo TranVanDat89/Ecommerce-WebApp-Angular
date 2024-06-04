@@ -19,7 +19,8 @@
                         </li>
                         @for (category of articleCategories; track $index) {
                         <li class="nav-item">
-                            <a href="#" class="nav-link text-muted">{{category.name}}</a>
+                            <a href="#" [routerLink]="['/articles/category', category.id]"
+                                class="nav-link text-muted">{{category.name}}</a>
                         </li>
                         }
                     </ul>
