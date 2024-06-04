@@ -32,8 +32,18 @@
                                 }
                             </li>
                             <li class="nav-item me-2">
-                                <a href="" class="nav-link text-white">Thông báo</a>
+                                <a class="nav-link text-white" [ngbPopover]="popoverNotifications">Thông báo</a>
                             </li>
+                            <ng-template #popoverNotifications>
+                                <div class="popover-list">
+                                    <div class="popover-item m-0">
+                                        <p class="m-0">Đơn hàng #fcdsbj46373 đang trên đường giao đến bạn. Vui lòng chú
+                                            ý điện thoại
+                                        </p>
+                                        <p class="text-muted m-0">06/04/2024</p>
+                                    </div>
+                                </div>
+                            </ng-template>
                             <li class="nav-item me-2">
                                 <a href="" [routerLink]="['/favorites']" class="nav-link text-white">Yêu thích</a>
                             </li>
