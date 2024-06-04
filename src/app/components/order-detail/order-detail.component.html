@@ -5,37 +5,39 @@
             <div class="col-lg-6">
                 <h2>Thông tin người nhận</h2>
                 <div class="mb-3">
-                    <p class="form-label"><span class="fw-bold">Họ và tên:</span> {{orderDetailResponse?.order?.fullName}}</p>
+                    <p class="form-label"><span class="fw-bold">Họ và tên:</span>
+                        {{orderDetailResponse?.order?.fullName}}</p>
                 </div>
                 <!-- Các trường thông tin khác -->
                 <div class="mb-3">
                     <p class="form-label"><span class="fw-bold">Email:</span> {{orderDetailResponse?.order?.email}}</p>
                 </div>
                 <div class="mb-3">
-                    <p class="form-label"><span class="fw-bold">Số điện thoại:</span> {{orderDetailResponse?.order?.phoneNumber}}</p>
+                    <p class="form-label"><span class="fw-bold">Số điện thoại:</span>
+                        {{orderDetailResponse?.order?.phoneNumber}}</p>
                 </div>
                 <div class="mb-3">
-                    <p class="form-label"><span class="fw-bold">Địa chỉ:</span> {{orderDetailResponse?.order?.address}}</p>
+                    <p class="form-label"><span class="fw-bold">Địa chỉ:</span> {{orderDetailResponse?.order?.address}}
+                    </p>
                 </div>
                 @if (orderDetailResponse?.order?.note !== null) {
-                    <div class="mb-3">
-                        <p class="form-label"><span class="fw-bold">Ghi chú:</span> {{orderDetailResponse?.order?.note}}</p>
-                    </div>
+                <div class="mb-3">
+                    <p class="form-label"><span class="fw-bold">Ghi chú:</span> {{orderDetailResponse?.order?.note}}</p>
+                </div>
                 }
                 <div class="mb-3">
-                    <p class="form-label"><span class="fw-bold">Phương thức vận chuyển:</span> {{orderDetailResponse?.order?.shippingMethod}}</p>
+                    <p class="form-label"><span class="fw-bold">Phương thức vận chuyển:</span>
+                        {{orderDetailResponse?.order?.shippingMethod}}</p>
                 </div>
                 <div class="mb-3">
-                    <p class="form-label"><span class="fw-bold">Phương thức thanh toán:</span> {{orderDetailResponse?.order?.paymentMethod}}</p>
-                </div>  
-                <div class="mb-3 w-75 mx-auto">
-                    <img src="../../../assets/undraw_on_the_way_re_swjt.svg" class="img-fluid" alt="">
+                    <p class="form-label"><span class="fw-bold">Phương thức thanh toán:</span>
+                        {{orderDetailResponse?.order?.paymentMethod}}</p>
                 </div>
             </div>
             <div class="col-lg-6">
                 <h2>Sản phẩm đã đặt hàng</h2>
-                <table class="table table-striped">
-                    <thead class="table-primary">
+                <table class="table">
+                    <thead>
                         <tr>
                             <th scope="col" class="text-start">Sản phẩm</th>
                             <th scope="col">Số lượng</th>
@@ -45,27 +47,26 @@
                     </thead>
                     <tbody>
                         @for (productInfor of orderDetailResponse?.detailResponses; track $index) {
-                            <tr>
-                                <td>
-                                    <div class="d-flex flex-column">
-                                        <img 
-                                        [src]="productInfor.productThumbnail"
-                                        alt="Product Image" class="product-image">
-                                        <span class="fw-bold">{{productInfor.productName}}</span>
-                                    </div>
-                                </td>
-                                <td>{{productInfor.numberOfProducts}}</td>
-                                <td>{{productInfor.price}}</td>
-                                <td>{{productInfor.totalMoney}}</td>
-                            </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <img [src]="productInfor.productThumbnail" alt="Product Image"
+                                        class="product-image">
+                                    <span class="fw-bold">{{productInfor.productName}}</span>
+                                </div>
+                            </td>
+                            <td>{{productInfor.numberOfProducts}}</td>
+                            <td class="fw-bold">{{formatPrice(productInfor.price)}}</td>
+                            <td class="fw-bold">{{formatPrice(productInfor.totalMoney)}}</td>
+                        </tr>
                         }
                     </tbody>
-                </table>   
+                </table>
                 <div class="text-center mt-3">
-                   <button class="btn btn-primary" [routerLink]="['/products']" type="button">Tiếp tục mua sắm</button>
-                </div> 
+                    <button class="btn btn-primary" [routerLink]="['/products']" type="button">Tiếp tục mua sắm</button>
+                </div>
             </div>
-        </div>    
+        </div>
     </div>
 </section>
 <app-footer></app-footer>

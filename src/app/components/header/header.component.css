@@ -51,3 +51,8 @@
     color: #fff;
     /* Text color on hover */
 }
+
+.hover-notification:hover {
+    background-color: var(--bs-secondary);
+    color: #fff;
+}

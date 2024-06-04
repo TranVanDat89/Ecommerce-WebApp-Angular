@@ -4,6 +4,7 @@ import { ArticleService } from '../../services/article.service';
 import { ApiResponse } from '../../responses/api.response';
 import { StorageResponse } from '../../responses/storage.response';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article',
@@ -13,7 +14,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ArticleComponent implements OnInit {
   articles?: Article[];
   articleCategories?: { id: string, name: string }[];
-  constructor(private articleService: ArticleService) { }
+  itemsPerPage: number = 9;
+  currentPage: number = 1;
+  constructor(private articleService: ArticleService, private router: Router) { }
   ngOnInit(): void {
     this.getAllArticles();
     this.getAllArticleCategories();
@@ -38,5 +41,8 @@ export class ArticleComponent implements OnInit {
         console.error(error?.error?.message ?? '');
       }
     })
+  }
+  getArticleDetail(articleId: string) {
+    this.router.navigate(['/articles/article-detail', articleId]);
   }
 }

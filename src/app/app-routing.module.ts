@@ -13,21 +13,20 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/admin/user/user.component';
 import { BlogComponent } from './components/admin/blog/blog.component';
 import { ArticleComponent } from './components/article/article.component';
+import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
 
 const routes: Routes = [
   {
     path: "",
-    component: HomeComponent,
-    // children: [
-    //   {
-    //     path: "articles",
-    //     component: ArticleComponent
-    //   }
-    // ]
+    component: HomeComponent
   },
   {
     path: "articles",
     component: ArticleComponent
+  },
+  {
+    path: 'articles/article-detail/:articleId',
+    component: ArticleDetailComponent
   },
   {
     path: "products",

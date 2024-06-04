@@ -15,7 +15,7 @@
                     <h3>Danh mục bài viết</h3>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a href="#" class="nav-link text-muted">Tất cả bài viết</a>
+                            <a href="" [routerLink]="['/articles']" class="nav-link text-muted">Tất cả bài viết</a>
                         </li>
                         @for (category of articleCategories; track $index) {
                         <li class="nav-item">
@@ -27,24 +27,30 @@
             </div>
             <div class="col-lg-9 d-flex flex-wrap justify-content-center">
                 <div class="row">
-                    @for (article of articles; track $index) {
-                    <div class="col-lg-6 col-xxl-4 col-md-6 col-12 my-2">
-                        <div class="card w-100 h-100 d-flex flex-row">
-                            <div class="align-items-center d-flex">
-                                <img style=" width: 150px;" [src]="article.imageUrl" alt="...">
-                            </div>
-                            <div class="card-body p-1">
-                                <h5 class="card-title m-0">{{article.title}}</h5>
-                                <p class="text-primary m-0 text-uppercase">{{article.category.name}}</p>
-                                <p>{{article.createdAt}}</p>
+                    @for (article of articles! | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage};
+                    track $index) {
+                    <div class="col-md-12 col-lg-12 col-xxl-12 col-12 my-2" (click)="getArticleDetail(article.id)"
+                        style="cursor: pointer;">
+                        <div class="card w-100 h-100 d-flex flex-row p-0 m-0">
+                            <div class="row">
+                                <div class="align-items-center d-flex col-4">
+                                    <img style="object-fit: cover" class="img-fluid w-100" [src]="article.imageUrl"
+                                        alt="...">
+                                </div>
+                                <div class="card-body p-0 col-8">
+                                    <div class="w-100">
+                                        <h5 class="card-title m-0" style="text-wrap: balance;">{{article.title}}</h5>
+                                        <p class="text-primary m-0 text-uppercase fw-bold">{{article.category.name}}</p>
+                                        <p>{{article.createdAt}}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     }
                 </div>
                 <div class="row mt-3">
-                    <!-- ngx-pagination library -->
-                    <pagination-controls></pagination-controls>
+                    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
                 </div>
             </div>
         </div>

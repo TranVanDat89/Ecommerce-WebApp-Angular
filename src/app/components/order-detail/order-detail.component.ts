@@ -22,6 +22,13 @@ export class OrderDetailComponent implements OnInit {
     });
     this.getOrderDetail(this.userId);
   }
+  formatPrice(price: number | undefined): string {
+    if (price === undefined) return '';
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    }).format(price);
+  }
   getOrderDetail(userId: string) {
     this.orderService.getOrderDetail(userId).subscribe({
       next: (apiResponse: ApiResponse<StorageResponse<OrderDetailResponse>>) => {

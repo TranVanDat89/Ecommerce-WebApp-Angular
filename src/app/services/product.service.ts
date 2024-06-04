@@ -19,6 +19,7 @@ export class ProductService {
   private apiProductGetTop4 = `${environment.apiBaseUrl}/products/get-top-4`;
   private apiProductFavorites = `${environment.apiBaseUrl}/favorite-products`;
   private apiProductComments = `${environment.apiBaseUrl}/comments/all`;
+  private apiComments = `${environment.apiBaseUrl}/comments`;
   private http = inject(HttpClient);
   private httpUtilService = inject(HttpUtilService);
   private apiConfig = {
@@ -47,5 +48,8 @@ export class ProductService {
   }
   getAllComments(): Observable<ApiResponse<StorageResponse<Comment[]>>> {
     return this.http.get<ApiResponse<StorageResponse<Comment[]>>>(this.apiProductComments);
+  }
+  getCommentsByProductId(productId: string): Observable<ApiResponse<StorageResponse<Comment[]>>> {
+    return this.http.get<ApiResponse<StorageResponse<Comment[]>>>(this.apiComments + `?productId=${productId}`);
   }
 }

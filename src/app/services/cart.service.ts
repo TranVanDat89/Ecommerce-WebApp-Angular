@@ -1,4 +1,3 @@
-import { UpdateCartRequest } from './../dtos/cart.dto';
 import { HttpClient } from '@angular/common/http';
 import { UserResponse } from '../responses/user.response';
 import { StorageResponse } from './../responses/storage.response';
@@ -9,6 +8,7 @@ import { Observable } from 'rxjs';
 import { ApiResponse } from '../responses/api.response';
 import { Cart } from '../responses/cart.response';
 import { CartItem } from '../responses/cart.item.response';
+import { CartRequest } from '../dtos/cart.request';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class CartService {// Dùng Map để lưu trữ giỏ hàng, key là id 
   private apiAddToCart = `${environment.apiBaseUrl}/carts/add-to-cart`;
   private apiGetMycart = `${environment.apiBaseUrl}/carts/my-cart`;
   private apiRemoveItemFromCart = `${environment.apiBaseUrl}/carts/delete-item`;
-  private apiUpdateCart = `${environment.apiBaseUrl}/carts/update-cart`;
+  private apiUpdateCart = `${environment.apiBaseUrl}/carts/update-cart/`;
   private http = inject(HttpClient);
   private httpUtilService = inject(HttpUtilService);
   private apiConfig = {
@@ -34,8 +34,7 @@ export class CartService {// Dùng Map để lưu trữ giỏ hàng, key là id 
   removeFromCart(productId: string): Observable<ApiResponse<StorageResponse<Cart>>> {
     return this.http.get<ApiResponse<StorageResponse<Cart>>>(this.apiRemoveItemFromCart + `?productId=${productId}`);
   }
-  updateCart(cart: Cart): Observable<ApiResponse<StorageResponse<Cart>>> {
-    debugger
-    return this.http.post<ApiResponse<StorageResponse<Cart>>>(this.apiUpdateCart, cart, this.apiConfig);
+  updateCart(cartId: string, cartUpdate: CartRequest[]): Observable<ApiResponse<StorageResponse<Cart>>> {
+    return this.http.post<ApiResponse<StorageResponse<Cart>>>(this.apiUpdateCart + cartId, cartUpdate, this.apiConfig);
   }
 }

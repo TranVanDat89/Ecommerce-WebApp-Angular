@@ -29,6 +29,9 @@ import { BlogComponent } from './components/admin/blog/blog.component';
 import { ArticleComponent } from './components/article/article.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HtmlEditorService, ImageService, LinkService, QuickToolbarService, RichTextEditorModule, TableService, ToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
+import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,8 @@ import { HtmlEditorService, ImageService, LinkService, QuickToolbarService, Rich
     OrderAdminComponent,
     ProductAdminComponent,
     BlogComponent,
-    ArticleComponent
+    ArticleComponent,
+    ArticleDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,9 @@ import { HtmlEditorService, ImageService, LinkService, QuickToolbarService, Rich
     NgxPaginationModule,
     NgbModule,
     AngularEditorModule,
-    RichTextEditorModule
+    RichTextEditorModule, // required animations module
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     {

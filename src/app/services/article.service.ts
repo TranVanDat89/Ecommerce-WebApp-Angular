@@ -15,6 +15,7 @@ export class ArticleService {
     private apiArticleCreate = `${environment.apiBaseUrl}/articles/create-article`;
     private apiGetAllArticles = `${environment.apiBaseUrl}/articles/all`;
     private apiGetAllArticleCategories = `${environment.apiBaseUrl}/articles/all-article-category`;
+    private apiArticleDetail = `${environment.apiBaseUrl}/articles/get-article/`;
     private http = inject(HttpClient);
     private httpUtilService = inject(HttpUtilService);
 
@@ -43,5 +44,8 @@ export class ArticleService {
     }
     getAllArticleCategories(): Observable<ApiResponse<StorageResponse<{ id: string, name: string }[]>>> {
         return this.http.get<ApiResponse<StorageResponse<{ id: string, name: string }[]>>>(this.apiGetAllArticleCategories);
+    }
+    getArticleDetail(articleId: string): Observable<ApiResponse<StorageResponse<Article>>> {
+        return this.http.get<ApiResponse<StorageResponse<Article>>>(`${this.apiArticleDetail}${articleId}`);
     }
 }

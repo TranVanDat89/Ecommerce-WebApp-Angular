@@ -12,6 +12,7 @@ import { UserService } from '../../services/user.service';
 import { CartService } from '../../services/cart.service';
 import { StorageResponse } from '../../responses/storage.response';
 import { Cart } from '../../responses/cart.response';
+import { Comment } from '../../models/comment';
 
 @Component({
   selector: 'app-product-detail',
@@ -24,17 +25,25 @@ export class ProductDetailComponent implements OnInit {
   quantity: number;
   product?: Product;
   flavorName: string;
+  comments?: Comment[];
+  rating: number = 0;
+  itemsPerPage: number;
+  currentPage: number;
   constructor(private router: ActivatedRoute, private cartService: CartService, private userService: UserService, private productService: ProductService) {
     this.productId = '';
     this.quantity = 1;
     this.flavorName = '';
+    this.itemsPerPage = 5;
+    this.currentPage = 1;
   }
+
   ngOnInit(): void {
     this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
     this.router.paramMap.subscribe(params => {
       this.productId = params.get('productId') ?? '';
     });
     this.getProductById(this.productId);
+    this.getAllCommentsByProductId(this.productId);
   }
   addToCart(): void {
     this.cartService.addToCart(this.productId, this.quantity, this.flavorName).subscribe({
@@ -64,6 +73,22 @@ export class ProductDetailComponent implements OnInit {
         console.error(error?.error?.message ?? '');
       }
     })
+  }
+  getAllCommentsByProductId(productId: string) {
+    this.productService.getCommentsByProductId(productId).subscribe({
+      next: (apiResponse: ApiResponse<StorageResponse<Comment[]>>) => {
+        this.comments = apiResponse.data.comments;
+        if (this.comments?.length) {
+          this.rating = this.comments?.reduce((sum, comment) => sum + comment.star, 0) / this.comments?.length
+        }
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? '');
+      }
+    })
+  }
+  getStarsArray(star: number): any[] {
+    return new Array(star);
   }
   increaseQuantity(): void {
     this.quantity++;

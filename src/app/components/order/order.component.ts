@@ -11,6 +11,8 @@ import { UserService } from '../../services/user.service';
 import { Cart } from '../../responses/cart.response';
 import { StorageResponse } from '../../responses/storage.response';
 import { Router } from '@angular/router';
+import { CartRequest } from '../../dtos/cart.request';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order',
@@ -20,7 +22,7 @@ import { Router } from '@angular/router';
 export class OrderComponent implements OnInit {
   cart?: Cart;
   selectedFlavor?: string;
-  constructor(private cartService: CartService, private router: Router) {
+  constructor(private cartService: CartService, private router: Router, private toastr: ToastrService) {
   }
   ngOnInit(): void {
     this.getCart();
@@ -73,19 +75,21 @@ export class OrderComponent implements OnInit {
     this.cart.cartItems[index].flavorName = (event.target as HTMLSelectElement).value;
   }
   updateCart() {
-    debugger
-    this.cartService.updateCart(this?.cart!).subscribe({
+    let cartRequest: CartRequest[] = [];
+    this.cart?.cartItems?.forEach(item => {
+      cartRequest.push({ productId: item.product.id, quantity: item.quantity, flavorName: item.flavorName! })
+    })
+    this.cartService.updateCart(this?.cart?.id!, cartRequest).subscribe({
       next: (apiResponse: ApiResponse<StorageResponse<Cart>>) => {
         console.log(apiResponse.data);
         this.cart = apiResponse.data.cart
         console.log(this.cart);
+        this.toastr.success('Cập nhật giỏ hàng thành công!', 'Thành công');
       },
       error: (error: HttpErrorResponse) => {
+        this.toastr.error('Cập nhật giỏ hàng thất bại!', 'Thất bại');
         console.error(error?.error?.message ?? '');
       }
     })
-  }
-  private updateCartFromCartItems(): void {
-
   }
 }
