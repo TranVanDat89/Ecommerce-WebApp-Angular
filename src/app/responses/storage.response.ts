@@ -9,4 +9,5 @@ export interface StorageResponse<T> {
     articleCategories?: T;
     article?: T;
     order?: T;
+    notifications?: T;
 }

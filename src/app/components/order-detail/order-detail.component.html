@@ -35,9 +35,14 @@
                         <span class="text-danger fw-bold">Đã hủy</span>
                     </p>
                     }
+                    @case ('Pending') {
+                    <p class="form-label"><span class="fw-bold me-2">Trạng thái:</span>
+                        <span class="text-warning fw-bold">Chờ xác nhận</span>
+                    </p>
+                    }
                     @default {
                     <p class="form-label"><span class="fw-bold me-2">Trạng thái:</span>
-                        <span class="text-primary fw-bold">Chờ vận chuyển</span>
+                        <span class="text-primary fw-bold">Đang vận chuyển</span>
                     </p>
                     }
                     }
@@ -55,6 +60,12 @@
                     <p class="form-label"><span class="fw-bold">Phương thức thanh toán:</span>
                         {{orderDetailResponse?.order?.paymentMethod}}</p>
                 </div>
+                @if(orderDetailResponse?.order?.shippingDate) {
+                <div class="mb-3">
+                    <p class="form-label"><span class="fw-bold">Ngày giao hàng:</span>
+                        {{orderDetailResponse?.order?.shippingDate}}</p>
+                </div>
+                }
                 @if(orderDetailResponse?.order?.status === 'Success') {
                 <div class="mb-3">
                     <button type="button" class="btn btn-warning text-white"

@@ -8,6 +8,7 @@ import { ApiResponse } from '../responses/api.response';
 import { LoginDTO } from '../dtos/user/login.dto';
 import { UserResponse } from '../responses/user.response';
 import { StorageResponse } from '../responses/storage.response';
+import { Notification } from '../models/notification';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class UserService {
   private apiLogin = `${environment.apiBaseUrl}/users/auth/login`;
   private apiUserDetail = `${environment.apiBaseUrl}/users/auth/details`;
   private apiUserAll = `${environment.apiBaseUrl}/users/auth/all`;
+  private apiAllNotifications = `${environment.apiBaseUrl}/notifications`;
   private http = inject(HttpClient);
   private httpUtilService = inject(HttpUtilService);
 
@@ -116,5 +118,8 @@ export class UserService {
       console.error('Error removing user data from local storage:', error);
       // Handle the error as needed
     }
+  }
+  getAllNotifications(): Observable<ApiResponse<StorageResponse<Notification[]>>> {
+    return this.http.get<ApiResponse<StorageResponse<Notification[]>>>(this.apiAllNotifications);
   }
 }

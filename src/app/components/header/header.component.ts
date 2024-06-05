@@ -8,6 +8,7 @@ import { UserResponse } from './../../responses/user.response';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Notification } from '../../models/notification';
 
 @Component({
   selector: 'app-header',
@@ -18,12 +19,14 @@ export class HeaderComponent implements OnInit {
   userResponse?: UserResponse | null;
   isPopoverOpen = false;
   cart?: Cart;
+  notifications?: Notification[];
   constructor(private router: Router, private cartService: CartService, private userService: UserService, private tokenService: TokenService) {
   }
   ngOnInit(): void {
     this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
     // console.log(this.userResponse);
     this.getCart();
+    this.getAllNotifications();
   }
 
   togglePopover(event: Event): void {
@@ -52,5 +55,17 @@ export class HeaderComponent implements OnInit {
       this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse;
     }
     this.isPopoverOpen = false; // Close the popover after clicking an item    
+  }
+  getAllNotifications() {
+    this.userService.getAllNotifications().subscribe({
+      next: (apiResponse: ApiResponse<StorageResponse<Notification[]>>) => {
+        console.log(apiResponse.data);
+        this.notifications = apiResponse.data.notifications
+        console.log(this.notifications?.length);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? '');
+      }
+    })
   }
 }

@@ -31,17 +31,27 @@
                                 </span>
                                 }
                             </li>
-                            <li class="nav-item me-2">
-                                <a class="nav-link text-white" [ngbPopover]="popoverNotifications">Thông báo</a>
+                            <li class="nav-item me-2 position-relative w-content">
+                                <a class="nav-link text-white" [ngbPopover]="popoverNotifications">Thông báo<i
+                                        class="fa-solid fa-bell ms-1"></i></a>
+                                @if(notifications?.length) {
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {{ notifications?.length }}
+                                </span>
+                                }
                             </li>
                             <ng-template #popoverNotifications>
                                 <div class="popover-list">
-                                    <div class="popover-item m-0 hover-notification">
-                                        <p class="m-0">Đơn hàng #fcdsbj46373 đang trên đường giao đến bạn. Vui lòng chú
-                                            ý điện thoại
+                                    @for (notification of notifications; track $index) {
+                                    <div class=" popover-item m-0 hover-notification"
+                                        style="border-bottom: 1px solid #ccc">
+                                        <p class="m-0">
+                                            {{notification.message}}
                                         </p>
-                                        <p class="m-0 fw-bold">06/04/2024</p>
+                                        <p class="m-0 fw-bold">{{notification.createdAt}}</p>
                                     </div>
+                                    }
                                 </div>
                             </ng-template>
                             <li class="nav-item me-2">
@@ -59,7 +69,8 @@
                                     <a class="popover-item" [routerLink]="['/user-profile']" href="">Tài khoản của
                                         tôi</a>
                                     <a class="popover-item" [routerLink]="['/orders/order-detail/', userResponse.id]"
-                                        href="">Lịch sử mua hàng</a>
+                                        href="">Lịch sử
+                                        mua hàng</a>
                                     <a class="popover-item" (click)="handleItemClick(2)" href="">Đăng xuất</a>
                                 </div>
                             </ng-template>
