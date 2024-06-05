@@ -32,6 +32,10 @@ import { HtmlEditorService, ImageService, LinkService, QuickToolbarService, Rich
 import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { CategoryComponent } from './components/admin/category/category.component';
+import { UpdateArticleComponent } from './components/admin/update-article/update-article.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProductAdminComponent,
     BlogComponent,
     ArticleComponent,
-    ArticleDetailComponent
+    ArticleDetailComponent,
+    DashboardComponent,
+    CategoryComponent,
+    UpdateArticleComponent
   ],
   imports: [
     BrowserModule,
@@ -67,14 +74,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularEditorModule,
     RichTextEditorModule, // required animations module
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    BaseChartDirective
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }, LinkService, ImageService, HtmlEditorService, ToolbarService, TableService, QuickToolbarService
+    },
+    provideCharts(withDefaultRegisterables())
   ],
   bootstrap: [AppComponent]
 })

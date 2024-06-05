@@ -14,6 +14,11 @@ import { UserComponent } from './components/admin/user/user.component';
 import { BlogComponent } from './components/admin/blog/blog.component';
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { OrderAdminComponent } from './components/admin/order-admin/order-admin.component';
+import { ProductAdminComponent } from './components/admin/product-admin/product-admin.component';
+import { CategoryComponent } from './components/admin/category/category.component';
+import { UpdateArticleComponent } from './components/admin/update-article/update-article.component';
 
 const routes: Routes = [
   {
@@ -78,8 +83,23 @@ const routes: Routes = [
         path: "users",
         component: UserComponent
       }, {
-        path: "blogs/create-blog",
-        component: BlogComponent
+        path: "blogs",
+        component: UpdateArticleComponent
+      },
+      {
+        path: "dashboard",
+        component: DashboardComponent
+      }, {
+        path: "orders",
+        component: OrderAdminComponent
+      },
+      {
+        path: "products",
+        component: ProductAdminComponent
+      },
+      {
+        path: "categories",
+        component: CategoryComponent
       }
     ]
   }

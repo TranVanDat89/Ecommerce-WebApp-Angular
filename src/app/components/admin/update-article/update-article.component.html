@@ -1,0 +1,102 @@
+<section id="articles" style="margin-top: 70px; margin-right: 10px;">
+    <div class="container-lg">
+        <div class="d-flex justify-content-between">
+            <h3 class="m-0 p-0">Quản lý bài viết</h3>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Thêm bài
+                viết</button>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <form action="" [formGroup]="blogForm" enctype="multipart/form-data" (ngSubmit)="createAtricle()">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tạo bài viết</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <div class="row m-3">
+                                    <div class="form-group">
+                                        <label for="title" class="mb-2">Tiêu đề</label>
+                                        <input type="text" class="form-control" formControlName="title"
+                                            placeholder="Nhập tiêu đề...">
+                                        @if(blogForm.controls['title'].invalid && (blogForm.controls['title'].dirty ||
+                                        blogForm.controls['title'].touched)) {
+                                        <p class="text-danger mt-2"
+                                            *ngIf="blogForm.controls['title'].errors?.['required']">
+                                            Bắt buộc phải tiêu đề</p>
+                                        }
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="imageFile" class="mb-2">Ảnh</label>
+                                        <input type="file" class="form-control" (change)="onFileChange($event)"
+                                            placeholder="Nhập tiêu đề...">
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="category" class="mb-2">Danh mục</label>
+                                        <select formControlName="category" class="form-select" aria-label="Select Type">
+                                            <option disabled>Chọn danh mục</option>
+                                            @for (category of articleCategories; track $index) {
+                                            <option [value]="category.id">{{category.name}}</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="centent" class="mb-2">Nội dung</label>
+                                        <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig"
+                                            formControlName="content"></angular-editor>
+                                        @if(blogForm.controls['content'].invalid && (blogForm.controls['content'].dirty
+                                        ||
+                                        blogForm.controls['content'].touched)) {
+                                        <p class="text-danger mt-2"
+                                            *ngIf="blogForm.controls['content'].errors?.['required']">
+                                            Bắt buộc phải nhập nội dung</p>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary">Thêm bài viết</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-3 ms-1">
+            <div class="row">
+                @for (article of articles! | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage};
+                track $index) {
+                <div class="col-md-12 col-lg-12 col-xxl-12 col-12 my-2" style="cursor: pointer;">
+                    <div class="card w-100 h-100 d-flex flex-row p-0 m-0">
+                        <div class="row">
+                            <div class="align-items-center d-flex col-4">
+                                <img style="object-fit: cover" class="img-fluid w-100" [src]="article.imageUrl"
+                                    alt="...">
+                            </div>
+                            <div class="card-body p-0 col-8">
+                                <div class="w-100">
+                                    <h5 class="card-title m-0" style="text-wrap: balance;">{{article.title}}</h5>
+                                    <p class="text-primary m-0 text-uppercase fw-bold">{{article.category.name}}</p>
+                                    <p>{{article.createdAt}}</p>
+                                    <div>
+                                        <button class="btn btn-primary">Sửa bài viết</button>
+                                        <button class="btn btn-danger ms-3">Xóa bài viết</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            <div class="row mt-3 text-center">
+                <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</section>

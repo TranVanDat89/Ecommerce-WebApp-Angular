@@ -1,1 +1,38 @@
-<p>order-admin works!</p>
+<section id="order-admin" style="margin-top: 70px; margin-right: 10px;">
+    <div class="container-lg ">
+        <h3 class="m-0 p-0">Quản lý đơn hàng</h3>
+        <div class="row mt-3 ms-1">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Người nhận</th>
+                        <th>Ngày nhận hàng</th>
+                        <th>Tổng số tiền</th>
+                        <th>Phương thức thanh toán</th>
+                        <th>Trạng thái</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Trần Văn Đạt</td>
+                        <td>01/01/2022</td>
+                        <td>2.500.000đ</td>
+                        <td>COD</td>
+                        <td class="text-success fw-bold">
+                            <select class="form-select">
+                                <option value="Peding">Chờ xử lý</option>
+                                <option value="Delivering">Đã xuất hàng</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Xem chi tiết</button>
+                            <button class="btn btn-success ms-3">Xuất hóa đơn</button>
+                            <button class="btn btn-warning ms-3 text-white">Cập nhật</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

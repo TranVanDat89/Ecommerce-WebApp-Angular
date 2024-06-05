@@ -109,7 +109,7 @@ export class OrderDetailComponent implements OnInit {
         // this.commentForm.get('comments')?.reset();
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error("Nhận xét thất baị", "Thất baị");
+        this.toastr.error("Nhận xét thất baị", "Thất bại");
         console.error(error?.error?.message ?? 'An error occurred during registration');
       }
     })

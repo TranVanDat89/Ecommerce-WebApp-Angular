@@ -1,0 +1,32 @@
+<section id="categories-admin" style="margin-top: 70px; margin-right: 20px;">
+    <div class="container-lg">
+        <div class="d-flex justify-content-between">
+            <h3 class="m-0 p-0">Quản lý danh mục sản phẩm</h3>
+            <button type="button" class="btn btn-success">Thêm danh mục</button>
+        </div>
+        <div class="row mt-3 ms-1">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Tên danh mục</th>
+                        <th>Số lượng sản phẩm</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(category of categories; track $index) {
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>10</td>
+                        <td>
+                            <button class="btn btn-danger ms-2">
+                                Xóa danh mục
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

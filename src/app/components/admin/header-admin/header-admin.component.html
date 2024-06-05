@@ -33,8 +33,6 @@
                         </li>
                         <ng-template #popoverContent>
                             <div class="popover-list">
-                                <a class="popover-item" href="">Tài khoản của
-                                    tôi</a>
                                 <a class="popover-item" href="">Đăng xuất</a>
                             </div>
                         </ng-template>
@@ -82,37 +80,38 @@
                         <i class="fa-solid fa-user me-2"></i>Người dùng</a>
                 </li>
                 <li class="nav-item w-75 my-2">
-                    <a href="" (click)="enableActived(2)" [ngClass]="{ 'active': isActived === 2 }"
-                        class="nav-link text-white">
+                    <a href="" [routerLink]="['/admin/orders']" (click)="enableActived(2)"
+                        [ngClass]="{ 'active': isActived === 2 }" class="nav-link text-white">
                         <i class="fa-solid fa-cart-shopping me-2"></i>Đơn hàng</a>
                 </li>
                 <li class="nav-item w-75 my-2">
-                    <a href="" (click)="enableActived(3)" [ngClass]="{ 'active': isActived === 3 }"
-                        class="nav-link text-white">
+                    <a href="" [routerLink]="['/admin/categories']" (click)="enableActived(3)"
+                        [ngClass]="{ 'active': isActived === 3 }" class="nav-link text-white">
                         <i class="fa-solid fa-list me-2"></i>Danh mục sản phẩm</a>
                 </li>
                 <li class="nav-item w-75 my-2">
-                    <a href="" (click)="enableActived(4)" [ngClass]="{ 'active': isActived === 4 }"
-                        class="nav-link text-white">
+                    <a href="" [routerLink]="['/admin/products']" (click)="enableActived(4)"
+                        [ngClass]="{ 'active': isActived === 4 }" class="nav-link text-white">
                         <i class="fa-solid fa-box me-2"></i>Sản phẩm</a>
                 </li>
                 <li class="nav-item w-75 my-2">
                     <a href="#collapseBlog" (click)="enableActived(5)" [ngClass]="{ 'active': isActived === 5 }"
                         class="nav-link text-white" data-bs-toggle="collapse" role="button" aria-expanded="false"
-                        aria-controls="collapseBlog">
+                        aria-controls="collapseBlog" [routerLink]="['/admin/blogs']">
                         <i class="fa-solid fa-blog me-2"></i>Bài viết
                     </a>
-                    <div class="collapse" id="collapseBlog">
+                    <!-- <div class="collapse" id="collapseBlog">
                         <ul class="list-unstyled ms-3">
                             <li><a [routerLink]="['/admin/blogs/create-blog']" class="nav-link text-white"><i
                                         class="fa-solid fa-square-plus me-2"></i>Tạo bài
                                     viết</a>
                             </li>
-                            <li><a class="nav-link text-white"><i class="fa-solid fa-file-pen me-2"></i>Cập nhật bài
+                            <li><a [routerLink]="['/admin/blogs/update-blog']" class="nav-link text-white"><i
+                                        class="fa-solid fa-file-pen me-2"></i>Cập nhật bài
                                     viết</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </li>
             </ul>
         </div>
@@ -121,3 +120,39 @@
         <router-outlet></router-outlet>
     </div>
 </div>
+<footer class="bg-dark text-white pt-4 pb-2">
+    <div class="container-xxl text-left text-md-left">
+        <div class="row align-items-center">
+            <div class="col-md-7 col-lg-8">
+                <p>Copyright &#64;2024 All rights reserved by: <a href="" class="text-decoration-none"><strong
+                            class="text-success">Trần Văn Đạt</strong></a></p>
+            </div>
+            <div class="col-md-5 col-lg-4">
+                <div class="text-center text-md-right">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item">
+                            <a href="" class="text-white btn-floating btn-sm" style="font-size: 23px;"><i
+                                    class="fab fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="" class="text-white btn-floating btn-sm" style="font-size: 23px;"><i
+                                    class="fab fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="" class="text-white btn-floating btn-sm" style="font-size: 23px;"><i
+                                    class="fab fa-google-plus"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="" class="text-white btn-floating btn-sm" style="font-size: 23px;"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="" class="text-white btn-floating btn-sm" style="font-size: 23px;"><i
+                                    class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

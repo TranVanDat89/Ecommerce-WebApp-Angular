@@ -1,1 +1,39 @@
-<p>product-admin works!</p>
+<section id="categories-admin" style="margin-top: 70px">
+    <div class="container-lg mt-3">
+        <div class="d-flex justify-content-between">
+            <h3 class="m-0 p-0">Quản lý sản phẩm</h3>
+            <button type="button" class="btn btn-success">Thêm sản phẩm</button>
+        </div>
+        <div class="row mt-3 ms-1">
+            <div class="row">
+                @for(product of products| paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; track
+                product.id) {
+                <div class="col-lg-6 col-xxl-4 col-md-6 col-12 my-2">
+                    <div class="card w-100 h-100">
+                        <div style="height: 226px;" class="overflow-hidden">
+                            @if (product.thumbnail === null) {
+                            <img src="../../../assets/intro-image.jpg" class="card-img-top" alt="...">
+                            }
+                            @if (product.thumbnail !== null) {
+                            <img [src]="product.thumbnail" class="card-img-top" alt="...">
+                            }
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text text--shorten">{{product.productDetail.introduction}}</p>
+                            <a href="" class="btn btn-warning mt-2 text-white">Sửa
+                                sản phẩm</a>
+                            <a href="" class=" btn btn-danger mt-2 ms-2">Xóa
+                                sản phẩm</a>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            <div class="row mt-3 mx-auto text-center">
+                <!-- ngx-pagination library -->
+                <pagination-controls (pageChange)=" currentPage=$event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</section>
