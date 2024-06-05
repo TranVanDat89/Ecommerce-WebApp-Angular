@@ -68,9 +68,66 @@
                 }
                 @if(orderDetailResponse?.order?.status === 'Success') {
                 <div class="mb-3">
-                    <button type="button" class="btn btn-warning text-white"
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
+                        class="btn btn-warning text-white"
                         [disabled]="(orderDetailResponse?.order?.isCommented && orderDetailResponse?.order?.status === 'Success')||orderDetailResponse?.order?.status!=='Success'">Thêm
                         nhận xét</button>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Thêm nhận xét</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" [formGroup]="commentForm">
+                                        <div formArrayName="comments">
+                                            <div *ngFor="let commentControl of comments.controls; let i = index"
+                                                [formGroupName]="i" class="mt-3">
+                                                <div class="d-flex flex-row mb-3">
+                                                    <img [src]="commentControl.get('productThumbnail')?.value"
+                                                        class="img-fluid" style="width: 100px" alt="">
+                                                    <div class="ms-3">
+                                                        <h4 class="fw-bold">{{commentControl.get('productName')?.value}}
+                                                        </h4>
+                                                        <ngb-rating formControlName="rating" [max]="5"></ngb-rating>
+                                                    </div>
+                                                </div>
+                                                <textarea class="form-control" formControlName="content"></textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- @for (orderDetailResponse of orderDetailResponses; track $index) {
+                                    @if(!orderDetailResponse.order.isCommented) {
+                                    @for (detailResponse of orderDetailResponse.detailResponses; track $index)
+                                    {
+                                    <div class="mt-3">
+                                        <div class="d-flex flex-row mb-3">
+                                            <img [src]=" detailResponse.productThumbnail" class="img-fluid"
+                                                style="width: 100px" alt="">
+                                            <div class="ms-3">
+                                                <h4 class="fw-bold">{{detailResponse.productName}}</h4>
+                                                <ngb-rating [formControl]="ratingControl" [max]="5"></ngb-rating>
+                                            </div>
+                                        </div>
+                                        <textarea class="form-control" [formControl]="commentControl"></textarea>
+                                    </div>
+                                    }
+                                    }
+                                    } -->
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                    <button type="button" class="btn btn-primary" (click)="comment()">Thêm nhận
+                                        xét</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 }
             </div>

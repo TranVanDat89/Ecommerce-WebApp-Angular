@@ -21,6 +21,7 @@ export class ProductService {
   private apiProductFavorites = `${environment.apiBaseUrl}/favorite-products`;
   private apiProductComments = `${environment.apiBaseUrl}/comments/all`;
   private apiComments = `${environment.apiBaseUrl}/comments`;
+  private apiCreateListComment = `${environment.apiBaseUrl}/comments/create-list-comment`;
   private http = inject(HttpClient);
   private httpUtilService = inject(HttpUtilService);
   private apiConfig = {
@@ -58,5 +59,8 @@ export class ProductService {
   }
   getCommentsByUserId(userId: string): Observable<ApiResponse<StorageResponse<CommentDTO[]>>> {
     return this.http.get<ApiResponse<StorageResponse<CommentDTO[]>>>(this.apiComments + `/user/${userId}`);
+  }
+  createListComment(comments: CommentDTO[]): Observable<ApiResponse<any>> {
+    return this.http.post<ApiResponse<any>>(this.apiCreateListComment, comments, this.apiConfig);
   }
 }
