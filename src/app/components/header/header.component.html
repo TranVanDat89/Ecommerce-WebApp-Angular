@@ -21,28 +21,41 @@
                     <ng-container>
                         <ng-container ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất" popoverTitle="User Actions"
                             triggers="click" [placement]="'auto'" container="body">
-                            <li class="nav-item position-relative me-2  w-content">
-                                <a href="" [routerLink]="['/orders']" class="nav-link text-white">Giỏ hàng <i
-                                        class="fa-solid fa-cart-shopping "></i></a>
-                                @if(cart?.cartItems?.length) {
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ cart?.cartItems?.length }}
-                                </span>
-                                }
+                            <li class="nav-item me-2">
+                                <a href="" [routerLink]="['/orders']" class="nav-link text-white">
+                                    <span class="me-2">Giỏ hàng</span>
+                                    <i class="fa-solid fa-cart-shopping position-relative">
+                                        @if(cart?.cartItems?.length) {
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ cart?.cartItems?.length }}
+                                        </span>
+                                        }
+                                    </i>
+                                </a>
                             </li>
-                            <li class="nav-item me-2 position-relative w-content">
-                                <a class="nav-link text-white" [ngbPopover]="popoverNotifications">Thông báo<i
-                                        class="fa-solid fa-bell ms-1"></i></a>
-                                @if(notifications?.length) {
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ notifications?.length }}
-                                </span>
-                                }
+                            <li class="nav-item me-3 ">
+                                <a style="cursor: pointer;" class="nav-link text-white"
+                                    [ngbPopover]="popoverNotifications">
+                                    <span class="me-2">Thông báo</span>
+                                    <i class="fa fa-bell position-relative">
+                                        @if(notifications?.length) {
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ notifications?.length }}
+                                        </span>
+                                        }
+                                    </i>
+                                </a>
                             </li>
                             <ng-template #popoverNotifications>
                                 <div class="popover-list">
+                                    @if(notifications?.length === 0) {
+                                    <div class="popover-item m-0 hover-notification">
+                                        <p class="m-0"><i class="fa-solid fa-circle-info me-2"></i>Bạn chưa có thông báo
+                                            nào!</p>
+                                    </div>
+                                    } @else {
                                     @for (notification of notifications; track $index) {
                                     <div class=" popover-item m-0 hover-notification"
                                         style="border-bottom: 1px solid #ccc">
@@ -51,6 +64,7 @@
                                         </p>
                                         <p class="m-0 fw-bold">{{notification.createdAt}}</p>
                                     </div>
+                                    }
                                     }
                                 </div>
                             </ng-template>

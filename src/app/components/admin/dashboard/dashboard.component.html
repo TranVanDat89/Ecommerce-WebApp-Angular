@@ -1,6 +1,20 @@
 <section id="dashboard" style="margin-top: 70px; margin-left: 20px; margin-bottom: 40px;">
     <div class="container-lg">
-        <h3>Tổng quan</h3>
+        <div class="d-flex flex-row w-content flex-start align-items-center mb-3">
+            <h3 class="m-0 me-2">Số liệu năm {{selectedYear}}</h3>
+            <div class="w-content">
+                <select [(ngModel)]="selectedYear" (change)="loadDataForYear(selectedYear)"
+                    class="form-select w-content">
+                    @for (year of years; track $index) {
+                    @if (year == 2020 || year == 2021 || year == 2022) {
+                    <option value="{{year}}" disabled>{{year}}</option>
+                    }@else {
+                    <option value="{{year}}">{{year}}</option>
+                    }
+                    }
+                </select>
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-xl-3 col-md-6 col-10 mb-3">
                 <div class="card p-0">
@@ -14,9 +28,9 @@
             </div>
             <div class="col-xl-3 col-md-6 col-10 mb-3">
                 <div class="card p-0">
-                    <h5 class="card-header"><i class="fa-solid fa-boxes-stacked me-2"></i>Số lượng sản phẩm</h5>
+                    <h5 class="card-header"><i class="fa-solid fa-coins me-2"></i>Tổng doanh thu</h5>
                     <div class="card-body">
-                        <h5 class="card-title">625 sản phẩm</h5>
+                        <h5 class="card-title">100,000,000 đ</h5>
                         <p class="text-danger">Giảm 5.5%<i class="fa-solid fa-arrow-trend-down ms-2"></i></p>
                         <a href="#" class="btn btn-primary">Chi tiết</a>
                     </div>
@@ -44,7 +58,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-sm-8 mt-3">
+            <div class="col-lg-8 col-sm-10 com-md-10 mt-3">
                 <div>
                     <h3>Doanh thu hàng tháng</h3>
                     <canvas baseChart [datasets]="columnChartData" [labels]="columnChartLabels"
@@ -53,7 +67,7 @@
                     </canvas>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-8 mt-3">
+            <div class="col-lg-4 col-sm-10 com-md-10 mt-3">
                 <div>
                     <h3>Tỉ lệ sản phẩm</h3>
                     <canvas baseChart [datasets]="pieChartData" [labels]="pieChartLabels" [options]="pieChartOptions"

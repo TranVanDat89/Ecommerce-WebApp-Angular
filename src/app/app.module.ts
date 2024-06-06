@@ -36,6 +36,7 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { CategoryComponent } from './components/admin/category/category.component';
 import { UpdateArticleComponent } from './components/admin/update-article/update-article.component';
+import { CommentComponent } from './components/admin/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { UpdateArticleComponent } from './components/admin/update-article/update
     ArticleDetailComponent,
     DashboardComponent,
     CategoryComponent,
-    UpdateArticleComponent
+    UpdateArticleComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

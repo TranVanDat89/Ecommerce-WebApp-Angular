@@ -19,6 +19,7 @@ import { OrderAdminComponent } from './components/admin/order-admin/order-admin.
 import { ProductAdminComponent } from './components/admin/product-admin/product-admin.component';
 import { CategoryComponent } from './components/admin/category/category.component';
 import { UpdateArticleComponent } from './components/admin/update-article/update-article.component';
+import { CommentComponent } from './components/admin/comment/comment.component';
 
 const routes: Routes = [
   {
@@ -100,6 +101,9 @@ const routes: Routes = [
       {
         path: "categories",
         component: CategoryComponent
+      }, {
+        path: "comments",
+        component: CommentComponent
       }
     ]
   }

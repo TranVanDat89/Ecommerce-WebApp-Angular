@@ -2,7 +2,7 @@
     <nav class="navbar fixed-top bg-dark navbar-expand-lg navbar-dark">
         <div class="container-fluid mx-5 py-2 px-0">
             <div>
-                <a href="" [routerLink]="['/admin']" class="navbar-brand">
+                <a href="" [routerLink]="['/admin/dashboard']" class="navbar-brand">
                     <span class="fw-bold text-white">AdminPanel</span>
                 </a>
                 <button (click)="toggleCollapse()" class="text-white bg-dark border-0" type="button">
@@ -17,26 +17,37 @@
                             <a style="cursor: pointer;" class="nav-link text-white" [ngbPopover]="popoverNotification">
                                 <span class="d-none d-lg-inline me-2">Thông báo</span>
                                 <i class="fa fa-bell position-relative">
+                                    @if(notifications?.length) {
                                     <span
-                                        class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
-                                        99+
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ notifications?.length }}
                                     </span>
+                                    }
                                 </i>
                             </a>
                         </li>
                         <ng-template #popoverNotification>
                             <div class="popover-list">
+                                @if(notifications?.length === 0) {
+                                <div class="popover-item m-0 hover-notification">
+                                    <p class="m-0"><i class="fa-solid fa-circle-info me-2"></i>Bạn chưa có thông báo
+                                        nào!</p>
+                                </div>
+                                } @else {
+                                @for (notification of notifications; track $index) {
                                 <div class=" popover-item m-0 hover-notification" style="border-bottom: 1px solid #ccc">
                                     <p class="m-0">
-                                        Đơn hàng #3457jhcge-djencn vừa được tạo bởi Trần Văn Đạt.
+                                        {{notification.message}}
                                     </p>
-                                    <p class="m-0 fw-bold">06/06/2024</p>
+                                    <p class="m-0 fw-bold">{{notification.createdAt}}</p>
                                 </div>
+                                }
+                                }
                             </div>
                         </ng-template>
                         <li class="nav-item me-2">
                             <a class="nav-link text-white w-content" [ngbPopover]="popoverContent">
-                                <span class="me-2 d-none d-lg-inline d-md-inline">Trần Văn Đạt</span>
+                                <span class="me-2 d-none d-lg-inline d-md-inline">{{userResponse?.fullName}}</span>
                                 <i class="fa-solid fa-caret-down d-none d-lg-inline d-md-inline"></i>
                                 <i class="fa-solid fa-user d-inline d-lg-none d-sm-none"></i>
                             </a>
@@ -122,6 +133,11 @@
                             </li>
                         </ul>
                     </div> -->
+                </li>
+                <li class="nav-item w-75 my-2">
+                    <a href="" [routerLink]="['/admin/comments']" (click)="enableActived(6)"
+                        [ngClass]="{ 'active': isActived === 6 }" class="nav-link text-white">
+                        <i class="fa-solid fa-comment me-2"></i>Bình luận</a>
                 </li>
             </ul>
         </div>
