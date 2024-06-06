@@ -64,3 +64,8 @@
 .routing {
     width: calc(100% - 240px);
 }
+
+.hover-notification:hover {
+    background-color: var(--bs-secondary);
+    color: #fff;
+}

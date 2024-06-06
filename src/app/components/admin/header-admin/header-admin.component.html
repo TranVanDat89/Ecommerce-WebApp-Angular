@@ -14,7 +14,7 @@
                     <ng-container ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất" popoverTitle="User Actions"
                         triggers="click" [placement]="'auto'" container="body">
                         <li class="nav-item me-3 ">
-                            <a href="" class="nav-link text-white">
+                            <a style="cursor: pointer;" class="nav-link text-white" [ngbPopover]="popoverNotification">
                                 <span class="d-none d-lg-inline me-2">Thông báo</span>
                                 <i class="fa fa-bell position-relative">
                                     <span
@@ -24,6 +24,16 @@
                                 </i>
                             </a>
                         </li>
+                        <ng-template #popoverNotification>
+                            <div class="popover-list">
+                                <div class=" popover-item m-0 hover-notification" style="border-bottom: 1px solid #ccc">
+                                    <p class="m-0">
+                                        Đơn hàng #3457jhcge-djencn vừa được tạo bởi Trần Văn Đạt.
+                                    </p>
+                                    <p class="m-0 fw-bold">06/06/2024</p>
+                                </div>
+                            </div>
+                        </ng-template>
                         <li class="nav-item me-2">
                             <a class="nav-link text-white w-content" [ngbPopover]="popoverContent">
                                 <span class="me-2 d-none d-lg-inline d-md-inline">Trần Văn Đạt</span>
@@ -87,7 +97,7 @@
                 <li class="nav-item w-75 my-2">
                     <a href="" [routerLink]="['/admin/categories']" (click)="enableActived(3)"
                         [ngClass]="{ 'active': isActived === 3 }" class="nav-link text-white">
-                        <i class="fa-solid fa-list me-2"></i>Danh mục sản phẩm</a>
+                        <i class="fa-solid fa-list me-2"></i>Danh mục sản phẩm & bài viết</a>
                 </li>
                 <li class="nav-item w-75 my-2">
                     <a href="" [routerLink]="['/admin/products']" (click)="enableActived(4)"

@@ -1,32 +1,101 @@
-<section id="categories-admin" style="margin-top: 70px; margin-right: 20px;">
+<section id="categories-admin" style="margin-top: 70px; margin-right: 10px;">
     <div class="container-lg">
-        <div class="d-flex justify-content-between">
-            <h3 class="m-0 p-0">Quản lý danh mục sản phẩm</h3>
-            <button type="button" class="btn btn-success">Thêm danh mục</button>
+        <div class="d-flex justify-content-between flex-column">
+            <h3 class="m-0 p-0 mt-3">Quản lý danh mục sản phẩm & bài viết</h3>
+            <div class="flex-start d-flex justify-content-between">
+                <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Thêm
+                    danh mục sản phẩm</button>
+                <button type="button" (click)="isArticleCategories()" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" class="btn btn-success ms-3 mt-3">Thêm danh mục bài viết</button>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="" [formGroup]="categoryForm" (ngSubmit)="createCategory()">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    @if(isProducts) {
+                                    <h5 class="modal-title" id="exampleModalLabel">Tạo danh mục sản phẩm</h5>
+                                    } @else {
+                                    <h5 class="modal-title" id="exampleModalLabel">Tạo danh mục bài viết</h5>
+                                    }
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-0">
+                                    <div class="row m-3">
+                                        <div class="form-group">
+                                            <label for="title" class="mb-2">Tên danh mục</label>
+                                            <input type="text" class="form-control" formControlName="category"
+                                                placeholder="Nhập danh mục...">
+                                            @if(categoryForm.controls['category'].invalid &&
+                                            (categoryForm.controls['category'].dirty ||
+                                            categoryForm.controls['category'].touched)) {
+                                            <p class="text-danger mt-2"
+                                                *ngIf="categoryForm.controls['category'].errors?.['required']">
+                                                Bắt buộc phải nhập danh mục</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                    <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">Thêm
+                                        danh mục</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row mt-3 ms-1">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Tên danh mục</th>
-                        <th>Số lượng sản phẩm</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for(category of categories; track $index) {
-                    <tr>
-                        <td>{{ category.name }}</td>
-                        <td>10</td>
-                        <td>
-                            <button class="btn btn-danger ms-2">
-                                Xóa danh mục
-                            </button>
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
+            <div class="col-lg-6">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Danh mục sản phẩm</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(category of categories; track $index) {
+                        <tr>
+                            <td>{{ category.name }}</td>
+                            <td>
+                                <button class="btn btn-danger ms-2">
+                                    Xóa danh mục
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-6">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Danh mục bài viết</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(category of articleCategories; track $index) {
+                        <tr>
+                            <td>{{ category.name }}</td>
+                            <td>
+                                <button class="btn btn-danger ms-2">
+                                    Xóa danh mục
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </section>
