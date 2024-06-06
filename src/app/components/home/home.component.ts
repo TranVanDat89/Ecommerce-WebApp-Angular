@@ -16,6 +16,8 @@ import { StorageResponse } from '../../responses/storage.response';
 export class HomeComponent implements OnInit {
   top4Product: Product[];
   comments: Comment[] | undefined;
+  itemsPerPage: number = 6;
+  currentPage: number = 1;
   constructor(private router: Router, private productService: ProductService) {
     this.top4Product = [];
   }

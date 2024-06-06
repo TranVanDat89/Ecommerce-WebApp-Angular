@@ -14,7 +14,8 @@
                     <ng-container ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất" popoverTitle="User Actions"
                         triggers="click" [placement]="'auto'" container="body">
                         <li class="nav-item me-3 ">
-                            <a style="cursor: pointer;" class="nav-link text-white" [ngbPopover]="popoverNotification">
+                            <a style="cursor: pointer;" class="nav-link text-white" popoverClass="notification-popover"
+                                [ngbPopover]="popoverNotification">
                                 <span class="d-none d-lg-inline me-2">Thông báo</span>
                                 <i class="fa fa-bell position-relative">
                                     @if(notifications?.length) {

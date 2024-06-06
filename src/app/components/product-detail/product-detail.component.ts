@@ -78,6 +78,8 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getCommentsByProductId(productId).subscribe({
       next: (apiResponse: ApiResponse<StorageResponse<Comment[]>>) => {
         this.comments = apiResponse.data.comments;
+        console.log(this.comments);
+
         if (this.comments?.length) {
           this.rating = this.comments?.reduce((sum, comment) => sum + comment.star, 0) / this.comments?.length
         }
@@ -88,7 +90,18 @@ export class ProductDetailComponent implements OnInit {
     })
   }
   getStarsArray(star: number): any[] {
-    return new Array(star);
+    return new Array(Math.floor(star));
+  }
+  getHalfStarArray(rating: number): number[] {
+    return (rating % 1) >= 0.5 ? [0] : [];
+  }
+
+  // Method to get empty stars array
+  getEmptyStarsArray(rating: number): number[] {
+    const fullStars = Math.floor(rating);
+    const halfStar = (rating % 1) >= 0.5 ? 1 : 0;
+    const emptyStars = 5 - fullStars - halfStar;
+    return Array(emptyStars).fill(0).map((_, index) => index);
   }
   increaseQuantity(): void {
     this.quantity++;

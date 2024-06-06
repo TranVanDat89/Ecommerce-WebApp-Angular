@@ -7,6 +7,7 @@ import { Article } from '../../../models/article';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ArticleDTO } from '../../../dtos/article/article.dto';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-article',
@@ -22,7 +23,7 @@ export class UpdateArticleComponent implements OnInit {
   imageFile?: File;
   height: string = '270px';
   articleCategories?: { id: string, name: string }[];
-  constructor(private articleService: ArticleService, private fb: FormBuilder) {
+  constructor(private articleService: ArticleService, private fb: FormBuilder, private toastr: ToastrService) {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
@@ -53,21 +54,14 @@ export class UpdateArticleComponent implements OnInit {
         imageFile: this.imageFile!,
         articleCategoryId: this.blogForm.get('category')?.value
       }
-      console.log(this.blogForm.get('content')?.value);
-      debugger
-      // const formData = new FormData();
-      // formData.append('title', this.blogForm.get('title')?.value);
-      // formData.append('category', this.blogForm.get('category')?.value);
-      // if (this.imageFile) {
-      //   formData.append('imageFile', this.imageFile);
-      // }
-      // formData.append('content', this.blogForm.get('content')?.value);
-      // console.log(formData.get('title'), formData.get('content'), formData.get('imageFile'), formData.get('category'));
       this.articleService.createArticle(articleDTO).subscribe({
         next: (apiResponse: ApiResponse<StorageResponse<Article>>) => {
           console.log(apiResponse);
+          this.toastr.success("Tạo bài viết thành công", "Thành công!");
+          this.blogForm.reset();
         },
         error: (error: HttpErrorResponse) => {
+          this.toastr.error("Tạo bài viết thất bại", "Thất bại!");
           console.error(error?.error?.message ?? '');
         }
       })

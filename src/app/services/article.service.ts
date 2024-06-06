@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { HttpUtilService } from "./http-util.service";
 import { environment } from "../environments/environment";
@@ -25,10 +25,6 @@ export class ArticleService {
     }
     constructor() {
     }
-
-    // createArticle(formData: FormData): Observable<ApiResponse<Article>> {
-    //     return this.http.post<ApiResponse<Article>>(this.apiArticleCreate, formData, this.apiConfig);
-    // }
     createArticle(articleDTO: ArticleDTO): Observable<ApiResponse<StorageResponse<Article>>> {
         console.log(articleDTO, "services");
         const formData = new FormData();
@@ -38,7 +34,7 @@ export class ArticleService {
             formData.append('imageFile', articleDTO.imageFile);
         }
         formData.append('content', articleDTO.content.trim());
-        return this.http.post<ApiResponse<StorageResponse<Article>>>(this.apiArticleCreate, formData, this.apiConfig);
+        return this.http.post<ApiResponse<StorageResponse<Article>>>(this.apiArticleCreate, formData);
     }
     getAllArticles(): Observable<ApiResponse<StorageResponse<Article[]>>> {
         return this.http.get<ApiResponse<StorageResponse<Article[]>>>(this.apiGetAllArticles);

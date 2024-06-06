@@ -59,7 +59,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                <button type="button" class="btn btn-primary">Thêm bài viết</button>
+                                <button type="submit" class="btn btn-primary" [disabled]="blogForm.invalid">Thêm bài
+                                    viết</button>
                             </div>
                         </div>
                     </form>

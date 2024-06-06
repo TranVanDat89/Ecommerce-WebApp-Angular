@@ -26,6 +26,7 @@ export class CategoryComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getCategories();
+    this.getAllArticleCategories();
   }
   isArticleCategories() {
     this.isProducts = false;

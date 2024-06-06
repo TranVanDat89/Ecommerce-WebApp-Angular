@@ -58,11 +58,11 @@
                             </div>
                             <div class="d-flex justify-content-between mt-3">
                                 <span class="fw-bold">Tổng tiền</span>
-                                <div>
+                                <div class="d-flex flex-column">
+                                    <span class="fw-bold flex-end">{{formatPrice(cart?.totalPrice)}}</span>
                                     <button class="btn btn-primary me-2" type="button" [disabled]="!isCartChanged"
                                         (click)="updateCart()">Cập nhật
                                         giỏ hàng</button>
-                                    <span class="fw-bold">{{formatPrice(cart?.totalPrice)}}</span>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                 <h3>Thông tin khách hàng</h3>
                 <div class="mb-3">
                     <div class="rounded p-3" style="background-color: #fff">
-                        <form [formGroup]="orderForm" (ngSubmit)="createOrder()">
+                        <form [formGroup]="orderForm" (onSubmit)="createOrder()">
                             <div class="mb-3">
                                 <label for="fullName" class="form-label">Họ và tên</label>
                                 <input type="text" class="form-control" formControlName="fullName"

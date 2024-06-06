@@ -12,6 +12,8 @@ import { StorageResponse } from '../../../responses/storage.response';
 })
 export class UserComponent implements OnInit {
   users?: UserResponse[];
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
   constructor(private userService: UserService) { }
   ngOnInit(): void {
     this.getAllUsers();

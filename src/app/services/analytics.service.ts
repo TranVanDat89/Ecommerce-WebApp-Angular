@@ -10,7 +10,7 @@ import { StorageResponse } from "../responses/storage.response";
     providedIn: 'root'
 })
 export class AnalyticsService {
-    private apiAdminAnalytics = `${environment.apiBaseUrl}/admin/analytics/`;
+    private apiAdminAnalytics = `${environment.apiBaseUrl}/admin/analytics`;
     private http = inject(HttpClient);
     private httpUtilService = inject(HttpUtilService);
 
@@ -21,10 +21,12 @@ export class AnalyticsService {
     }
 
     getAnalyticsProduct(): Observable<ApiResponse<StorageResponse<Object>>> {
-        return this.http.get<ApiResponse<StorageResponse<Object>>>(this.apiAdminAnalytics + 'products')
+        return this.http.get<ApiResponse<StorageResponse<Object>>>(this.apiAdminAnalytics + '/products')
     }
     getOutComeByMonth(year: number): Observable<ApiResponse<StorageResponse<Object>>> {
-        return this.http.get<ApiResponse<StorageResponse<Object>>>(this.apiAdminAnalytics + `outcome-by-month?year=${year}`)
-
+        return this.http.get<ApiResponse<StorageResponse<Object>>>(this.apiAdminAnalytics + `/outcome-by-month?year=${year}`)
+    }
+    getAnalytics(year: number): Observable<ApiResponse<StorageResponse<[]>>> {
+        return this.http.get<ApiResponse<StorageResponse<[]>>>(this.apiAdminAnalytics + `?year=${year}`)
     }
 }

@@ -56,3 +56,12 @@
     background-color: var(--bs-secondary);
     color: #fff;
 }
+
+::ng-deep .notification-popover .popover-body .popover-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+::ng-deep .notification-popover {
+    min-width: 380px;
+}

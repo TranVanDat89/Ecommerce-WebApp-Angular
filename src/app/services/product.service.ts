@@ -19,7 +19,7 @@ export class ProductService {
   private apiProductById = `${environment.apiBaseUrl}/products/product-detail`;
   private apiProductGetTop4 = `${environment.apiBaseUrl}/products/get-top-4`;
   private apiProductFavorites = `${environment.apiBaseUrl}/favorite-products`;
-  private apiProductComments = `${environment.apiBaseUrl}/comments/all`;
+  private apiProductComments = `${environment.apiBaseUrl}/comments/all/star-greater-than-3`;
   private apiComments = `${environment.apiBaseUrl}/comments`;
   private apiCreateListComment = `${environment.apiBaseUrl}/comments/create-list-comment`;
   private http = inject(HttpClient);
@@ -50,6 +50,9 @@ export class ProductService {
   }
   getAllComments(): Observable<ApiResponse<StorageResponse<Comment[]>>> {
     return this.http.get<ApiResponse<StorageResponse<Comment[]>>>(this.apiProductComments);
+  }
+  getAllCommentsForAdmin(): Observable<ApiResponse<StorageResponse<Comment[]>>> {
+    return this.http.get<ApiResponse<StorageResponse<Comment[]>>>(this.apiComments + '/all');
   }
   getCommentsByProductId(productId: string): Observable<ApiResponse<StorageResponse<Comment[]>>> {
     return this.http.get<ApiResponse<StorageResponse<Comment[]>>>(this.apiComments + `?productId=${productId}`);

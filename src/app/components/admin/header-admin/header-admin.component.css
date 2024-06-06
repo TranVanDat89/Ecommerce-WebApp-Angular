@@ -69,3 +69,24 @@
     background-color: var(--bs-secondary);
     color: #fff;
 }
+
+::ng-deep .notification-popover .popover-body .popover-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+::ng-deep .notification-popover {
+    min-width: 380px;
+}
+
+/* ::ng-deep #sidebar {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 250ms ease-in, visibility 0ms ease-in 250ms;
+}
+
+::ng-deep #sidebar.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 250ms ease-in, visibility 0ms ease-in 0ms;
+} */

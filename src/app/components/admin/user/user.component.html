@@ -1,4 +1,4 @@
-<section id="user-management" style="margin-top: 70px">
+<section id="user-management" style="margin-top: 70px; margin-right: 10px;">
     <div class="container-lg">
         <h3 class="m-0 p-0">Quản lý người dùng</h3>
         <div class="row mt-3 ms-1">
@@ -7,28 +7,29 @@
                     <tr>
                         <th>Full Name</th>
                         <th>Phone</th>
-                        <th>Address</th>
-                        <th>State</th>
-                        <th>Role</th>
+                        <th class="display-none">Address</th>
+                        <th class="display-none">State</th>
+                        <th class="display-none">Role</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @for(user of users; track user.id) {
+                    @for(user of users! | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; track
+                    user.id) {
                     <tr>
                         <td>{{ user.fullName }}</td>
                         <td>{{ user.phoneNumber }}</td>
-                        <td>{{ user.address }}</td>
-                        <td>{{ user.active ? 'Active' : 'Inactive' }}</td>
-                        <td>{{ user.role }}</td>
+                        <td class="display-none">{{ user.address }}</td>
+                        <td class="display-none">{{ user.active ? 'Active' : 'Inactive' }}</td>
+                        <td class="display-none">{{ user.role }}</td>
                         <td>
-                            <button class="btn" [ngClass]="{
+                            <button class="btn ms-2 mt-2" [ngClass]="{
                                             'btn-danger': user.active,
                                             'btn-success': !user.active
                                           }">
                                 {{ user.active? 'Block User' : 'Unblock User' }}
                             </button>
-                            <button class="btn btn-primary ms-2">
+                            <button class="btn btn-primary ms-2 m-2">
                                 Reset Password
                             </button>
                         </td>
@@ -36,6 +37,10 @@
                     }
                 </tbody>
             </table>
+            <div class="row mt-3 mx-auto text-center">
+                <!-- ngx-pagination library -->
+                <pagination-controls (pageChange)=" currentPage=$event"></pagination-controls>
+            </div>
         </div>
     </div>
 </section>

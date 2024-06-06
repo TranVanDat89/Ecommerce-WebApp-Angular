@@ -39,10 +39,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getDataForPieChart();
     this.getDataForColumnChart(this.selectedYear);
+    this.getAnalytics(this.selectedYear);
   }
   loadDataForYear(selectedYear: number) {
     this.getDataForColumnChart(this.selectedYear);
     this.getDataForPieChart();
+    this.getAnalytics(selectedYear);
   }
   getDataForPieChart() {
     this.analyticsService.getAnalyticsProduct().subscribe({
@@ -71,5 +73,15 @@ export class DashboardComponent implements OnInit {
         console.error(error?.error?.message ?? '');
       }
     });
+  }
+  getAnalytics(selectedYear: number) {
+    this.analyticsService.getAnalytics(selectedYear).subscribe({
+      next: (apiResponse: ApiResponse<StorageResponse<[]>>) => {
+        console.log(apiResponse.data.result);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? '');
+      }
+    })
   }
 }
