@@ -2,6 +2,17 @@
 <section id="order-detail" style="padding: 90px 0 40px 0;">
     <div class="container-lg">
         <div class="row">
+            @if(orderDetailResponses?.length === 0) {
+            <div class="d-flex justify-content-center flex-column w-100 text-center mt-5">
+                <div>
+                    <i class="fa-solid fa-cart-shopping text-muted" style="font-size: 80px;"></i>
+                </div>
+                <h2 class=" text-center mt-3">Chưa có sản phẩm nào trong lịch sử mua hàng của bạn.</h2>
+                <p class="text-muted" style="font-size: 20px;">Mua sắm tại WheyStation ngay thôi!</p>
+                <a href="" [routerLink]=" ['/products']" class="btn btn-primary mx-auto mt-2 w-content">Xem toàn bộ
+                    sản phẩm</a>
+            </div>
+            }
             @for (orderDetailResponse of orderDetailResponses! | paginate: { itemsPerPage: itemsPerPage, currentPage:
             currentPage }; track $index) {
             <div class="col-lg-6">
@@ -166,9 +177,11 @@
             </div>
             }
         </div>
+        @if(orderDetailResponses?.length! > 0) {
         <div class="row mt-3 mx-auto text-center">
             <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
         </div>
+        }
     </div>
 </section>
 <app-footer></app-footer>
