@@ -76,7 +76,7 @@
 }
 
 ::ng-deep .notification-popover {
-    min-width: 380px;
+    min-width: 50%;
 }
 
 /* ::ng-deep #sidebar {

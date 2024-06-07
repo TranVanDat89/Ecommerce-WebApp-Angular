@@ -1,34 +1,39 @@
 <section id="user-management" style="margin-top: 70px; margin-right: 10px;">
     <div class="container-lg">
-        <h3 class="m-0 p-0">Quản lý người dùng</h3>
-        <div class="row mt-3 ms-1">
-            <table class="table table-striped">
-                <thead>
+        <div class="d-flex flex-row w-content align-items-center ms-1 mb-3 w-100">
+            <h3 class="m-0 me-2 flex-grow-1">Quản lý người dùng</h3>
+        </div>
+        <div class="row mt-3 ms-1 mb-3">
+            <table id="userTable" datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger"
+                class="table responsive w-100 nowrap table-bordered table-striped table-hover mt-4 mb-3">
+                <thead class="table-dark mt-3">
                     <tr>
-                        <th>Full Name</th>
-                        <th>Phone</th>
-                        <th class="display-none">Address</th>
-                        <th class="display-none">State</th>
-                        <th class="display-none">Role</th>
-                        <th>Action</th>
+                        <th class="text-start">Họ và tên</th>
+                        <th class="text-start">Số điện thoại</th>
+                        <th class="">Địa chỉ</th>
+                        <th class="text-start">Ngày sinh</th>
+                        <th class="">Trạng thái</th>
+                        <th class="">Vai trò</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @for(user of users! | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; track
-                    user.id) {
+                    @for(user of users!; track user.id) {
+                    @if(user.role !== 'ADMIN') {
                     <tr>
-                        <td>{{ user.fullName }}</td>
-                        <td>{{ user.phoneNumber }}</td>
-                        <td class="display-none">{{ user.address }}</td>
-                        <td class="display-none">{{ user.active ? 'Active' : 'Inactive' }}</td>
-                        <td class="display-none">{{ user.role }}</td>
-                        <td>
+                        <td class="fw-bold">{{ user.fullName }}</td>
+                        <td class="text-start">{{ user.phoneNumber }}</td>
+                        <td class="">{{ user.address }}</td>
+                        <td class="text-start">{{ user.dateOfBirth }}</td>
+                        <td class="">{{ user.active ? 'Active' : 'Inactive' }}</td>
+                        <td class="">{{ user.role }}</td>
+                        <td class="text-center">
                             <!-- <button class="btn ms-2 mt-2" [ngClass]="{
-                                            'btn-danger': user.active,
-                                            'btn-success': !user.active
-                                          }">
-                                {{ user.active? 'Block User' : 'Unblock User' }}
-                            </button> -->
+                                                    'btn-danger': user.active,
+                                                    'btn-success': !user.active
+                                                  }">
+                                        {{ user.active? 'Block User' : 'Unblock User' }}
+                                    </button> -->
                             <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Block người dùng"><i class="fa-solid fa-lock"></i></button>
                             <button class="btn btn-primary ms-2 m-2" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -38,12 +43,9 @@
                         </td>
                     </tr>
                     }
+                    }
                 </tbody>
             </table>
-            <div class="row mt-3 mx-auto text-center">
-                <!-- ngx-pagination library -->
-                <pagination-controls (pageChange)=" currentPage=$event"></pagination-controls>
-            </div>
         </div>
     </div>
 </section>

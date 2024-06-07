@@ -1,5 +1,45 @@
+::ng-deep #userTable_wrapper .dt-buttons button {
+    background-color: #0d6efd;
+    color: #fff;
+    margin-left: 5px;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+::ng-deep #userTable_wrapper .dt-search,
+::ng-deep #userTable_wrapper .dt-paging {
+    float: right;
+}
+
+::ng-deep #userTable_wrapper .dt-length,
+::ng-deep #userTable_wrapper .dt-search,
+::ng-deep #userTable_wrapper .dt-info,
+::ng-deep #userTable_wrapper .dt-paging {
+    width: max-content !important;
+    display: inline !important;
+}
+
+::ng-deep #userTable_wrapper .dt-buttons,
+::ng-deep #userTable_wrapper .dt-paging .pagination {
+    width: max-content !important;
+}
+
 @media (max-width: 767px) {
     .display-none {
         display: none;
+    }
+
+    ::ng-deep #userTable_wrapper .dt-buttons,
+    ::ng-deep #userTable_wrapper .dt-search,
+    ::ng-deep #userTable_wrapper .dt-paging {
+        float: left;
+    }
+
+    #userTable {
+        width: inherit;
+        margin-top: 10px;
     }
 }

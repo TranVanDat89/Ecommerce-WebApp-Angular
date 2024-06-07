@@ -37,6 +37,7 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
 import { CategoryComponent } from './components/admin/category/category.component';
 import { UpdateArticleComponent } from './components/admin/update-article/update-article.component';
 import { CommentComponent } from './components/admin/comment/comment.component';
+import { DataTableDirective, DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { CommentComponent } from './components/admin/comment/comment.component';
     RichTextEditorModule, // required animations module
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    BaseChartDirective
+    BaseChartDirective,
+    DataTablesModule
   ],
   providers: [
     {
