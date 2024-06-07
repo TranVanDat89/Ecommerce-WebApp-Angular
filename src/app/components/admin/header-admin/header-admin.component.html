@@ -87,8 +87,8 @@
         </div>
     </nav>
 </header>
-<div class="container-fluid m-0 p-0 d-flex">
-    <aside id="sidebar" [ngbCollapse]="isCollapsed" class="w-content m-0">
+<div class="container-fluid m-0 p-0 d-flex" style="min-height: calc(100vh - 82px); margin-bottom: -83px;">
+    <aside id="sidebar" [ngClass]="{ 'collapsed-sidebar': isCollapsed }" [ngbCollapse]="isCollapsed" class=" m-0">
         <div class="">
             <ul class="nav navbar navbar-collapse nav-pills flex-column">
                 <li class="nav-item w-75 my-2">
@@ -143,7 +143,7 @@
             </ul>
         </div>
     </aside>
-    <div class="routing mt-2" [ngClass]="{ 'w-100': isCollapsed }">
+    <div class="mt-2 w-100">
         <router-outlet></router-outlet>
     </div>
 </div>

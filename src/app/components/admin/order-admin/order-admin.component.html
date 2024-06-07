@@ -1,6 +1,42 @@
 <section id="order-admin" style="margin-top: 70px; margin-right: 10px;">
     <div class="container-lg ">
-        <h3 class="m-0 p-0">Quản lý đơn hàng</h3>
+        <div class="d-flex flex-row w-content flex-start align-items-center mb-3">
+            <h3 class="m-0 me-2">Quản lý đơn hàng <br> Số liệu năm {{selectedYear}}</h3>
+            <div class="w-content">
+                <select [(ngModel)]="selectedYear" (change)="loadDataForYear(selectedYear)"
+                    class="form-select w-content">
+                    @for (year of years; track $index) {
+                    @if (year < 2023) { <option value="{{year}}" disabled>{{year}}</option>
+                        }@else {
+                        <option value="{{year}}">{{year}}</option>
+                        }
+                        }
+                </select>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-4 col-md-6 col-10 mb-3">
+                <div class="card p-0">
+                    <h5 class="card-header bg-success text-white"><i class="fa-solid fa-thumbs-up me-2"></i>Số lượng đơn
+                        hàng thành
+                        công</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">15,200 đơn hàng</h5>
+                        <p class="text-danger">Giảm 12.5%<i class="fa-solid fa-arrow-trend-down ms-2"></i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-10 mb-3">
+                <div class="card p-0">
+                    <h5 class="card-header bg-danger text-white"><i class="fa-solid fa-thumbs-down me-2"></i>Số lượng
+                        đơn hàng hoàn trả</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">12,200 đơn hàng</h5>
+                        <p class="text-danger">Giảm 5.5%<i class="fa-solid fa-arrow-trend-down ms-2"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row mt-3 ms-1">
             <table class="table table-striped">
                 <thead>
@@ -26,9 +62,13 @@
                             </select>
                         </td>
                         <td>
-                            <button class="btn btn-primary">Xem chi tiết</button>
-                            <button class="btn btn-success ms-3">Xuất hóa đơn</button>
-                            <button class="btn btn-warning ms-3 text-white">Cập nhật</button>
+                            <button class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
+                            <button class="btn btn-success ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Xuất hóa đơn"><i class="fa-solid fa-file-pdf"></i></button>
+                            <button class="btn btn-warning ms-3 text-white" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Cập nhật đơn"><i
+                                    class="fa-solid fa-file-pen"></i></button>
                         </td>
                     </tr>
                 </tbody>

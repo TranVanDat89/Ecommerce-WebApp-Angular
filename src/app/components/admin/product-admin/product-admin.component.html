@@ -1,8 +1,60 @@
 <section id="categories-admin" style="margin-top: 70px">
     <div class="container-lg mt-3">
-        <div class="d-flex justify-content-between">
-            <h3 class="m-0 p-0">Quản lý sản phẩm</h3>
-            <button type="button" class="btn btn-success">Thêm sản phẩm</button>
+        <div class="d-flex flex-row w-content flex-start align-items-center mb-3">
+            <h3 class="m-0 me-2">Quản lý sản phẩm <br> Số liệu năm {{selectedYear}}</h3>
+            <div class="w-content">
+                <select [(ngModel)]="selectedYear" (change)="loadDataForYear(selectedYear)"
+                    class="form-select w-content">
+                    @for (year of years; track $index) {
+                    @if (year < 2023) { <option value="{{year}}" disabled>{{year}}</option>
+                        }@else {
+                        <option value="{{year}}">{{year}}</option>
+                        }
+                        }
+                </select>
+            </div>
+            <div class="ms-2">
+                <button class="btn btn-success">Thêm sản phẩm<i class="fa-solid fa-circle-plus ms-2"></i></button>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-4 col-md-6 col-10 mb-3">
+                <div class="card p-0">
+                    <h5 class="card-header bg-success text-white"><i class="fa-solid fa-fire me-2"></i>Sản phẩm bán
+                        chạy nhất</h5>
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="w-25 me-3">
+                                <img src="../../../../assets/intro-image.jpg" class="img-fluid" alt="">
+                            </div>
+                            <div>
+                                <p class="card-title fw-bold">Optimum Nutrition Gold Standard 100% Whey Protein Powder
+                                </p>
+                                <p>Số lượng bán ra: 25,000 sản phẩm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-10 mb-3">
+                <div class="card p-0">
+                    <h5 class="card-header bg-danger text-white"><i class="fa-solid fa-face-frown me-2"></i>Sản phẩm bị
+                        đánh
+                        giá tệ nhất</h5>
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="w-25 me-3">
+                                <img src="../../../../assets/intro-image.jpg" class="img-fluid" alt="">
+                            </div>
+                            <div>
+                                <p class="card-title fw-bold">Optimum Nutrition Gold Standard 100% Whey Protein Powder
+                                </p>
+                                <p>Đánh giá trung bình: 1/5 sao</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row mt-3 ms-1">
             <div class="row">
@@ -21,12 +73,14 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text text--shorten">{{product.productDetail.introduction}}</p>
-                            <a href="" class="btn btn-warning mt-2 text-white">Sửa
-                                sản phẩm</a>
-                            <a href="" class=" btn btn-danger mt-2 ms-2">Xóa
-                                sản phẩm</a>
-                            <a href="" class="btn btn-primary mt-2">
-                                Upload ảnh
+                            <a href="" class="btn btn-warning mt-2 text-white" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Sửa sản phẩm"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="" class=" btn btn-danger mt-2 ms-2" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Xóa sản phẩm"><i class="fa-solid fa-trash-can"></i></a>
+                            <a href="" class="btn btn-primary mt-2 ms-2" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Upload ảnh">
+                                <i class="fa-solid fa-image"></i>
                             </a>
                         </div>
                     </div>

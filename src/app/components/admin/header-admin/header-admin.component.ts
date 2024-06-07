@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { UserResponse } from '../../../responses/user.response';
 import { UserService } from '../../../services/user.service';
 import { Notification } from '../../../models/notification';
@@ -13,10 +13,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class HeaderAdminComponent implements OnInit {
   notifications?: Notification[];
-  isCollapsed: boolean = false;
+  isCollapsed: boolean = true;
   isActived: number = 0;
   userResponse?: UserResponse | null;
   constructor(private userService: UserService) { }
+
   ngOnInit(): void {
     this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
     this.getAllNotifications();

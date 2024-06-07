@@ -32,3 +32,8 @@
 .w-content {
     width: max-content;
 }
+
+html,
+body {
+    min-height: 100%;
+}

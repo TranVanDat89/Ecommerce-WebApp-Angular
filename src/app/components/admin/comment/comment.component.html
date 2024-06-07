@@ -1,6 +1,19 @@
 <section id="comment-management" style="margin-top: 70px; margin-right: 10px;">
     <div class="container-lg">
-        <h3 class="m-0 p-0">Quản lý bình luận</h3>
+        <div class="d-flex flex-row w-content flex-start align-items-center mb-3">
+            <h3 class="m-0 me-2">Quản lý đánh giá <br> Số liệu năm {{selectedYear}}</h3>
+            <div class="w-content">
+                <select [(ngModel)]="selectedYear" (change)="loadDataForYear(selectedYear)"
+                    class="form-select w-content">
+                    @for (year of years; track $index) {
+                    @if (year < 2023) { <option value="{{year}}" disabled>{{year}}</option>
+                        }@else {
+                        <option value="{{year}}">{{year}}</option>
+                        }
+                        }
+                </select>
+            </div>
+        </div>
         <div class="row justify-content-center my-2">
             <div class="col-lg-8">
                 <div class="list-group">
@@ -27,6 +40,15 @@
                 <div class="row mt-3 mx-auto text-center">
                     <!-- ngx-pagination library -->
                     <pagination-controls (pageChange)=" currentPage=$event"></pagination-controls>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div>
+                    <h3>Tỉ lệ đánh giá</h3>
+                    <canvas baseChart [datasets]="pieChartData" [labels]="pieChartLabels" [options]="pieChartOptions"
+                        [plugins]="pieChartPlugins" [legend]="pieChartLegend" [type]="pieChartType"
+                        style="width: 200px; height: 200px;">
+                    </canvas>
                 </div>
             </div>
         </div>

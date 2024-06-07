@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-between">
             <h3 class="m-0 p-0">Quản lý bài viết</h3>
             <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Thêm bài
-                viết</button>
+                viết<i class="fa-solid fa-circle-plus ms-2"></i></button>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -80,13 +80,16 @@
                                     alt="...">
                             </div>
                             <div class="card-body p-0 col-8">
-                                <div class="w-100">
+                                <div class="w-100 py-2">
                                     <h5 class="card-title m-0" style="text-wrap: balance;">{{article.title}}</h5>
                                     <p class="text-primary m-0 text-uppercase fw-bold">{{article.category.name}}</p>
                                     <p>{{article.createdAt}}</p>
                                     <div>
-                                        <button class="btn btn-primary">Sửa bài viết</button>
-                                        <button class="btn btn-danger ms-3">Xóa bài viết</button>
+                                        <button class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Sửa bài viết"><i class="fa-solid fa-gear"></i></button>
+                                        <button class="btn btn-danger ms-2" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Xóa bài viết"><i
+                                                class="fa-solid fa-trash-can"></i></button>
                                     </div>
                                 </div>
                             </div>

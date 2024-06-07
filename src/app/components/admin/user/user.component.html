@@ -23,14 +23,17 @@
                         <td class="display-none">{{ user.active ? 'Active' : 'Inactive' }}</td>
                         <td class="display-none">{{ user.role }}</td>
                         <td>
-                            <button class="btn ms-2 mt-2" [ngClass]="{
+                            <!-- <button class="btn ms-2 mt-2" [ngClass]="{
                                             'btn-danger': user.active,
                                             'btn-success': !user.active
                                           }">
                                 {{ user.active? 'Block User' : 'Unblock User' }}
-                            </button>
-                            <button class="btn btn-primary ms-2 m-2">
-                                Reset Password
+                            </button> -->
+                            <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Block người dùng"><i class="fa-solid fa-lock"></i></button>
+                            <button class="btn btn-primary ms-2 m-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Reset mật khẩu">
+                                <i class="fa-solid fa-gear"></i>
                             </button>
                         </td>
                     </tr>

@@ -61,9 +61,9 @@
     /* Text color on hover */
 }
 
-.routing {
+/* .routing {
     width: calc(100% - 240px);
-}
+} */
 
 .hover-notification:hover {
     background-color: var(--bs-secondary);
@@ -90,3 +90,32 @@
     opacity: 1;
     transition: opacity 250ms ease-in, visibility 0ms ease-in 0ms;
 } */
+
+
+#sidebar {
+    width: 250px;
+    /* Adjust the width as needed */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #343a40;
+    /* Background color */
+    z-index: 1000;
+    /* Ensure the sidebar is on top */
+    transition: transform 0.3s ease;
+    /* Smooth transition for opening/closing */
+}
+
+.collapsed-sidebar {
+    transform: translateX(-100%);
+    /* Hide the sidebar when collapsed */
+}
+
+.open-sidebar.routing {
+    width: calc(100% - 240px);
+}
+
+.open-sidebar#sidebar {
+    z-index: none;
+}

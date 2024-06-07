@@ -6,7 +6,7 @@
                 <select [(ngModel)]="selectedYear" (change)="loadDataForYear(selectedYear)"
                     class="form-select w-content">
                     @for (year of years; track $index) {
-                    @if (year == 2020 || year == 2021 || year == 2022) {
+                    @if (year < 2023) {
                     <option value="{{year}}" disabled>{{year}}</option>
                     }@else {
                     <option value="{{year}}">{{year}}</option>

@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './order-admin.component.css'
 })
 export class OrderAdminComponent {
+  selectedYear: number = new Date().getFullYear();
+  currentYear: number = new Date().getFullYear();
+  years: number[] = Array.from({ length: this.currentYear - 2020 + 1 }, (_, i) => 2020 + i);
 
+  loadDataForYear(selectedYear: number) {
+
+  }
 }
