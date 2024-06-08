@@ -15,16 +15,14 @@ import { UserResponse } from '../../responses/user.response';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  userResponse?: UserResponse
+  userResponse?: UserResponse;
+  isSummited: boolean = false;
   constructor(private router: Router, private userService: UserService, private fb: FormBuilder, private tokenService: TokenService) {
     this.loginForm = this.fb.group({
       phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^\d+$/)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
       rememberMe: [true]
     })
-  }
-  registerAccount() {
-    this.router.navigate(["/register"]);
   }
   login() {
     if (this.loginForm.valid) {
@@ -75,5 +73,7 @@ export class LoginComponent {
         }
       })
     }
+  }
+  onCodeCompleted(token: string) {
   }
 }

@@ -50,10 +50,11 @@ export class RegisterComponent {
 
       this.userService.register(registerDTO).subscribe({
         next: (apiResponse: ApiResponse<UserResponse>) => {
-          const confirmation = window.confirm('Đăng ký thành công, mời bạn đăng nhập. Bấm "OK" để chuyển đến trang đăng nhập.');
-          if (confirmation) {
-            this.router.navigate(['/login']);
-          }
+          // const confirmation = window.confirm('Đăng ký thành công, mời bạn đăng nhập. Bấm "OK" để chuyển đến trang đăng nhập.');
+          // if (confirmation) {
+          //   this.router.navigate(['/login']);
+          // }
+          this.router.navigate(['/activate-account']);
         },
         error: (error: HttpErrorResponse) => {
           console.error(error?.error?.message ?? 'An error occurred during registration');

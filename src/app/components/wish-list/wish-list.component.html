@@ -32,8 +32,10 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ fav.product.name }}</h5>
                   <p class="card-text text--shorten">{{fav.product.productDetail.introduction}}</p>
-                  <a href="" [routerLink]="['/products/product-detail', fav.product.id]"
-                    class="btn btn-primary mt-2">Chi tiết sản phẩm</a>
+                  <a data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết sản phẩm" href=""
+                    [routerLink]="['/products/product-detail', fav.product.id]" class="btn btn-primary mt-2"><i
+                      class="fa-solid fa-circle-info"></i></a>
+                  <a href="" class="btn btn-danger mt-2 ms-2"><i class="fa-solid fa-trash-can"></i></a>
                 </div>
               </div>
             </div>

@@ -23,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
     "@syncfusion/ej2-angular-richtexteditor": "^25.2.6",
+    "angular-code-input": "^2.0.0",
     "angular-datatables": "^17.1.0",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.3",

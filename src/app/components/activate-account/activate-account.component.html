@@ -1,0 +1,39 @@
+<app-header></app-header>
+<section id="register-page" style="padding: 90px 0 40px 0;">
+    <div class="container-lg">
+        <div class="row w-100">
+            @if(submitted) {
+            @if(isOkay) {
+            <div class="col-lg-4 mx-auto my-5">
+                <div class="activation-message text-center">
+                    <h2>Kích hoạt tài khoản thành công!</h2>
+                    <p>Tài khoản của bạn đã được kích hoạt, bạn có thể sử dụng tài khoản này để mua sắm tại cửa hàng của
+                        chúng tôi.</p>
+                    <button class=" btn btn-primary" (click)="redirectToLogin()">Go to Login</button>
+                </div>
+            </div>
+            } @else {
+            <div class="col-lg-4 mx-auto my-5">
+                <div class="activation-error text-center">
+                    <h2>Kích hoạt tài khoản thất bại!</h2>
+                    <p>{{ message }}</p>
+                    <button class="btn btn-primary" (click)="submitted = false">Try again</button>
+                </div>
+            </div>
+            }
+            } @else {
+            <div class="col-lg-4 mx-auto my-5">
+                <div class="text-center w-100" style="width: 400px;">
+                    <h2>Nhập mã OTP</h2>
+                    <p>Mã OTP sẽ được gửi đến số điện thoại bạn đăng ký và có hiệu lực trong vòng 1 ngày.</p>
+                    <code-input [isCodeHidden]="false" [codeLength]="6" [code]="'number'"
+                        (codeCompleted)="onCodeCompleted($event)">
+                    </code-input>
+                    <button class="btn btn-primary mt-3" (click)="redirectToLogin()">Go to Login</button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

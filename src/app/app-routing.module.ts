@@ -20,6 +20,8 @@ import { ProductAdminComponent } from './components/admin/product-admin/product-
 import { CategoryComponent } from './components/admin/category/category.component';
 import { UpdateArticleComponent } from './components/admin/update-article/update-article.component';
 import { CommentComponent } from './components/admin/comment/comment.component';
+import { MyCommentComponent } from './components/my-comment/my-comment.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,9 @@ const routes: Routes = [
   {
     path: 'articles/article-detail/:articleId',
     component: ArticleDetailComponent
+  }, {
+    path: 'comments/my-comments/:userId',
+    component: MyCommentComponent
   },
   {
     path: "products",
@@ -56,6 +61,9 @@ const routes: Routes = [
   {
     path: "register",
     component: RegisterComponent
+  }, {
+    path: "activate-account",
+    component: ActivateAccountComponent
   },
   {
     path: "product-detail",

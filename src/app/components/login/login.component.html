@@ -39,7 +39,58 @@
                                         id="remember">
                                     <label class="form-check-label text-start" for="remember">Ghi nhớ đăng nhập</label>
                                 </span>
-                                <span><a href="#" class="">Quên mật khẩu</a></span>
+                                <span>
+                                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
+                                        class="btn btn-link p-0">Quên mật
+                                        khẩu</button>
+                                    <!-- Modal forgot password -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <form action="">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Tạo mật khẩu mới
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-group my-2">
+                                                            <label for="password" class="mb-2">Mật khẩu</label>
+                                                            <input type="password" formControlName="password"
+                                                                class="form-control" placeholder="Nhập mật khẩu...">
+                                                        </div>
+                                                        <div class="form-group my-2">
+                                                            <label for="retype-password" class="mb-2">Gõ lại mật
+                                                                khẩu</label>
+                                                            <input type="password" formControlName="retype-password"
+                                                                class="form-control" placeholder="Gõ lại mật khẩu...">
+                                                        </div>
+                                                        <div class="w-100" style="width: 400px;">
+                                                            <p>Mã OTP sẽ được gửi đến số điện thoại bạn đăng ký và
+                                                                có
+                                                                hiệu
+                                                                lực trong vòng 1 tiếng.</p>
+                                                            <code-input [isCodeHidden]="false" [codeLength]="6"
+                                                                [code]="'number'"
+                                                                (codeCompleted)="onCodeCompleted($event)">
+                                                            </code-input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-primary">Nhận mã
+                                                            OTP</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Hủy</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            [disabled]="!isSummited">Xác nhận</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </span>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center my-3">
@@ -47,7 +98,7 @@
                                 nhập</button>
                         </div>
                         <div class="d-flex justify-content-center my-3">
-                            Bạn chưa đăng ký?<span><a href="" (click)="registerAccount()" class="ms-2">Tạo tài
+                            Bạn chưa đăng ký?<span><a [routerLink]="['/register']" class="ms-2">Tạo tài
                                     khoản</a></span>
                         </div>
                     </div>

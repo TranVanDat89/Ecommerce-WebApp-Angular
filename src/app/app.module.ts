@@ -38,6 +38,9 @@ import { CategoryComponent } from './components/admin/category/category.componen
 import { UpdateArticleComponent } from './components/admin/update-article/update-article.component';
 import { CommentComponent } from './components/admin/comment/comment.component';
 import { DataTableDirective, DataTablesModule } from 'angular-datatables';
+import { MyCommentComponent } from './components/my-comment/my-comment.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { CodeInputModule } from 'angular-code-input';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,9 @@ import { DataTableDirective, DataTablesModule } from 'angular-datatables';
     DashboardComponent,
     CategoryComponent,
     UpdateArticleComponent,
-    CommentComponent
+    CommentComponent,
+    MyCommentComponent,
+    ActivateAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,8 @@ import { DataTableDirective, DataTablesModule } from 'angular-datatables';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     BaseChartDirective,
-    DataTablesModule
+    DataTablesModule,
+    CodeInputModule
   ],
   providers: [
     {

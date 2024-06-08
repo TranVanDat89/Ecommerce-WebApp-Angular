@@ -45,18 +45,20 @@
               <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text text--shorten">{{product.productDetail.introduction}}</p>
-                <a href="" [routerLink]="['/products/product-detail', product.id]" class="btn btn-primary mt-2">Chi tiết
-                  sản phẩm</a>
+                <a href="" [routerLink]="['/products/product-detail', product.id]" class="btn btn-primary mt-2"><i
+                    class="fa-solid fa-circle-info"></i></a>
                 @if(userResponse) {
-                <a href="" class="btn btn-danger mt-2"
-                  (click)="addToCart(product.id, 1, product.ingredient.flavors[0].name)">Thêm vào giỏ hàng</a>
+                <a href="" class="btn btn-success mt-2 ms-2"
+                  (click)="addToCart(product.id, 1, product.ingredient.flavors[0].name)"><i
+                    class="fa-solid fa-cart-plus"></i></a>
+                <a href="" class="btn btn-danger mt-2 ms-2"><i class="fa-solid fa-heart-circle-plus"></i></a>
                 }
               </div>
             </div>
           </div>
           }
         </div>
-        <div class="row mt-3">
+        <div class=" row mt-3">
           <!-- ngx-pagination library -->
           <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
         </div>

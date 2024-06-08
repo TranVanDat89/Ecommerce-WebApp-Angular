@@ -60,8 +60,8 @@ export class ProductService {
   getAllProductsByCategoryId(categoryId: string): Observable<ApiResponse<ProductResponse>> {
     return this.http.get<ApiResponse<ProductResponse>>(this.apiProduct + `/category/${categoryId}`);
   }
-  getCommentsByUserId(userId: string): Observable<ApiResponse<StorageResponse<CommentDTO[]>>> {
-    return this.http.get<ApiResponse<StorageResponse<CommentDTO[]>>>(this.apiComments + `/user/${userId}`);
+  getCommentsByUserId(userId: string): Observable<ApiResponse<StorageResponse<Comment[]>>> {
+    return this.http.get<ApiResponse<StorageResponse<Comment[]>>>(this.apiComments + `/user/${userId}`);
   }
   createListComment(comments: CommentDTO[]): Observable<ApiResponse<any>> {
     return this.http.post<ApiResponse<any>>(this.apiCreateListComment, comments, this.apiConfig);
