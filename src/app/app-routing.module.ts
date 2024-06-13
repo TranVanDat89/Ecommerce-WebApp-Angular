@@ -22,6 +22,8 @@ import { UpdateArticleComponent } from './components/admin/update-article/update
 import { CommentComponent } from './components/admin/comment/comment.component';
 import { MyCommentComponent } from './components/my-comment/my-comment.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { CreateProductComponent } from './components/admin/product-admin/create-product/create-product.component';
+import { UpdateProductComponent } from './components/admin/product-admin/update-product/update-product.component';
 
 const routes: Routes = [
   {
@@ -84,7 +86,8 @@ const routes: Routes = [
   {
     path: "favorites",
     component: WishListComponent
-  }, {
+  },
+  { path: 'admin', redirectTo: 'admin/dashboard', pathMatch: 'full' }, {
     path: "admin",
     component: AdminComponent,
     children: [
@@ -105,6 +108,13 @@ const routes: Routes = [
       {
         path: "products",
         component: ProductAdminComponent
+      }, {
+        path: 'products/create-product',
+        component: CreateProductComponent
+      }
+      , {
+        path: 'products/update-product',
+        component: UpdateProductComponent
       },
       {
         path: "categories",
@@ -115,6 +125,7 @@ const routes: Routes = [
       }
     ]
   }
+
 ];
 
 @NgModule({

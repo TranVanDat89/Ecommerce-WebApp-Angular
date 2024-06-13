@@ -16,7 +16,8 @@
                 </div>
             </div>
             <div class="ms-2">
-                <button class="btn btn-success">Thêm sản phẩm<i class="fa-solid fa-circle-plus ms-2"></i></button>
+                <a class="btn btn-success" href="" [routerLink]="['/admin/products/create-product']">Thêm sản phẩm<i
+                        class="fa-solid fa-circle-plus ms-2"></i></a>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -75,20 +76,33 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text text--shorten">{{product.productDetail.introduction}}</p>
-                            <a href="" class="btn btn-warning mt-2 text-white" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Sửa sản phẩm"><i
-                                    class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="" class=" btn btn-danger mt-2 ms-2" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Xóa sản phẩm"><i class="fa-solid fa-trash-can"></i></a>
-                            <a href="" class="btn btn-primary mt-2 ms-2" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Upload ảnh">
-                                <i class="fa-solid fa-image"></i>
-                            </a>
+                            <a href="" [routerLink]="['/admin/products/update-product']"
+                                class="btn btn-warning mt-2 text-white" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Sửa sản phẩm"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <button class=" btn btn-danger mt-2 ms-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Xóa sản phẩm"><i class="fa-solid fa-trash-can"
+                                    (click)="onDelete(product.name, product.id, deleteModal)"></i></button>
                         </div>
                     </div>
                 </div>
                 }
             </div>
+            <!-- Modal -->
+            <ng-template #deleteModal let-modal>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modal.dismiss()"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc muốn xóa sản phẩm <strong>{{productNameDeleted}}</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()"
+                        data-bs-dismiss="modal">Close</button>
+                    <button type="button" (click)="confirmDelete(productIdDeleted)" class="btn btn-danger">Xóa</button>
+                </div>
+            </ng-template>
             <div class="row mt-3 mx-auto text-center">
                 <!-- ngx-pagination library -->
                 <pagination-controls (pageChange)=" currentPage=$event"></pagination-controls>

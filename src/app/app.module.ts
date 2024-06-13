@@ -41,6 +41,8 @@ import { DataTableDirective, DataTablesModule } from 'angular-datatables';
 import { MyCommentComponent } from './components/my-comment/my-comment.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { CodeInputModule } from 'angular-code-input';
+import { CreateProductComponent } from './components/admin/product-admin/create-product/create-product.component';
+import { UpdateProductComponent } from './components/admin/product-admin/update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { CodeInputModule } from 'angular-code-input';
     UpdateArticleComponent,
     CommentComponent,
     MyCommentComponent,
-    ActivateAccountComponent
+    ActivateAccountComponent,
+    CreateProductComponent,
+    UpdateProductComponent
   ],
   imports: [
     BrowserModule,

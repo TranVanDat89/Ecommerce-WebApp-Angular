@@ -48,6 +48,7 @@
     "@angular-devkit/build-angular": "^17.0.3",
     "@angular/cli": "^17.0.3",
     "@angular/compiler-cli": "^17.0.0",
+    "@types/bootstrap": "^5.2.10",
     "@types/datatables.net-buttons": "^2.2.0",
     "@types/jasmine": "~5.1.0",
     "@types/jquery": "^3.5.9",

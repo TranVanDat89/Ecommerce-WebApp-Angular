@@ -4,6 +4,7 @@ import { ProductService } from '../../../services/product.service';
 import { ProductResponse } from '../../../responses/product.response';
 import { ApiResponse } from '../../../responses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-product-admin',
@@ -17,11 +18,13 @@ export class ProductAdminComponent implements OnInit {
   selectedYear: number = new Date().getFullYear();
   currentYear: number = new Date().getFullYear();
   years: number[] = Array.from({ length: this.currentYear - 2020 + 1 }, (_, i) => 2020 + i);
-
+  // productDeleted?: Product;
+  productNameDeleted: string = '';
+  productIdDeleted: string = '';
   loadDataForYear(selectedYear: number) {
 
   }
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private modalService: NgbModal) {
     this.products = [];
   }
   ngOnInit(): void {
@@ -40,5 +43,15 @@ export class ProductAdminComponent implements OnInit {
         console.error(error?.error?.message ?? '');
       }
     })
+  }
+
+  onDelete(productName: string, productId: string, modal: any) {
+    this.productNameDeleted = productName;
+    this.productIdDeleted = productId;
+    this.modalService.open(modal);
+  }
+
+  confirmDelete(productId?: string) {
+    console.log(productId);
   }
 }
