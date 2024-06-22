@@ -30,6 +30,7 @@
                 <div class="">
                     <h1>{{article?.title}}</h1>
                     <p class="text-muted">{{article?.createdAt}}</p>
+                    <p class="text-muted">Bản quyền bài viết thuộc về <span class="fw-bold">WheyStation</span></p>
                     <img [src]="article?.imageUrl" class="img-fluid mb-2 w-100" alt="">
                     <div [innerHTML]="article?.content"></div>
                 </div>

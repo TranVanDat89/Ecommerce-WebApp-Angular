@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -7,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from '../../responses/api.response';
 import { TokenService } from '../../services/token.service';
 import { UserResponse } from '../../responses/user.response';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-login',

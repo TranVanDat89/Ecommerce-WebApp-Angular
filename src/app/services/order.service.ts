@@ -1,4 +1,3 @@
-import { Injectable, inject } from '@angular/core';
 import { HttpUtilService } from './http-util.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
@@ -8,6 +7,7 @@ import { StorageResponse } from '../responses/storage.response';
 import { OrderDetailResponse } from '../responses/order-detail.response';
 import { OrderRequest } from '../dtos/order.request';
 import { Order } from '../models/order';
+import { Injectable, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,7 @@ export class OrderService {
   }
 
   createOrder(orderRequest: OrderRequest): Observable<ApiResponse<StorageResponse<Order>>> {
+    debugger
     return this.http.post<ApiResponse<StorageResponse<Order>>>(this.apiCreateOrder, orderRequest, this.apiConfig);
   }
 }

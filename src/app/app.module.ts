@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,6 +43,9 @@ import { ActivateAccountComponent } from './components/activate-account/activate
 import { CodeInputModule } from 'angular-code-input';
 import { CreateProductComponent } from './components/admin/product-admin/create-product/create-product.component';
 import { UpdateProductComponent } from './components/admin/product-admin/update-product/update-product.component';
+import { registerLocaleData } from '@angular/common';
+import localeVi from '@angular/common/locales/vi';
+registerLocaleData(localeVi, 'vi');
 
 @NgModule({
   declarations: [
@@ -80,7 +83,6 @@ import { UpdateProductComponent } from './components/admin/product-admin/update-
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
     NgxPaginationModule,
     NgbModule,
     AngularEditorModule,
@@ -89,7 +91,9 @@ import { UpdateProductComponent } from './components/admin/product-admin/update-
     BrowserAnimationsModule,
     BaseChartDirective,
     DataTablesModule,
-    CodeInputModule
+    CodeInputModule,
+    ReactiveFormsModule
+
   ],
   providers: [
     {
@@ -97,7 +101,8 @@ import { UpdateProductComponent } from './components/admin/product-admin/update-
       useClass: TokenInterceptor,
       multi: true
     },
-    provideCharts(withDefaultRegisterables())
+    provideCharts(withDefaultRegisterables()),
+    { provide: LOCALE_ID, useValue: 'vi' }
   ],
   bootstrap: [AppComponent]
 })

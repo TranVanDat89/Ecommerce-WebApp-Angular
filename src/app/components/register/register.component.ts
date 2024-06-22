@@ -1,4 +1,3 @@
-import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { RegisterDTO } from '../../dtos/user/register.dto';
 import { Router } from '@angular/router';
@@ -7,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from '../../responses/api.response';
 import { Observable, delay, of } from 'rxjs';
 import { UserResponse } from '../../responses/user.response';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -54,7 +54,7 @@ export class RegisterComponent {
           // if (confirmation) {
           //   this.router.navigate(['/login']);
           // }
-          this.router.navigate(['/activate-account']);
+          this.router.navigate(['/login']);
         },
         error: (error: HttpErrorResponse) => {
           console.error(error?.error?.message ?? 'An error occurred during registration');

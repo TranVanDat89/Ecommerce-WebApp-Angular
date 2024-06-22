@@ -77,13 +77,168 @@
                         {{orderDetailResponse?.order?.shippingDate}}</p>
                 </div>
                 }
+                @if(orderDetailResponse?.order?.status==='Pending') {
+                <button type="button" class="btn btn-danger text-white ms-3">Hủy đơn hàng</button>
+                }
                 @if(orderDetailResponse?.order?.status === 'Success') {
                 <div class="mb-3">
+                    @if(!orderDetailResponse?.order?.isCommented) {
                     <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
-                        class="btn btn-warning text-white"
-                        [disabled]="(orderDetailResponse?.order?.isCommented && orderDetailResponse?.order?.status === 'Success')||orderDetailResponse?.order?.status!=='Success'">Thêm
+                        class="btn btn-warning text-white">Thêm
                         nhận xét</button>
-
+                    }
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#invoiceModal"
+                        class="btn btn-primary text-white ms-3">Chi tiết hóa đơn</button>
+                    <!--Invoice Modal -->
+                    <div class="modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Hóa đơn chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="invoice-box" id="invoice">
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr class="top_rw">
+                                                <td colspan="2">
+                                                    <h2 style="margin-bottom: 0px;">Hóa đơn bán hàng</h2>
+                                                    <span> Mã số: 27B00032991LQ354 Ngày:
+                                                        {{now.toLocaleDateString() |
+                                                        date:'fullDate'}}</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="top">
+                                                <td colspan="3">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <b>Bên bán: Công ty cổ phần WheyStation </b> <br>
+                                                                <b>Trụ sở chính: Số 92/44 Xuân Thủy, Cầu Giấy, Hà Nội
+                                                                </b> <br>
+                                                                <b>Số điện thoại: +84 676 28074
+                                                                </b> <br>
+                                                                <b>Email: wheystation&#64;contact.gmail.com
+                                                                </b> <br>
+                                                                <b>Mã số thuế: 1562596385656235
+                                                                </b> <br>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="information">
+                                                <td colspan="3">
+                                                    <table>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <b>Bên mua: {{orderDetailResponse.order.fullName}} </b>
+                                                                <br>
+                                                                <b>Số điện thoại:
+                                                                    {{orderDetailResponse.order.phoneNumber}} </b><br>
+                                                                <b>Phương thức thanh toán:
+                                                                    {{orderDetailResponse.order.paymentMethod}} </b><br>
+                                                                <b>Phương thức vận chuyển:
+                                                                    {{orderDetailResponse.order.shippingMethod}}
+                                                                </b><br>
+                                                            </td>
+                                                            <td> <b>Địa chỉ:
+                                                                    {{orderDetailResponse.order.shippingAddress}}
+                                                                </b><br>
+                                                                <b>Trạng thái đơn hàng: Thành công
+                                                                </b><br>
+                                                                <b>Ngày giao hàng:
+                                                                    {{orderDetailResponse.order.shippingDate}}
+                                                                </b><br>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <td colspan="3">
+                                                <table cellspacing="0px" cellpadding="2px">
+                                                    <tr class="heading">
+                                                        <td style="width:25%;">
+                                                            SẢN PHẨM
+                                                        </td>
+                                                        <td style="width:10%; text-align:center;">
+                                                            SỐ LƯỢNG
+                                                        </td>
+                                                        <td style="width:10%; text-align:center;">
+                                                            ĐƠN GIÁ
+                                                        </td>
+                                                        <td style="width:15%; text-align:center;">
+                                                            TỔNG TIỀN
+                                                        </td>
+                                                    </tr>
+                                                    @for (productInfor of orderDetailResponse?.detailResponses;
+                                                    track $index) {
+                                                    <tr class="item">
+                                                        <td style="width:25%;">
+                                                            {{productInfor.productName}}
+                                                        </td>
+                                                        <td class="text-center">{{productInfor.numberOfProducts}}</td>
+                                                        <td class="fw-bold text-center">
+                                                            {{formatPrice(productInfor.price)}}</td>
+                                                        <td class="fw-bold text-center">
+                                                            {{formatPrice(productInfor.totalMoney)}}
+                                                        </td>
+                                                    </tr>
+                                                    }
+                                                </table>
+                                                <tr class="total">
+                                                    <td colspan="3" align="right"> Tổng số tiền : <b>
+                                                            {{formatPrice(orderDetailResponse?.order?.totalMoney)}} </b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <table cellspacing="0px" cellpadding="2px">
+                                                            <tr>
+                                                                <td width="50%">
+                                                                    <b> Cam kết: </b> <br>
+                                                                    We declare that this invoice shows the actual price
+                                                                    of the goods
+                                                                    described above and that all particulars are true
+                                                                    and correct. The
+                                                                    goods sold are intended for end user consumption and
+                                                                    not for resale.
+                                                                </td>
+                                                                <td>
+                                                                    * This is a computer generated invoice and does not
+                                                                    require a physical signature
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="50%">
+                                                                </td>
+                                                                <td>
+                                                                    <b> Chữ ký người nhận </b>
+                                                                    <br>
+                                                                    <br>
+                                                                    {{orderDetailResponse.order.fullName}}
+                                                                    <br>
+                                                                    <br>
+                                                                    <br>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-success" (click)="generateInvoice()">Tải
+                                        xuống</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">

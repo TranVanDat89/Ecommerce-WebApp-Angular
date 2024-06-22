@@ -72,7 +72,7 @@
                 <h3>Thông tin khách hàng</h3>
                 <div class="mb-3">
                     <div class="rounded p-3" style="background-color: #fff">
-                        <form [formGroup]="orderForm" (onSubmit)="createOrder()">
+                        <form [formGroup]="orderForm" (ngSubmit)="createOrder()">
                             <div class="mb-3">
                                 <label for="fullName" class="form-label">Họ và tên</label>
                                 <input type="text" class="form-control" formControlName="fullName"

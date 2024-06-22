@@ -1,5 +1,4 @@
 import { CommentDTO } from './../../dtos/comment.dto';
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
 import { ApiResponse } from '../../responses/api.response';
@@ -9,6 +8,9 @@ import { OrderDetailResponse } from '../../responses/order-detail.response';
 import { ProductService } from '../../services/product.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-order-detail',
@@ -16,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './order-detail.component.css'
 })
 export class OrderDetailComponent implements OnInit {
+  now: Date;
   userId: string = '';
   orderDetailResponses?: OrderDetailResponse[];
   currentPage: number = 1;
@@ -29,13 +32,14 @@ export class OrderDetailComponent implements OnInit {
     this.commentForm = this.fb.group({
       comments: this.fb.array([])
     })
+    this.now = new Date();
   }
   ngOnInit(): void {
-
     this.router.paramMap.subscribe(params => {
       this.userId = params.get('userId') ?? '';
     });
     this.getOrderDetail(this.userId);
+
     // this.populateForm();
   }
   formatPrice(price: number | undefined): string {
@@ -112,6 +116,14 @@ export class OrderDetailComponent implements OnInit {
         this.toastr.error("Nhận xét thất baị", "Thất bại");
         console.error(error?.error?.message ?? 'An error occurred during registration');
       }
+    })
+  }
+  generateInvoice() {
+    const invoice: any = document.getElementById("invoice");
+    html2canvas(invoice).then((canvas) => {
+      const pdf = new jsPDF();
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+      pdf.save('invoice.pdf');
     })
   }
 }
