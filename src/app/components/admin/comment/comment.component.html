@@ -32,7 +32,7 @@
                         <p class="mb-1">{{comment.createdAt}}</p>
                         <small>Nhận xét bởi <strong>{{comment.fullName}}</strong></small>
                         <div>
-                            <button class="btn btn-danger">Xóa bình luận</button>
+                            <button class="btn btn-danger" (click)="deleteComment(comment.id)">Xóa bình luận</button>
                         </div>
                     </div>
                     }

@@ -1,3 +1,4 @@
+import { CommentDTO } from './../dtos/comment.dto';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { HttpUtilService } from './http-util.service';
@@ -8,7 +9,6 @@ import { ProductResponse } from '../responses/product.response';
 import { StorageResponse } from '../responses/storage.response';
 import { FavoriteResponse } from '../responses/favorite.response';
 import { Comment } from '../models/comment';
-import { CommentDTO } from '../dtos/comment.dto';
 import { Injectable, inject } from '@angular/core';
 
 @Injectable({
@@ -40,6 +40,12 @@ export class ProductService {
   }
   deleteFavorite(favId: string): Observable<any> {
     return this.http.delete<ApiResponse<any>>(this.apiDeleteFav + favId);
+  }
+  deleteComment(commentId: string): Observable<any> {
+    return this.http.delete<ApiResponse<any>>(this.apiComments + `/delete/${commentId}`);
+  }
+  updateComment(commentId: string, commentDTO: CommentDTO): Observable<any> {
+    return this.http.put<ApiResponse<any>>(this.apiComments + `/update-comment/${commentId}`, commentDTO, this.apiConfig);
   }
   addToWishList(productId: string): Observable<any> {
     return this.http.post<ApiResponse<any>>(this.apiAddFav + productId, this.apiConfig);

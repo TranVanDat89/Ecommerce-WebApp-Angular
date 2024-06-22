@@ -5,6 +5,7 @@ import { Notification } from '../../../models/notification';
 import { StorageResponse } from '../../../responses/storage.response';
 import { ApiResponse } from '../../../responses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TokenService } from '../../../services/token.service';
 
 @Component({
   selector: 'app-header-admin',
@@ -16,7 +17,7 @@ export class HeaderAdminComponent implements OnInit {
   isCollapsed: boolean = true;
   isActived: number = 0;
   userResponse?: UserResponse | null;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
@@ -28,6 +29,10 @@ export class HeaderAdminComponent implements OnInit {
 
   enableActived(index: number): void {
     this.isActived = index;
+  }
+  logout() {
+    this.userService.removeUserFromLocalStorage();
+    this.tokenService.deleteCookie();
   }
   getAllNotifications() {
     this.userService.getAllNotifications().subscribe({

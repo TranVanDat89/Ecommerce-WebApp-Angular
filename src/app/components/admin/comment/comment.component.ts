@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ProductService } from '../../../services/product.service';
 import { Comment } from '../../../models/comment';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-comment',
@@ -35,11 +36,22 @@ export class CommentComponent implements OnInit {
 
   }
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private toastr: ToastrService) { }
   ngOnInit(): void {
     this.getAllComments();
   }
-
+  deleteComment(commentId: string) {
+    this.productService.deleteComment(commentId).subscribe({
+      next: (apiResponse: ApiResponse<any>) => {
+        this.toastr.success("Xóa bình luận thành công", "Thành công");
+        window.location.reload();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error("Xóa bình luận thất bại", "Thất bại");
+        console.error(error?.error?.message ?? '');
+      }
+    })
+  }
   getAllComments() {
     this.productService.getAllCommentsForAdmin().subscribe({
       next: (apiResponse: ApiResponse<StorageResponse<Comment[]>>) => {

@@ -7,6 +7,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { CommentDTO } from '../../dtos/comment.dto';
 
 @Component({
   selector: 'app-my-comment',
@@ -21,21 +23,54 @@ export class MyCommentComponent implements OnInit {
   commentForm: FormGroup;
   currentCommentId: string = '';
 
-  constructor(private router: ActivatedRoute, private productService: ProductService, private fb: FormBuilder, private modalService: NgbModal) {
+  constructor(private router: ActivatedRoute, private toastr: ToastrService, private productService: ProductService, private fb: FormBuilder, private modalService: NgbModal) {
     this.commentForm = this.fb.group({
       rating: [0, [Validators.required]],
       content: ['', [Validators.required]]
     })
   }
-  onDelete(commentId: string, modal: any) {
+  onUpdate(commentId: string, modal: any, content: string, star: number) {
     this.currentCommentId = commentId;
     this.modalService.open(modal);
+    this.commentForm.get('rating')?.setValue(star);
+    this.commentForm.get('content')?.setValue(content);
+    console.log(this.currentCommentId);
   }
   deleteComment(commentId: string) {
-    console.log(commentId);
+    this.productService.deleteComment(commentId).subscribe({
+      next: (apiResponse: ApiResponse<any>) => {
+        this.toastr.success("Xóa bình luận thành công", "Thành công");
+        window.location.reload();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error("Xóa bình luận thất bại", "Thất bại");
+        console.error(error?.error?.message ?? '');
+      }
+    })
   }
-  updateComment(commentId: string) {
-
+  updateComment() {
+    if (this.commentForm.valid) {
+      let commentDTO: CommentDTO = {
+        star: this.commentForm.get('rating')?.value,
+        content: this.commentForm.get('content')?.value,
+        productId: '',
+        userId: '',
+        orderId: ''
+      }
+      console.log(commentDTO);
+      this.productService.updateComment(this.currentCommentId, commentDTO).subscribe({
+        next: (apiResponse: ApiResponse<any>) => {
+          this.modalService.dismissAll();
+          this.toastr.success("Cập nhật đánh giá thành công", "Thành công");
+          window.location.reload();
+        },
+        error: (error: HttpErrorResponse) => {
+          this.modalService.dismissAll();
+          console.error(error?.error?.message ?? '');
+          this.toastr.success("Cập nhật đánh giá thất bại", "Thất bại");
+        }
+      })
+    }
   }
   ngOnInit(): void {
     this.router.paramMap.subscribe(params => {
