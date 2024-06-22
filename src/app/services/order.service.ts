@@ -27,7 +27,12 @@ export class OrderService {
   }
 
   createOrder(orderRequest: OrderRequest): Observable<ApiResponse<StorageResponse<Order>>> {
-    debugger
     return this.http.post<ApiResponse<StorageResponse<Order>>>(this.apiCreateOrder, orderRequest, this.apiConfig);
+  }
+  cancelOrder(orderId: string): Observable<ApiResponse<any>> {
+    return this.http.post<ApiResponse<any>>(`${environment.apiBaseUrl}/orders/delete-order/${orderId}`, this.apiConfig)
+  }
+  getAllOrder(): Observable<ApiResponse<StorageResponse<OrderDetailResponse[]>>> {
+    return this.http.get<ApiResponse<StorageResponse<OrderDetailResponse[]>>>(`${environment.apiBaseUrl}/orders/get-all-orders`);
   }
 }

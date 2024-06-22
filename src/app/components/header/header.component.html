@@ -55,12 +55,6 @@
                                             nào!</p>
                                     </div>
                                     } @else {
-                                    <div class=" popover-item m-0 hover-notification"
-                                        style="border-bottom: 1px solid #ccc">
-                                        <p class="m-0 fw-bold">
-                                            Các thông báo sẽ chỉ tồn tại trong vòng 14 ngày!
-                                        </p>
-                                    </div>
                                     @for (notification of notifications; track $index) {
                                     <div class=" popover-item m-0 hover-notification"
                                         style="border-bottom: 1px solid #ccc">
@@ -74,7 +68,15 @@
                                 </div>
                             </ng-template>
                             <li class="nav-item me-2">
-                                <a href="" [routerLink]="['/favorites']" class="nav-link text-white">Yêu thích</a>
+                                <a href="" [routerLink]="['/favorites']" class="nav-link text-white">Yêu thích<i
+                                        class="fa-solid fa-heart ms-1 position-relative">
+                                        @if(favorites?.length) {
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ favorites?.length }}
+                                        </span>
+                                        }
+                                    </i></a>
                             </li>
                             <li class="nav-item me-2">
                                 <a class="nav-link text-white w-content" [ngbPopover]="popoverContent"

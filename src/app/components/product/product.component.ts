@@ -1,4 +1,3 @@
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { ApiResponse } from '../../responses/api.response';
@@ -12,6 +11,8 @@ import { UserService } from '../../services/user.service';
 import { StorageResponse } from '../../responses/storage.response';
 import { Cart } from '../../responses/cart.response';
 import { CartService } from '../../services/cart.service';
+import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-product',
@@ -28,7 +29,7 @@ export class ProductComponent implements OnInit {
   currentPage: number;
   categoryId?: string;
   // totalItems: number;
-  constructor(private router: Router, private activedRouter: ActivatedRoute, private cartService: CartService, private categoryService: CategoryService, private userService: UserService, private productService: ProductService) {
+  constructor(private router: Router, private toastr: ToastrService, private activedRouter: ActivatedRoute, private cartService: CartService, private categoryService: CategoryService, private userService: UserService, private productService: ProductService) {
     this.categories = [];
     // this.totalPages = 0;
     // this.totalItems = 0;
@@ -42,10 +43,22 @@ export class ProductComponent implements OnInit {
     this.getCategories();
     this.getAllProducts();
   }
+  addToWishList(productId: string) {
+    this.productService.addToWishList(productId).subscribe({
+      next: (apiResponse: ApiResponse<any>) => {
+        this.toastr.success("Thêm sản phẩm vào yêu thích thành công", "Thành công")
+        window.location.reload();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error("Thêm sản phẩm vào yêu thích thất bại", "Thất bại")
+      }
+    })
+  }
   addToCart(productId: string, quantity: number, flavorName: string): void {
     this.cartService.addToCart(productId, quantity, flavorName).subscribe({
       next: (apiResponse: ApiResponse<StorageResponse<Cart>>) => {
         console.log(apiResponse.data.cart);
+        window.location.reload();
       },
       error: (error: HttpErrorResponse) => {
         console.error(error?.error?.message ?? '');

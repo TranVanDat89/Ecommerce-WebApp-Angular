@@ -6,12 +6,11 @@
                 <select [(ngModel)]="selectedYear" (change)="loadDataForYear(selectedYear)"
                     class="form-select w-content">
                     @for (year of years; track $index) {
-                    @if (year < 2023) {
-                    <option value="{{year}}" disabled>{{year}}</option>
-                    }@else {
-                    <option value="{{year}}">{{year}}</option>
-                    }
-                    }
+                    @if (year < 2023) { <option value="{{year}}" disabled>{{year}}</option>
+                        }@else {
+                        <option value="{{year}}">{{year}}</option>
+                        }
+                        }
                 </select>
             </div>
         </div>
@@ -20,9 +19,16 @@
                 <div class="card p-0">
                     <h5 class="card-header"><i class="fa-solid fa-users me-2"></i>Số lượng người dùng</h5>
                     <div class="card-body">
-                        <h5 class="card-title">15,200 người sử dụng</h5>
-                        <p class="text-danger">Giảm 12.5%<i class="fa-solid fa-arrow-trend-down ms-2"></i></p>
-                        <a href="#" class="btn btn-primary">Chi tiết</a>
+                        <h5 class="card-title">{{totalUsers.totalUsers}} người sử dụng</h5>
+                        @if (totalUsers.up) {
+                        <p class="text-success">Tăng {{totalUsers.up}}%<i class="fa-solid fa-arrow-trend-up ms-2"></i>
+                        </p>
+                        } @else {
+                        <p class="text-success">Tăng {{totalUsers.down}}%<i
+                                class="fa-solid fa-arrow-trend-down ms-2"></i>
+                        </p>
+                        }
+                        <a href="#" [routerLink]="['/admin/users']" class="btn btn-primary">Chi tiết</a>
                     </div>
                 </div>
             </div>
@@ -30,9 +36,15 @@
                 <div class="card p-0">
                     <h5 class="card-header"><i class="fa-solid fa-coins me-2"></i>Tổng doanh thu</h5>
                     <div class="card-body">
-                        <h5 class="card-title">100,000,000 đ</h5>
-                        <p class="text-danger">Giảm 5.5%<i class="fa-solid fa-arrow-trend-down ms-2"></i></p>
-                        <a href="#" class="btn btn-primary">Chi tiết</a>
+                        <h5 class="card-title">{{formatPrice(outcome.outcome)}}</h5>
+                        @if (outcome.up) {
+                        <p class="text-success">Tăng {{outcome.up}}%<i class="fa-solid fa-arrow-trend-up ms-2"></i>
+                        </p>
+                        } @else {
+                        <p class="text-success">Tăng {{outcome.down}}%<i class="fa-solid fa-arrow-trend-down ms-2"></i>
+                        </p>
+                        }
+                        <a href="#" [routerLink]="['/admin/orders']" class="btn btn-primary">Chi tiết</a>
                     </div>
                 </div>
             </div>
@@ -40,9 +52,15 @@
                 <div class="card p-0">
                     <h5 class="card-header"><i class="fa-solid fa-truck me-2"></i>Số lượng đơn hàng</h5>
                     <div class="card-body">
-                        <h5 class="card-title">5,200 đơn hàng</h5>
-                        <p class="text-success">Tăng 12.5%<i class="fa-solid fa-arrow-trend-up ms-2"></i></p>
-                        <a href="#" class="btn btn-primary">Chi tiết</a>
+                        <h5 class="card-title">{{totalOrders.totalOrders}} đơn hàng</h5>
+                        @if (totalOrders.up) {
+                        <p class="text-success">Tăng {{totalOrders.up}}%<i class="fa-solid fa-arrow-trend-up ms-2"></i>
+                        </p>
+                        } @else {
+                        <p class="text-success">Tăng {{totalOrders.down}}%<i
+                                class="fa-solid fa-arrow-trend-down ms-2"></i></p>
+                        }
+                        <a href="#" [routerLink]="['/admin/orders']" class="btn btn-primary">Chi tiết</a>
                     </div>
                 </div>
             </div>
@@ -50,9 +68,15 @@
                 <div class="card p-0">
                     <h5 class="card-header"><i class="fa-solid fa-newspaper me-2"></i>Số lượng bài viết</h5>
                     <div class="card-body">
-                        <h5 class="card-title">1000 bài viết</h5>
-                        <p class="text-success">Tăng 5.5%<i class="fa-solid fa-arrow-trend-up ms-2"></i></p>
-                        <a href="#" class="btn btn-primary">Chi tiết</a>
+                        <h5 class="card-title">{{totalArticles.totalArticles}} bài viết</h5>
+                        @if (totalArticles.up) {
+                        <p class="text-success">Tăng {{totalArticles.up}}%<i
+                                class="fa-solid fa-arrow-trend-up ms-2"></i></p>
+                        } @else {
+                        <p class="text-success">Tăng {{totalArticles.down}}%<i
+                                class="fa-solid fa-arrow-trend-down ms-2"></i></p>
+                        }
+                        <a href="#" [routerLink]="['/admin/blogs']" class="btn btn-primary">Chi tiết</a>
                     </div>
                 </div>
             </div>

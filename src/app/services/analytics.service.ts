@@ -26,7 +26,7 @@ export class AnalyticsService {
     getOutComeByMonth(year: number): Observable<ApiResponse<StorageResponse<Object>>> {
         return this.http.get<ApiResponse<StorageResponse<Object>>>(this.apiAdminAnalytics + `/outcome-by-month?year=${year}`)
     }
-    getAnalytics(year: number): Observable<ApiResponse<StorageResponse<[]>>> {
-        return this.http.get<ApiResponse<StorageResponse<[]>>>(this.apiAdminAnalytics + `?year=${year}`)
+    getAnalytics(year: number): Observable<ApiResponse<StorageResponse<Object>>> {
+        return this.http.get<ApiResponse<StorageResponse<Object>>>(this.apiAdminAnalytics + `?year=${year}`)
     }
 }

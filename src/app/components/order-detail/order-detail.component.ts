@@ -42,6 +42,17 @@ export class OrderDetailComponent implements OnInit {
 
     // this.populateForm();
   }
+  cancelOrder(orderId: string) {
+    this.orderService.cancelOrder(orderId).subscribe({
+      next: (apiResponse: ApiResponse<any>) => {
+        this.toastr.success("Hủy đơn hàng thành công", "Thành công");
+        window.location.reload()
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error("Hủy đơn hàng thất bại", "Thất bại");
+      }
+    })
+  }
   formatPrice(price: number | undefined): string {
     if (price === undefined) return '';
     return new Intl.NumberFormat('vi-VN', {

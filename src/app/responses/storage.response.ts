@@ -12,4 +12,8 @@ export interface StorageResponse<T> {
     notifications?: T;
     result?: T;
     common?: T;
+    outcome?: T;
+    totalUsers?: T;
+    totalArticles?: T;
+    totalOrders?: T;
 }

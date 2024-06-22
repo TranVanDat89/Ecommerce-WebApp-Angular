@@ -32,13 +32,75 @@
                         <p class="mb-1">{{comment.createdAt}}</p>
                         <small>Nhận xét bởi <strong>{{comment.fullName}}</strong></small>
                         <div>
-                            <button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                            <button class="btn btn-dark ms-2" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Sửa bình luận"><i class="fa-solid fa-gear"></i></button>
+                            <button class="btn btn-danger"><i class="fa-solid fa-trash-can"
+                                    (click)="deleteComment(comment.id)"></i></button>
+                            <button class="btn btn-dark ms-2" title="Sửa bình luận"><i
+                                    class="fa-solid fa-gear"></i></button>
                         </div>
                     </div>
                     }
                 </div>
+                <!-- Delete modal -->
+                <!-- Modal -->
+                <!-- <ng-template #deleteModal let-modal>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="modal.dismiss()"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Bạn có chắc muốn xóa đánh giá này?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger"
+                            (click)="deleteComment(currentCommentId)">Xóa</button>
+                    </div>
+                </ng-template> -->
+                <!-- Update modal -->
+                <!-- <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Sửa bình luận</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" [formGroup]="commentForm">
+                                    <div>
+                                        <div class="d-flex flex-row mb-3">
+                                            <div class="ms-3">
+                                                <ngb-rating formControlName="rating" [max]="5"></ngb-rating>
+                                            </div>
+                                            @if(commentForm.controls['rating'].invalid &&
+                                            commentForm.controls['rating'].dirty ||
+                                            commentForm.controls['rating'].touched) {
+                                            <p class="text-danger mt-2"
+                                                *ngIf="commentForm.controls['rating'].errors?.['required']">Bạn phải
+                                                đánh giá số sao cho sản phẩm.</p>
+                                            }
+                                        </div>
+                                        <textarea formControlName="content" class="form-control"></textarea>
+                                        @if(commentForm.controls['content'].invalid &&
+                                        commentForm.controls['content'].dirty ||
+                                        commentForm.controls['content'].touched) {
+                                        <p class="text-danger mt-2"
+                                            *ngIf="commentForm.controls['content'].errors?.['required']">Bạn phải đánh
+                                            giá số sao cho sản phẩm.</p>
+                                        }
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Sửa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
                 @if(comments?.length! > 0) {
                 <div class="row mt-3 mx-auto text-center">
                     <!-- ngx-pagination library -->

@@ -22,6 +22,8 @@ export class ProductService {
   private apiProductComments = `${environment.apiBaseUrl}/comments/all/star-greater-than-3`;
   private apiComments = `${environment.apiBaseUrl}/comments`;
   private apiCreateListComment = `${environment.apiBaseUrl}/comments/create-list-comment`;
+  private apiDeleteFav = `${environment.apiBaseUrl}/products/delete-wishlist/`;
+  private apiAddFav = `${environment.apiBaseUrl}/products/add-to-wish-list/`;
   private http = inject(HttpClient);
   private httpUtilService = inject(HttpUtilService);
   private apiConfig = {
@@ -35,6 +37,12 @@ export class ProductService {
       limit: limit.toString()
     }
     return this.http.get<ApiResponse<ProductResponse>>(this.apiProduct, { params });
+  }
+  deleteFavorite(favId: string): Observable<any> {
+    return this.http.delete<ApiResponse<any>>(this.apiDeleteFav + favId);
+  }
+  addToWishList(productId: string): Observable<any> {
+    return this.http.post<ApiResponse<any>>(this.apiAddFav + productId, this.apiConfig);
   }
   getAllFavorites(): Observable<ApiResponse<StorageResponse<FavoriteResponse[]>>> {
     return this.http.post<ApiResponse<StorageResponse<FavoriteResponse[]>>>(this.apiProductFavorites, this.apiConfig);

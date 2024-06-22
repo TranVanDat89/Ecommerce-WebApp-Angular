@@ -78,7 +78,8 @@
                 </div>
                 }
                 @if(orderDetailResponse?.order?.status==='Pending') {
-                <button type="button" class="btn btn-danger text-white ms-3">Hủy đơn hàng</button>
+                <button type="button" class="btn btn-danger text-white ms-3"
+                    (click)="cancelOrder(orderDetailResponse.order.id)">Hủy đơn hàng</button>
                 }
                 @if(orderDetailResponse?.order?.status === 'Success') {
                 <div class="mb-3">

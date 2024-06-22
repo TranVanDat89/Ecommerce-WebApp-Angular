@@ -9,6 +9,8 @@ import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Notification } from '../../models/notification';
+import { FavoriteResponse } from '../../responses/favorite.response';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-header',
@@ -20,15 +22,32 @@ export class HeaderComponent implements OnInit {
   isPopoverOpen = false;
   cart?: Cart;
   notifications?: Notification[];
-  constructor(private router: Router, private cartService: CartService, private userService: UserService, private tokenService: TokenService) {
+  favorites?: FavoriteResponse[];
+  constructor(private router: Router, private productService: ProductService, private cartService: CartService, private userService: UserService, private tokenService: TokenService) {
   }
   ngOnInit(): void {
     this.userResponse = this.userService.getUserResponseFromLocalStorage()?.userResponse || this.userService.getUserResponseFromSessionStorage()?.userResponse;
     // console.log(this.userResponse);
     this.getCart();
     this.getAllNotifications();
+    this.getAllFavs();
   }
-
+  getAllFavs() {
+    this.productService.getAllFavorites().subscribe({
+      next: (apiResponse: ApiResponse<StorageResponse<FavoriteResponse[]>>) => {
+        this.favorites = apiResponse.data.favorites;
+        // apiResponse.data.favorites?.forEach((fav) => {
+        //   console.log(fav.product);
+        //   this.products?.push(fav.product);
+        //   console.log(this.products);
+        // })
+        // console.log(this.products);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? 'An error occurred during registration');
+      }
+    })
+  }
   togglePopover(event: Event): void {
     event.preventDefault();
     this.isPopoverOpen = !this.isPopoverOpen;

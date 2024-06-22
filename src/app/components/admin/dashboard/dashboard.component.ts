@@ -35,7 +35,16 @@ export class DashboardComponent implements OnInit {
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
-  constructor(private analyticsService: AnalyticsService) { }
+  totalArticles: { totalArticles?: number, up?: number, down?: number };
+  totalOrders: { totalOrders?: number, up?: number, down?: number };
+  totalUsers: { totalUsers?: number, up?: number, down?: number }
+  outcome: { outcome?: number, up?: number, down?: number }
+  constructor(private analyticsService: AnalyticsService) {
+    this.totalArticles = { totalArticles: 0, up: 0, down: 0 };
+    this.totalOrders = { totalOrders: 0, up: 0, down: 0 };
+    this.totalUsers = { totalUsers: 0, up: 0, down: 0 };
+    this.outcome = { outcome: 0, up: 0, down: 0 };
+  }
   ngOnInit(): void {
     this.getDataForPieChart();
     this.getDataForColumnChart(this.selectedYear);
@@ -76,12 +85,23 @@ export class DashboardComponent implements OnInit {
   }
   getAnalytics(selectedYear: number) {
     this.analyticsService.getAnalytics(selectedYear).subscribe({
-      next: (apiResponse: ApiResponse<StorageResponse<[]>>) => {
-        console.log(apiResponse.data.result);
+      next: (apiResponse: ApiResponse<StorageResponse<Object>>) => {
+        console.log(apiResponse.data.totalArticles);
+        this.totalArticles = apiResponse.data.totalArticles!
+        this.totalOrders = apiResponse.data.totalOrders!
+        this.totalUsers = apiResponse.data.totalUsers!
+        this.outcome = apiResponse.data.outcome!
       },
       error: (error: HttpErrorResponse) => {
         console.error(error?.error?.message ?? '');
       }
     })
+  }
+  formatPrice(price: number | undefined): string {
+    if (price === undefined) return '';
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    }).format(price);
   }
 }

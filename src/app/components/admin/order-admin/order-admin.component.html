@@ -14,7 +14,7 @@
                 </select>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <!-- <div class="row justify-content-center">
             <div class="col-xl-4 col-md-6 col-10 mb-3">
                 <div class="card p-0">
                     <h5 class="card-header bg-success text-white"><i class="fa-solid fa-thumbs-up me-2"></i>Số lượng đơn
@@ -36,10 +36,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row mt-3 ms-1">
-            <table class="table table-striped">
-                <thead>
+            <table id="userTable" datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger"
+                class="table responsive w-100 nowrap table-bordered table-striped table-hover mt-4 mb-3">
+                <thead class="table-dark mt-3">
                     <tr>
                         <th>Người nhận</th>
                         <th>Ngày nhận hàng</th>
@@ -50,27 +51,50 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for (orderDetail of orderDetailResponses; track $index) {
                     <tr>
-                        <td>Trần Văn Đạt</td>
-                        <td>01/01/2022</td>
-                        <td>2.500.000đ</td>
-                        <td>COD</td>
+                        <td>{{orderDetail.order.fullName}}</td>
+                        <td class="text-center">{{orderDetail.order.shippingDate}}</td>
+                        <td class="text-center fw-bold">{{formatPrice(orderDetail.order.totalMoney)}}</td>
+                        <td class="text-center fw-bold">{{orderDetail.order.paymentMethod}}</td>
+                        @if(orderDetail.order.status === 'Success') {
+                        <td class="text-center fw-bold text-success">{{orderDetail.order.status}}</td>
+                        }
+                        @if (orderDetail.order.status === 'Cancelled') {
+                        <td class="text-center fw-bold text-danger">{{orderDetail.order.status}}</td>
+                        }
+                        @if(orderDetail.order.status === 'Pending') {
                         <td class="text-success fw-bold">
+                            <select [(ngModel)]="status" class="form-select">
+                                <option value="Delivering">Đang vận chuyển</option>
+                                <option value="Success">Thành công</option>
+                                <option value=" Cancelled">Đã hủy</option>
+                            </select>
+                        </td>
+                        }
+                        @if(orderDetail.order.status === 'Delivering') {
+                        <td class="text-success fw-bold">
+                            <select [(ngModel)]="status" class="form-select">
+                                <option value="Success">Thành công</option>
+                                <option value=" Cancelled">Đã hủy</option>
+                            </select>
+                        </td>
+                        }
+                        <td class="text-center">
+                            <button class="btn btn-success ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Xuất hóa đơn"><i class="fa-solid fa-file-pdf"></i></button>
+                            <button class="btn btn-warning ms-3 text-white" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Cập nhật đơn"><i class="fa-solid fa-file-pen"
+                                    (click)="updateOrder(orderDetail.order.id)"></i></button>
+                        </td>
+                    </tr>
+                    }
+                    <!-- <td class="text-success fw-bold">
                             <select class="form-select">
                                 <option value="Peding">Chờ xử lý</option>
                                 <option value="Delivering">Đã xuất hàng</option>
                             </select>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
-                            <button class="btn btn-success ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Xuất hóa đơn"><i class="fa-solid fa-file-pdf"></i></button>
-                            <button class="btn btn-warning ms-3 text-white" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Cập nhật đơn"><i
-                                    class="fa-solid fa-file-pen"></i></button>
-                        </td>
-                    </tr>
+                        </td> -->
                 </tbody>
             </table>
         </div>
