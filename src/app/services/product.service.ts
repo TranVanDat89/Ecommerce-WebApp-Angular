@@ -114,4 +114,7 @@ export class ProductService {
   createListComment(comments: CommentDTO[]): Observable<ApiResponse<any>> {
     return this.http.post<ApiResponse<any>>(this.apiCreateListComment, comments, this.apiConfig);
   }
+  search(keyword: string): Observable<ApiResponse<StorageResponse<Product[]>>> {
+    return this.http.post<ApiResponse<StorageResponse<Product[]>>>(this.apiProduct + `/search?keyword=${keyword}`, this.apiConfig);
+  }
 }

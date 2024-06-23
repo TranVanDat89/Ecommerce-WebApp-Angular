@@ -28,6 +28,7 @@ export class ProductComponent implements OnInit {
   itemsPerPage: number;
   currentPage: number;
   categoryId?: string;
+  keyword?: string;
   // totalItems: number;
   constructor(private router: Router, private toastr: ToastrService, private activedRouter: ActivatedRoute, private cartService: CartService, private categoryService: CategoryService, private userService: UserService, private productService: ProductService) {
     this.categories = [];
@@ -42,6 +43,21 @@ export class ProductComponent implements OnInit {
     // this.currentPage = Number(this.localStorage?.getItem('currentProductPage')) || 0;
     this.getCategories();
     this.getAllProducts();
+  }
+  searchProducts() {
+    debugger
+    if (this.keyword) {
+      this.productService.search(this.keyword).subscribe({
+        next: (apiResponse: ApiResponse<StorageResponse<Product[]>>) => {
+          this.products = apiResponse.data.products!;
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error(error?.error?.message ?? '');
+        }
+      })
+    } else {
+      this.getAllProducts();
+    }
   }
   addToWishList(productId: string) {
     this.productService.addToWishList(productId).subscribe({
