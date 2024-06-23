@@ -21,4 +21,10 @@ export class CategoryService {
   getAllCategories(): Observable<ApiResponse<any>> {
     return this.http.get<ApiResponse<any>>(this.apiCategories, this.apiConfig);
   }
+  createCategory(name: string, isArticleCategory: boolean): Observable<ApiResponse<any>> {
+    return this.http.post<ApiResponse<any>>(this.apiCategories + `?isArticleCategory=${isArticleCategory}`, name, this.apiConfig);
+  }
+  deleteCategory(id: string, isArticleCategory: boolean): Observable<ApiResponse<any>> {
+    return this.http.delete<ApiResponse<any>>(this.apiCategories + `/${id}?isArticleCategory=${isArticleCategory}`, this.apiConfig);
+  }
 }

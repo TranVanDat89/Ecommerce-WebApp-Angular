@@ -1,8 +1,8 @@
 <section id="order-admin" style="margin-top: 70px; margin-right: 10px;">
     <div class="container-lg ">
         <div class="d-flex flex-row w-content flex-start align-items-center mb-3">
-            <h3 class="m-0 me-2">Quản lý đơn hàng <br> Số liệu năm {{selectedYear}}</h3>
-            <div class="w-content">
+            <h3 class="m-0 me-2">Quản lý đơn hàng</h3>
+            <!-- <div class="w-content">
                 <select [(ngModel)]="selectedYear" (change)="loadDataForYear(selectedYear)"
                     class="form-select w-content">
                     @for (year of years; track $index) {
@@ -12,7 +12,7 @@
                         }
                         }
                 </select>
-            </div>
+            </div> -->
         </div>
         <!-- <div class="row justify-content-center">
             <div class="col-xl-4 col-md-6 col-10 mb-3">
@@ -83,9 +83,11 @@
                         <td class="text-center">
                             <button class="btn btn-success ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Xuất hóa đơn"><i class="fa-solid fa-file-pdf"></i></button>
+                            @if(orderDetail.order.status === 'Pending' || orderDetail.order.status === 'Delivering') {
                             <button class="btn btn-warning ms-3 text-white" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="Cập nhật đơn"><i class="fa-solid fa-file-pen"
                                     (click)="updateOrder(orderDetail.order.id)"></i></button>
+                            }
                         </td>
                     </tr>
                     }

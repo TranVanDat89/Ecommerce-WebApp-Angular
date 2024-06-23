@@ -6,6 +6,7 @@ import { Category } from '../../../models/category';
 import { StorageResponse } from '../../../responses/storage.response';
 import { ArticleService } from '../../../services/article.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-category',
@@ -18,7 +19,7 @@ export class CategoryComponent implements OnInit {
   isProducts: boolean = true;
   categoryForm: FormGroup;
 
-  constructor(private categoryService: CategoryService, private articleService: ArticleService, private fb: FormBuilder) {
+  constructor(private categoryService: CategoryService, private toastr: ToastrService, private articleService: ArticleService, private fb: FormBuilder) {
     this.categoryForm = this.fb.group({
       category: ['', Validators.required]
     })
@@ -31,13 +32,58 @@ export class CategoryComponent implements OnInit {
   isArticleCategories() {
     this.isProducts = false;
   }
+  deleteCategory(id: string, isArticleCategory: boolean) {
+    debugger
+    if (!isArticleCategory) {
+      this.categoryService.deleteCategory(id, false).subscribe({
+        next: (apiResponse: ApiResponse<any>) => {
+          this.toastr.success("Xóa danh mục thành công", "Thành công");
+          window.location.reload();
+        },
+        error: (error: HttpErrorResponse) => {
+          this.toastr.error("Xóa danh mục thất bại", "Thất bại");
+          console.error(error?.error?.message ?? '');
+        }
+      })
+    } else {
+      this.categoryService.deleteCategory(id, true).subscribe({
+        next: (apiResponse: ApiResponse<any>) => {
+          this.toastr.success("Xóa danh mục thành công", "Thành công");
+          window.location.reload();
+        },
+        error: (error: HttpErrorResponse) => {
+          this.toastr.error("Xóa danh mục thất bại", "Thất bại");
+          console.error(error?.error?.message ?? '');
+        }
+      })
+    }
+  }
   createCategory() {
     if (this.categoryForm.valid) {
       if (this.isProducts) {
-        console.log(this.categoryForm.value.category, "Products");
+        this.categoryService.createCategory(this.categoryForm.value.category, false).subscribe({
+          next: (apiResponse: ApiResponse<any>) => {
+            this.toastr.success("Thêm danh mục thành công", "Thành công");
+            window.location.reload();
+          },
+          error: (error: HttpErrorResponse) => {
+            this.toastr.error("Thêm danh mục thất bại", "Thất bại");
+            console.error(error?.error?.message ?? '');
+          }
+        })
       } else {
-        console.log(this.categoryForm.value.category, "Articles");
-        this.isProducts = true;
+        this.categoryService.createCategory(this.categoryForm.value.category, true).subscribe({
+          next: (apiResponse: ApiResponse<any>) => {
+            this.toastr.success("Thêm danh mục thành công", "Thành công");
+            this.isProducts = true;
+            window.location.reload();
+          },
+          error: (error: HttpErrorResponse) => {
+            this.toastr.success("Thêm danh mục thành công", "Thành công");
+            window.location.reload();
+            console.error(error?.error?.message ?? '');
+          }
+        })
       }
     }
   }

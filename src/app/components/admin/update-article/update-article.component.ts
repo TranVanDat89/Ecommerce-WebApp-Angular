@@ -74,6 +74,18 @@ export class UpdateArticleComponent implements OnInit {
       this.imageFile = file;
     }
   }
+  deleteArticle(id: string) {
+    this.articleService.deleteArticle(id).subscribe({
+      next: (apiResponse: ApiResponse<any>) => {
+        this.toastr.success("Xóa bài viết thành công", "Thành công");
+        window.location.reload();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error("Xóa bài viết thất bại", "Thất bại");
+        console.error(error?.error?.message ?? '');
+      }
+    })
+  }
   getAllArticleCategories() {
     this.articleService.getAllArticleCategories().subscribe({
       next: (apiResponse: ApiResponse<StorageResponse<{ id: string, name: string }[]>>) => {

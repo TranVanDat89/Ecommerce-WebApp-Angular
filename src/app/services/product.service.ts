@@ -10,6 +10,7 @@ import { StorageResponse } from '../responses/storage.response';
 import { FavoriteResponse } from '../responses/favorite.response';
 import { Comment } from '../models/comment';
 import { Injectable, inject } from '@angular/core';
+import { ProductDTO } from '../dtos/product.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,9 @@ export class ProductService {
     headers: this.httpUtilService.createHeaders()
   }
   constructor() { }
-
+  getProductsWithMaxSolved(year: number): Observable<ApiResponse<StorageResponse<Product[]>>> {
+    return this.http.get<ApiResponse<StorageResponse<Product[]>>>(this.apiProduct + `/product-with-max-solved?year=${year}`);
+  }
   getAllProducts(page: number, limit: number): Observable<ApiResponse<ProductResponse>> {
     const params = {
       page: page.toString(),
@@ -40,6 +43,34 @@ export class ProductService {
   }
   deleteFavorite(favId: string): Observable<any> {
     return this.http.delete<ApiResponse<any>>(this.apiDeleteFav + favId);
+  }
+  createProduct(productDto: ProductDTO): Observable<any> {
+    const formData = new FormData();
+    formData.append('name', productDto.name.trim());
+    formData.append('name', productDto.name.trim());
+    formData.append('price', productDto.price.toString().trim());
+    formData.append('categoryName', productDto.categoryName.trim());
+    formData.append('quantity', productDto.quantity.toString().trim());
+    formData.append('brand', productDto.brand.trim());
+    formData.append('weight', productDto.weight.trim());
+    formData.append('servingSize', productDto.servingSize.trim());
+    formData.append('serving', productDto.serving.trim());
+    formData.append('calories', productDto.calories.trim());
+    formData.append('ingredientList', productDto.ingredientList.trim());
+    formData.append('proteinPerServing', productDto.proteinPerServing.trim());
+    formData.append('origin', productDto.origin.trim());
+    formData.append('flavors', productDto.flavors.trim());
+    formData.append('introduction', productDto.introduction.trim());
+    formData.append('instruction', productDto.instruction.trim());
+    formData.append('advantage', productDto.advantage.trim());
+    formData.append('warning', productDto.warning.trim());
+    if (productDto.images && productDto.images.length > 0) {
+      productDto.images.forEach((file, index) => {
+        formData.append(`images[${index}]`, file);
+      });
+    }
+    debugger
+    return this.http.post<ApiResponse<any>>(this.apiProduct + '/create-product-images', formData);
   }
   deleteComment(commentId: string): Observable<any> {
     return this.http.delete<ApiResponse<any>>(this.apiComments + `/delete/${commentId}`);

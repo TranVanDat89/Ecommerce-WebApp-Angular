@@ -2,8 +2,8 @@
     <div class="container-lg mt-3">
         <div class="d-flex ms-3 flex-row w-content flex-start flex-wrap align-items-center mb-3 w-100">
             <div class="flex-grow-1 flex-row d-flex align-items-center">
-                <h3 class=" m-0 me-2">Quản lý sản phẩm <br> Số liệu năm {{selectedYear}}</h3>
-                <div class="w-content">
+                <h3 class=" m-0 me-2">Quản lý sản phẩm</h3>
+                <!-- <div class="w-content">
                     <select [(ngModel)]="selectedYear" (change)="loadDataForYear(selectedYear)"
                         class="form-select w-content">
                         @for (year of years; track $index) {
@@ -13,7 +13,7 @@
                             }
                             }
                     </select>
-                </div>
+                </div> -->
             </div>
             <div class="ms-2">
                 <a class="btn btn-success" href="" [routerLink]="['/admin/products/create-product']">Thêm sản phẩm<i
@@ -21,6 +21,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
+            @for (pro of productsWithMaxSolved; track $index) {
             <div class="col-xl-4 col-md-6 col-10 mb-3">
                 <div class="card p-0">
                     <h5 class="card-header bg-success text-white"><i class="fa-solid fa-fire me-2"></i>Sản phẩm bán
@@ -28,18 +29,19 @@
                     <div class="card-body">
                         <div class="d-flex flex-row">
                             <div class="w-25 me-3">
-                                <img src="../../../../assets/intro-image.jpg" class="img-fluid" alt="">
+                                <img [src]="pro.thumbnail" class="img-fluid" alt="">
                             </div>
                             <div>
-                                <p class="card-title fw-bold">Optimum Nutrition Gold Standard 100% Whey Protein Powder
+                                <p class="card-title fw-bold">{{pro.name}}
                                 </p>
-                                <p>Số lượng bán ra: 25,000 sản phẩm</p>
+                                <p>Số lượng bán ra: {{pro.solved}} sản phẩm</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-md-6 col-10 mb-3">
+            }
+            <!-- <div class="col-xl-4 col-md-6 col-10 mb-3">
                 <div class="card p-0">
                     <h5 class="card-header bg-danger text-white"><i class="fa-solid fa-face-frown me-2"></i>Sản phẩm bị
                         đánh
@@ -57,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="row mt-3 ms-1">
             <div class="row">

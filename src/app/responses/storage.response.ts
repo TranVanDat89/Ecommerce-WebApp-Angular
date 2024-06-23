@@ -16,4 +16,5 @@ export interface StorageResponse<T> {
     totalUsers?: T;
     totalArticles?: T;
     totalOrders?: T;
+    products?: T;
 }

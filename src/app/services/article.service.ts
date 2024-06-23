@@ -25,6 +25,9 @@ export class ArticleService {
     }
     constructor() {
     }
+    deleteArticle(articleId: string): Observable<ApiResponse<any>> {
+        return this.http.delete<ApiResponse<any>>(`${environment.apiBaseUrl}/articles/delete-article/${articleId}`, this.apiConfig);
+    }
     createArticle(articleDTO: ArticleDTO): Observable<ApiResponse<StorageResponse<Article>>> {
         console.log(articleDTO, "services");
         const formData = new FormData();
