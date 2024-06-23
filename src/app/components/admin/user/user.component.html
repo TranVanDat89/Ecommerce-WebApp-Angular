@@ -39,10 +39,12 @@
                                     </button> -->
                             @if(user.active) {
                             <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Block người dùng"><i class="fa-solid fa-lock"></i></button>
+                                title="Block người dùng" (click)="blockUser(user.id)"><i
+                                    class="fa-solid fa-lock"></i></button>
                             } @else {
                             <button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Block người dùng"><i class="fa-solid fa-unlock"></i></button>
+                                title="Block người dùng" (click)="unBlockUser(user.id)"><i
+                                    class="fa-solid fa-unlock"></i></button>
                             }
                         </td>
                     </tr>

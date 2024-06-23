@@ -78,9 +78,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text text--shorten">{{product.productDetail.introduction}}</p>
-                            <a href="" [routerLink]="['/admin/products/update-product']"
+                            <button type="button" (click)="openModal(updateModal, product.id)"
                                 class="btn btn-warning mt-2 text-white" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Sửa sản phẩm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                title="Sửa sản phẩm"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button class=" btn btn-danger mt-2 ms-2" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Xóa sản phẩm"><i class="fa-solid fa-trash-can"
                                     (click)="onDelete(product.name, product.id, deleteModal)"></i></button>
@@ -89,6 +89,125 @@
                 </div>
                 }
             </div>
+            <ng-template #updateModal let-modal>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form (ngSubmit)="updateProduct()" [formGroup]="productForm" enctype="multipart/form-data"
+                            class="mt-3">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Sửa sản phẩm</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    (click)="modal.dismiss()" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+                                    <div class="form-group mb-3">
+                                        <label for="name">Tên sản phẩm:</label>
+                                        <input type="text" formControlName="name" id="name" name="name"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="price">Giá bán:</label>
+                                        <input type="number" formControlName="price" id="price" name="price"
+                                            class="form-control col-md-3" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="name">Thương hiệu:</label>
+                                        <input type="text" formControlName="brand" id="name" name="name"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="name">Xuất xứ:</label>
+                                        <input type="text" formControlName="origin" id="name" name="name"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="name">Hương vị:</label>
+                                        <input type="text" formControlName="flavors" id="name" name="name"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="price">Số lượng sản phẩm:</label>
+                                        <input type="number" formControlName="quantity" id="price" name="price"
+                                            class="form-control col-md-3" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="price">Trọng lượng:</label>
+                                        <input type="text" formControlName="weight" id="price" name="price"
+                                            class="form-control col-md-3" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="price">Số lần dùng:</label>
+                                        <input type="text" formControlName="serving" id="price" name="price"
+                                            class="form-control col-md-3" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="price">Serving size:</label>
+                                        <input type="text" id="price" formControlName="servingSize" name="price"
+                                            class="form-control col-md-3" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="price">Tỷ lệ protein/serving:</label>
+                                        <input type="text" id="price" formControlName="proteinPerServing" name="price"
+                                            class="form-control col-md-3" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="price">Calories:</label>
+                                        <input type="text" id="price" formControlName="calories" name="price"
+                                            class="form-control col-md-3" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="price">Thành phần khác:</label>
+                                        <input type="text" formControlName="ingredientList" id="price" name="price"
+                                            class="form-control col-md-3" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="category">Danh mục:</label>
+                                        <select formControlName="categoryName" id="category" name="category"
+                                            class="form-control" required>
+                                            @for (cat of categories; track $index) {
+                                            <option value="{{cat.name}}">{{cat.name}}</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="description">Giới thiệu:</label>
+                                        <textarea id="description" formControlName="introduction" rows="4"
+                                            name="description" class="form-control" required></textarea>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="description">Ưu điểm & Lợi ích:</label>
+                                        <textarea id="description" formControlName="advantage" rows="4"
+                                            name="description" class="form-control" required></textarea>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="description">Hướng dẫn sử dụng:</label>
+                                        <textarea id="description" formControlName="instruction" rows="4"
+                                            name="description" class="form-control" required></textarea>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="description">Lưu ý:</label>
+                                        <textarea id="description" formControlName="warning" rows="4" name="description"
+                                            class="form-control" required></textarea>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label for="images">Hình ảnh (tối đa 5):</label>
+                                        <input type="file" (change)="onFileChange($event)" id="images"
+                                            class="form-control" name=" images" multiple>
+                                    </div> -->
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" (click)="modal.dismiss()"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger">Sửa</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ng-template>
             <!-- Modal -->
             <ng-template #deleteModal let-modal>
                 <div class="modal-header">

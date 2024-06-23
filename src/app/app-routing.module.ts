@@ -111,10 +111,6 @@ const routes: Routes = [
       }, {
         path: 'products/create-product',
         component: CreateProductComponent
-      }
-      , {
-        path: 'products/update-product',
-        component: UpdateProductComponent
       },
       {
         path: "categories",

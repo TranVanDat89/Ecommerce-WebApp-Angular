@@ -64,7 +64,6 @@ export class CreateProductComponent implements OnInit {
     })
   }
   createProduct() {
-    debugger
     const product: ProductDTO = {
       name: this.productForm.get('name')?.value,
       price: this.productForm.get('price')?.value,

@@ -117,4 +117,7 @@ export class ProductService {
   search(keyword: string): Observable<ApiResponse<StorageResponse<Product[]>>> {
     return this.http.post<ApiResponse<StorageResponse<Product[]>>>(this.apiProduct + `/search?keyword=${keyword}`, this.apiConfig);
   }
+  updateProduct(productId: string, productDto: ProductDTO): Observable<any> {
+    return this.http.put<ApiResponse<any>>(this.apiProduct + `/update-product/${productId}`, productDto, this.apiConfig);
+  }
 }

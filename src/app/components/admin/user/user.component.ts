@@ -5,7 +5,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from '../../../responses/api.response';
 import { StorageResponse } from '../../../responses/storage.response';
 import DataTables, { Config } from 'datatables.net';
-import { Subject } from 'rxjs';
+import { Subject, delay } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 @Component({
   selector: 'app-user',
@@ -18,7 +19,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   itemsPerPage: number = 10;
   dtoptions: any = {};
   dttrigger: Subject<any> = new Subject<any>();
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private toastr: ToastrService) { }
   ngAfterViewInit(): void {
   }
   ngOnInit(): void {
@@ -41,6 +42,32 @@ export class UserComponent implements OnInit, AfterViewInit {
         this.dttrigger.next(null);
       },
       error: (error: HttpErrorResponse) => {
+        console.error(error?.error?.message ?? 'An error occurred during registration');
+      }
+    })
+  }
+  blockUser(id: string) {
+    this.userService.deleteUser(id, false).subscribe({
+      next: (apiResponse: ApiResponse<any>) => {
+        this.toastr.success("Block người dùng thành công", "Thông báo");
+        delay(1000);
+        window.location.reload();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error("Block người dùng thất bại", "Thất bại");
+        console.error(error?.error?.message ?? 'An error occurred during registration');
+      }
+    })
+  }
+  unBlockUser(id: string) {
+    this.userService.deleteUser(id, true).subscribe({
+      next: (apiResponse: ApiResponse<any>) => {
+        this.toastr.success("Unblock người dùng thành công", "Thành công");
+        delay(1000);
+        window.location.reload();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error("Unblock người dùng thất bại", "Thất bại");
         console.error(error?.error?.message ?? 'An error occurred during registration');
       }
     })

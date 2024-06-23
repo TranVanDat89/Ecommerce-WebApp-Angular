@@ -26,6 +26,9 @@ export class UserService {
     headers: this.httpUtilService.createHeaders()
   }
   constructor() { }
+  deleteUser(id: string, isActive: boolean): Observable<ApiResponse<any>> {
+    return this.http.delete<ApiResponse<any>>(`${environment.apiBaseUrl}/users/auth/delete/${id}?isActive=${isActive}`, this.apiConfig);
+  }
   getAllUsers(): Observable<ApiResponse<StorageResponse<UserResponse[]>>> {
     return this.http.get<ApiResponse<StorageResponse<UserResponse[]>>>(this.apiUserAll);
   }

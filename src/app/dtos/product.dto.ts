@@ -16,7 +16,7 @@ export class ProductDTO {
     instruction: string;
     advantage: string;
     warning: string;
-    images: File[];
+    images?: File[];
     constructor(productDTO: any) {
         this.name = productDTO.name;
         this.price = productDTO.price;
