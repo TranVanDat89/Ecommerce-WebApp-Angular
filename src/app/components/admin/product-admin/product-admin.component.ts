@@ -6,6 +6,7 @@ import { ApiResponse } from '../../../responses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StorageResponse } from '../../../responses/storage.response';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-admin',
@@ -27,7 +28,7 @@ export class ProductAdminComponent implements OnInit {
 
   }
 
-  constructor(private productService: ProductService, private modalService: NgbModal) {
+  constructor(private productService: ProductService, private toastr: ToastrService, private modalService: NgbModal) {
     this.products = [];
     this.productsWithMaxSolved = [];
   }
@@ -67,6 +68,16 @@ export class ProductAdminComponent implements OnInit {
   }
 
   confirmDelete(productId?: string) {
-    console.log(productId);
+    this.productService.deleteProduct(productId!).subscribe({
+      next: (apiResponse: ApiResponse<any>) => {
+        this.toastr.success("Xóa sản phẩm thành công", "Thành công");
+        this.modalService.dismissAll();
+        window.location.reload();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error("Xóa sản phẩm thất bại", "Thất bại");
+        console.error(error?.error?.message ?? '');
+      }
+    })
   }
 }

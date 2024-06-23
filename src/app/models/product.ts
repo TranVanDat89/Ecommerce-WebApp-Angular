@@ -12,4 +12,5 @@ export interface Product {
     ingredient: Ingredient;
     productDetail: ProductDetail;
     productImages: ProductImage[];
+    isDeleted: boolean;
 }

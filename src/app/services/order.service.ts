@@ -35,4 +35,7 @@ export class OrderService {
   getAllOrder(): Observable<ApiResponse<StorageResponse<OrderDetailResponse[]>>> {
     return this.http.get<ApiResponse<StorageResponse<OrderDetailResponse[]>>>(`${environment.apiBaseUrl}/orders/get-all-orders`);
   }
+  updateOrderStatus(order: Object): Observable<ApiResponse<any>> {
+    return this.http.post<ApiResponse<any>>(`${environment.apiBaseUrl}/orders/update-status-order`, order, this.apiConfig)
+  }
 }

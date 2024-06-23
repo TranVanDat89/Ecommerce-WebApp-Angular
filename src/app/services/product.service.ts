@@ -75,6 +75,9 @@ export class ProductService {
   deleteComment(commentId: string): Observable<any> {
     return this.http.delete<ApiResponse<any>>(this.apiComments + `/delete/${commentId}`);
   }
+  deleteProduct(productId: string): Observable<any> {
+    return this.http.delete<ApiResponse<any>>(this.apiProduct + `/${productId}`);
+  }
   updateComment(commentId: string, commentDTO: CommentDTO): Observable<any> {
     return this.http.put<ApiResponse<any>>(this.apiComments + `/update-comment/${commentId}`, commentDTO, this.apiConfig);
   }

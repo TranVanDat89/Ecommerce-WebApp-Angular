@@ -5,6 +5,10 @@ import { OrderService } from '../../../services/order.service';
 import { StorageResponse } from '../../../responses/storage.response';
 import { ApiResponse } from '../../../responses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-order-admin',
@@ -16,13 +20,16 @@ export class OrderAdminComponent implements OnInit {
   currentYear: number = new Date().getFullYear();
   orderDetailResponses?: OrderDetailResponse[];
   status?: string;
+  now: Date;
   years: number[] = Array.from({ length: this.currentYear - 2020 + 1 }, (_, i) => 2020 + i);
   dtoptions: any = {};
   dttrigger: Subject<any> = new Subject<any>();
   loadDataForYear(selectedYear: number) {
 
   }
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private toastr: ToastrService, private modalService: NgbModal) {
+    this.now = new Date();
+  }
   ngOnInit(): void {
     this.dtoptions = {
       pagingType: 'full_numbers',
@@ -31,8 +38,20 @@ export class OrderAdminComponent implements OnInit {
     }
     this.getAllOrder();
   }
+  openModal(modal: any) {
+    this.modalService.open(modal);
+  }
   updateOrder(orderId: string) {
-    console.log(orderId, this.status);
+    this.orderService.updateOrderStatus({ orderId: orderId, status: this.status }).subscribe({
+      next: (apiResponse: ApiResponse<any>) => {
+        this.toastr.success("Cập nhật đơn hàng thành công", "Thành công");
+        window.location.reload();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error("Cập nhật đơn hàng thất bại", "Thất bại");
+        console.error(error);
+      }
+    })
   }
   formatPrice(price: number | undefined): string {
     if (price === undefined) return '';
@@ -40,6 +59,14 @@ export class OrderAdminComponent implements OnInit {
       style: 'currency',
       currency: 'VND'
     }).format(price);
+  }
+  generateInvoice() {
+    const invoice: any = document.getElementById("invoice");
+    html2canvas(invoice).then((canvas) => {
+      const pdf = new jsPDF();
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+      pdf.save('invoice.pdf');
+    })
   }
   getAllOrder() {
     this.orderService.getAllOrder().subscribe({
