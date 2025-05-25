@@ -27,7 +27,7 @@ phases:
       - docker push $REPOSITORY_URI:$COMMIT_HASH
       - echo Build completed on `date`
       - echo Writing image definitions file...
-      - printf '[{"name":"nodejs-container","imageUri":"%s"}]'
+      - printf '[{"name":"fe-container","imageUri":"%s"}]'
         $REPOSITORY_URI:$COMMIT_HASH > imagedefinitions.json
       - cat imagedefinitions.json
 artifacts:
